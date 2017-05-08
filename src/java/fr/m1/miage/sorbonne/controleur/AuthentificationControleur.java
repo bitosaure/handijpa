@@ -20,7 +20,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class AuthentificationControleur implements Serializable{
-    private PersonneEntity      personne;
+    private PersonneEntity personne = new PersonneEntity();
 
     
     private PersonneDAO   personneDao;
@@ -33,7 +33,11 @@ public class AuthentificationControleur implements Serializable{
     // Méthode d'action appelée lors du clic sur le bouton du formulaire
     // d'atuehtnification
     public void authentification() {
+        personneDao   = new PersonneDAO();
         System.out.println("je rentre");
+        personne.setLogin("toto");
+        personne.setMdp("toto");
+        personneDao.create(personne);
        
     }
 

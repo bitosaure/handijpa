@@ -13,7 +13,7 @@
             <legend>authentification</legend>
             <h:outputLabel for="login">Login </h:outputLabel>
             <h:inputText id="login" value="#{authentificationControleur.personne.login}" required="true" size="20" maxlength="60" />
-            <h:message id="emailMessage" for="email" errorClass="erreur" />
+            <h:message id="emailMessage" for="login" errorClass="erreur" />
             <br />
     
             <h:outputLabel for="motdepasse">Mot de passe</h:outputLabel>
@@ -23,7 +23,7 @@
     
             <h:messages globalOnly="true" infoClass="info" />
     
-            <h:commandButton value="Authenti" action="#{authentificationControleur.authentification}" styleClass="sansLabel" />
+            <h:commandButton value="Authenti" action="#{authentificationControleur.authentification()}" styleClass="sansLabel" />
             <br />
           </fieldset>
         </h:form>   

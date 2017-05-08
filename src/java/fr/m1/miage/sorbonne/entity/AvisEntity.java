@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -35,6 +37,7 @@ public class AvisEntity implements Serializable {
     @JoinColumn(name = "commentaire")
     private String commentaire;
     @JoinColumn(name = "dateCreation")
+    @Temporal(TemporalType.DATE)
     private Date dateCreation;
     @JoinColumn(name = "estValide", columnDefinition="tinyint(1)")
     private Integer estValide;

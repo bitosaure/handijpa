@@ -4,10 +4,27 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/thibault/Projets/handijpa/web/WEB-INF/dispatcher-servlet.xml</file>
-            <file>file:/Users/thibault/Projets/handijpa/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/entity/LieuEntity.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/dao/DAO.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/web/WEB-INF/web.xml</file>
             <file>file:/Users/thibault/Projets/handijpa/web/redirect.jsp</file>
-            <file>file:/Users/thibault/Projets/handijpa/web/index.xhtml</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/entity/PersonneEntity.java</file>
             <file>file:/Users/thibault/Projets/handijpa/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/conf/persistence.xml</file>
+            <file>file:/Users/thibault/Projets/handijpa/web/WEB-INF/glassfish-resources.xml</file>
+            <file>file:/Users/thibault/Projets/handijpa/web/resources/css/default.css</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/controleur/InscriptionControleur.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/Test.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/web/resources/css/cssLayout.css</file>
+            <file>file:/Users/thibault/Projets/handijpa/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/entity/CategorieEntity.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/entity/AvisEntity.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/entity/NoteUnLieuEntity.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/entity/CritereEntity.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/web/index.xhtml</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/controleur/TestControleur.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/src/java/fr/m1/miage/sorbonne/dao/PersonneDAO.java</file>
+            <file>file:/Users/thibault/Projets/handijpa/web/newTemplate.xhtml</file>
         </group>
     </open-files>
 </project-private>
