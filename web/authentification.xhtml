@@ -1,31 +1,53 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" 
-       xmlns:f="http://java.sun.com/jsf/core" 
-       xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:ui="http://java.sun.com/jsf/facelets"> 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
     <h:head>
         <meta charset="utf-8" />
         <title>Authentification</title>
+
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <!-- Compiled and minified JavaScript -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     </h:head>
     <h:body>
-      <h:form>
-         <fieldset>
-            <legend>authentification</legend>
-            <h:outputLabel for="login">Login </h:outputLabel>
-            <h:inputText id="login" value="#{authentificationControleur.personne.login}" required="true" size="20" maxlength="60" />
-            <h:message id="emailMessage" for="login" errorClass="erreur" />
-            <br />
-    
-            <h:outputLabel for="motdepasse">Mot de passe</h:outputLabel>
-            <h:inputSecret id="motdepasse" value="#{authentificationControleur.personne.mdp}" required="true" size="20" maxlength="20" />
-            <h:message id="motDePasseMessage" for="motdepasse" errorClass="erreur" />
-            <br />
-    
-            <h:messages globalOnly="true" infoClass="info" />
-    
-            <h:commandButton value="Authenti" action="#{authentificationControleur.authentification()}" styleClass="sansLabel" />
-            <br />
-          </fieldset>
+        <h:form>
+            <fieldset>
+                <legend>authentification</legend>
+
+                
+                <div class="row">
+                    <div class="input-group">
+                        <h:outputLabel for="login">Login </h:outputLabel>
+                        <h:inputText id="login" class="form-control"  value="#{authentificationControleur.personne.login}" required="true" size="20" maxlength="60" />
+                        <h:message id="emailMessage" for="login" errorClass="erreur" />
+                    </div>
+                </div>
+                <br />
+
+                <h:outputLabel for="motdepasse">Mot de passe</h:outputLabel>
+                <h:inputSecret id="motdepasse" value="#{authentificationControleur.personne.mdp}" required="true" size="20" maxlength="20" />
+                <h:message id="motDePasseMessage" for="motdepasse" errorClass="erreur" />
+                <br />
+
+                <h:messages globalOnly="true" infoClass="info" />
+
+
+                <h:commandButton value="Authenti" action="#{authentificationControleur.authentification()}" styleClass="sansLabel" />
+                <br />
+            </fieldset>
         </h:form>   
     </h:body>
 </html>
