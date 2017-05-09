@@ -18,5 +18,19 @@
 			<to-view-id>/authentification.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
+        <navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{authentificationControleur.authentification()}</from-action>
+			<from-outcome>ERROR</from-outcome>
+			<to-view-id>/authentification.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule><navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{authentificationControleur.authentification()}</from-action>
+			<from-outcome>SUCCESS</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>
