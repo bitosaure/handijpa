@@ -8,9 +8,11 @@ package fr.m1.miage.sorbonne.controleur;
 import fr.m1.miage.sorbonne.dao.PersonneDAO;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -32,12 +34,20 @@ public class AuthentificationControleur implements Serializable{
 
     // Méthode d'action appelée lors du clic sur le bouton du formulaire
     // d'atuehtnification
-    public void authentification() {
+    public String authentification() {
         personneDao   = new PersonneDAO();
-        System.out.println("je rentre");
-        personne.setLogin("toto");
-        personne.setMdp("toto");
-        personneDao.create(personne);
+        if(personneDao.rechercherPersonnesAvecLoginAnMdp(personne.getLogin(), personne.getMdp()).size()==0){
+              FacesMessage message = new FacesMessage( "login ou mot de passe incorrect!" );
+              FacesContext.getCurrentInstance().addMessage( null, message );
+                return "ERROR";
+        }
+        else{
+             
+        
+             FacesMessage message = new FacesMessage( "succès de l'authentification!" );
+              FacesContext.getCurrentInstance().addMessage( null, message );
+                return "SUCCESS";
+        }
        
     }
 
