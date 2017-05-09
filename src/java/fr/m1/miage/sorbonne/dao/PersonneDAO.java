@@ -7,10 +7,15 @@ package fr.m1.miage.sorbonne.dao;
 
 import fr.m1.miage.sorbonne.entity.CategorieEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -31,7 +36,49 @@ public class PersonneDAO implements DAO<PersonneEntity>{
         List<PersonneEntity> listPersonneEntity = em.createQuery("Select a FROM PERSONNE a").getResultList();
         return listPersonneEntity;
     }
+    public List<PersonneEntity> rechercherPersonnesAvecLogin(String login ) {
 
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<PersonneEntity> query = cb
+				.createQuery(PersonneEntity.class);
+		// construction de la requete dynamique
+		Root<PersonneEntity> root = query.from(PersonneEntity.class);
+		List<Predicate> predicateList = new ArrayList<Predicate>();
+
+		
+			predicateList.add(cb.equal(root.<String> get("login"),
+					login));
+		
+
+		Predicate[] predicates = new Predicate[predicateList.size()];
+		predicateList.toArray(predicates);
+		query.where(predicates);
+		// exécution de la requete
+		return em.createQuery(query).getResultList();
+	}
+    
+     public List<PersonneEntity> rechercherPersonnesAvecLoginAnMdp(String login, String mdp ) {
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<PersonneEntity> query = cb
+				.createQuery(PersonneEntity.class);
+		// construction de la requete dynamique
+		Root<PersonneEntity> root = query.from(PersonneEntity.class);
+		List<Predicate> predicateList = new ArrayList<Predicate>();
+
+		
+			predicateList.add(cb.equal(root.<String> get("login"),
+					login));
+                       predicateList.add(cb.equal(root.<String> get("mdp"),
+					mdp));
+		
+
+		Predicate[] predicates = new Predicate[predicateList.size()];
+		predicateList.toArray(predicates);
+		query.where(predicates);
+		// exécution de la requete
+		return em.createQuery(query).getResultList();
+	}
     @Override
     public void create(PersonneEntity obj) {
         em.getTransaction().begin();
