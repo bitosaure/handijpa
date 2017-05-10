@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.el.ValueBinding;
 
 /**
  *
@@ -26,6 +27,8 @@ public class AuthentificationControleur implements Serializable{
 
     
     private PersonneDAO   personneDao;
+    
+    private boolean isAuthenti =false;
 
     // Initialisation de l'entité utilisateur
     public AuthentificationControleur() {
@@ -46,6 +49,9 @@ public class AuthentificationControleur implements Serializable{
         
              FacesMessage message = new FacesMessage( "succès de l'authentification!" );
               FacesContext.getCurrentInstance().addMessage( null, message );
+              isAuthenti=true;
+             
+        
                 return "SUCCESS";
         }
        
@@ -55,5 +61,20 @@ public class AuthentificationControleur implements Serializable{
         return personne;
     }
 
+    /**
+     * @return the isAuthenti
+     */
+    public boolean isIsAuthenti() {
+        return isAuthenti;
+    }
+
+    /**
+     * @param isAuthenti the isAuthenti to set
+     */
+    public void setIsAuthenti(boolean isAuthenti) {
+        this.isAuthenti = isAuthenti;
+    }
+
+    
     
 }

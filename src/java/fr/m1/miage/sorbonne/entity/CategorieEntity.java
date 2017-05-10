@@ -56,7 +56,7 @@ public class CategorieEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.sorbonne.m1.entity.CategorieEntity[ id=" + getCode() + " ]";
+        return this.libelle;
     }
 
     /**
