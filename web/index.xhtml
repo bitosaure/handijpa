@@ -2,16 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://java.sun.com/jsf/html">
-    
+      xmlns:p="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
     <h:head>
-        <title>Facelet Title</title>
+        <title>HandiAdvisor</title>
     </h:head>
-    <h:body>
-        Hello from Facelets
-        <p:inputText value="toto"></p:inputText>
-        <p:outputLabel value="titi"/>
-        <p> titi</p>
-    </h:body>
+    <ui:composition template="templateHandi.xhtml">
+        <ui:define name="body">
+            Hello from Facelets
+            
+            <p> titi</p>
+        </ui:define>
+    </ui:composition>
 </html>
 
