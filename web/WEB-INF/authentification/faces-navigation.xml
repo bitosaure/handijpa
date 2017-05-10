@@ -14,7 +14,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-action>#{authentificationControleur.initialiserPage()}</from-action>
-			<from-outcome>*</from-outcome>
+			<from-outcome>SUCCESS</from-outcome>
 			<to-view-id>/authentification.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
