@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+    <h:head>
+        <h:form id="navigationForm">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed"
+                                data-toggle="collapse" data-target="#navbar" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span> <span
+                                class="icon-bar"></span> <span class="icon-bar"></span> <span
+                                class="icon-bar"></span> <span class="icon-bar"></span>
+                        </button>
+                        <div class="navbar-brand">
+
+                            <h:commandLink id="retourHome" style="color: black; "
+
+                                           value="Accueil" />
+                        </div>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+
+                            <li  id="divTableau"><h:commandLink id="consulLieu"
+
+                                                                value="Consulter lieux" /></li>
+
+
+
+
+                            <li id="divAlerte"><h:commandLink id="creerLieu"
+
+                                                              value="Créer lieu" /></li>
+
+
+
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    var utili = '#{loginControleur.utilisateurConnecte.groupe}';
+                    verifUtilisateur(utili);
+                });
+
+                $(".nav li").on("click", function () {
+                    $(".nav li").removeClass("active");
+                    $(this).addClass("active");
+
+                });
+            </script>
+        </h:form>
+    </h:head>
+</html>
+
