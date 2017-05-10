@@ -13,7 +13,9 @@
 		<param-name>javax.faces.CONFIG_FILES</param-name>
 		<param-value>
 			/WEB-INF/authentification/faces-navigation.xml,		
-                        /WEB-INF/inscription/faces-navigation.xml
+                        /WEB-INF/inscription/faces-navigation.xml,
+                        /WEB-INF/ajoutLieu/faces-navigation.xml
+
 			
 		</param-value>
 	</context-param>
