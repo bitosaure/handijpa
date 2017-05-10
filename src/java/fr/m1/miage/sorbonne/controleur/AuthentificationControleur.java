@@ -26,10 +26,14 @@ public class AuthentificationControleur implements Serializable{
 
     
     private PersonneDAO   personneDao;
+    
 
     // Initialisation de l'entité utilisateur
     public AuthentificationControleur() {
         personne = new PersonneEntity();
+    }
+    public String initialiserPage(){
+        return "SUCCESS";
     }
 
     // Méthode d'action appelée lors du clic sur le bouton du formulaire
