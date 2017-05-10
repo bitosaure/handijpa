@@ -34,8 +34,7 @@ public class LieuEntity implements Serializable {
     private Long id;
     @JoinColumn(name = "nom")
     private String nom;
-    @JoinColumn(name = "adresseComplete")
-    private String adresseComplete;
+
     @JoinColumn(name = "description")
     private String description;
     
@@ -48,7 +47,18 @@ public class LieuEntity implements Serializable {
     @JoinColumn(name = "createur")
     @OneToOne(cascade = CascadeType.ALL)
     private PersonneEntity createur;
-
+    @JoinColumn(name="codePostal")
+    private Integer codePostal;
+    @JoinColumn(name="numRue")
+    private Integer numRue;
+    @JoinColumn(name="rue")
+    private String rue;
+    @JoinColumn(name="ville")
+    private String ville;
+    @JoinColumn(name="tel")
+    private Integer tel;
+    @JoinColumn(name="pays")
+    private String pays;
     public Long getId() {
         return id;
     }
@@ -110,19 +120,7 @@ public class LieuEntity implements Serializable {
         this.nom = nom;
     }
 
-    /**
-     * @return the adresseComplete
-     */
-    public String getAdresseComplete() {
-        return adresseComplete;
-    }
 
-    /**
-     * @param adresseComplete the adresseComplete to set
-     */
-    public void setAdresseComplete(String adresseComplete) {
-        this.adresseComplete = adresseComplete;
-    }
 
     /**
      * @return the description
@@ -180,6 +178,90 @@ public class LieuEntity implements Serializable {
      */
     public void setCreateur(PersonneEntity createur) {
         this.createur = createur;
+    }
+
+    /**
+     * @return the codePostal
+     */
+    public Integer getCodePostal() {
+        return codePostal;
+    }
+
+    /**
+     * @param codePostal the codePostal to set
+     */
+    public void setCodePostal(Integer codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    /**
+     * @return the numRue
+     */
+    public Integer getNumRue() {
+        return numRue;
+    }
+
+    /**
+     * @param numRue the numRue to set
+     */
+    public void setNumRue(Integer numRue) {
+        this.numRue = numRue;
+    }
+
+    /**
+     * @return the rue
+     */
+    public String getRue() {
+        return rue;
+    }
+
+    /**
+     * @param rue the rue to set
+     */
+    public void setRue(String rue) {
+        this.rue = rue;
+    }
+
+    /**
+     * @return the ville
+     */
+    public String getVille() {
+        return ville;
+    }
+
+    /**
+     * @param ville the ville to set
+     */
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    /**
+     * @return the tel
+     */
+    public Integer getTel() {
+        return tel;
+    }
+
+    /**
+     * @param tel the tel to set
+     */
+    public void setTel(Integer tel) {
+        this.tel = tel;
+    }
+
+    /**
+     * @return the pays
+     */
+    public String getPays() {
+        return pays;
+    }
+
+    /**
+     * @param pays the pays to set
+     */
+    public void setPays(String pays) {
+        this.pays = pays;
     }
 
 }

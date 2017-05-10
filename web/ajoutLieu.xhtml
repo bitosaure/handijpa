@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
 
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 
- <h:head>
+    <h:head>
         <meta charset="utf-8" />
         <title>Ajouter un lieu</title>
 
@@ -28,98 +28,129 @@
     </h:head>
     <ui:composition template="templateHandi.xhtml">
         <ui:define name="body">
-           
-    
-		<h:form id="ajoutLieu">
-			<div class="container-fluid">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="form-title">
-							<h:outputText
-								value="Ajouter un lieu" />
-						</h4>
-					</div>
-					<div class="panel-body">
-						<div class="form-horizontal">
-							<div class="form-group">
-								<h:outputLabel styleClass="col-sm-2 control-label"
-									for="nom"
-									value="Nom" />
-
-								<div class="col-sm-2">
 
 
-									<h:inputText styleClass="form-control" id="nom"
-                                                                                     value="#{ajouterLieuControleur.lieu.nom}">
-									</h:inputText>
-								</div>
-                                                        </div>
-                                                        <div class="form-group">
-								<h:outputLabel styleClass="col-sm-2 control-label"
-									for="adresse"
-									value="Adresse du lieu" />
+            <h:form id="ajoutLieu">
+                <div class="container-fluid">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="form-title">
+                                <h:outputText
+                                    value="Ajouter un lieu" />
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <h:outputLabel styleClass="col-sm-2 control-label"
+                                                   for="nom"
+                                                   value="Nom" />
 
-								<div class="col-sm-2">
-
-
-									<h:inputTextarea styleClass="form-control" id="adresse"
-                                                                                     value="#{ajouterLieuControleur.lieu.adresseComplete}">
-									</h:inputTextarea>
-								</div>
-                                                        </div>
-                                                    <div class="form-group">
-								<h:outputLabel styleClass="col-sm-2 control-label"
-									for="description"
-									value="description" />
-
-								<div class="col-sm-2">
+                                    <div class="col-sm-2">
 
 
-									<h:inputText styleClass="form-control" id="description"
-                                                                                     value="#{ajouterLieuControleur.lieu.description}">
-									</h:inputText>
-								</div>
-                                                        </div>
-                                                    
-                                                    
-								<div class="col-sm-2">
-                                                                    
-                                                                    <h:outputLabel styleClass="col-sm-2 control-label"
-									for="categorie"
-									value="Catégorie" />
-									<h:selectOneMenu
-										value="#{ajouterLieuControleur.categ}"
-										id="categorie" styleClass="form-control">
+                                        <h:inputText styleClass="form-control" id="nom"
+                                                     value="#{ajouterLieuControleur.lieu.nom}">
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <h:outputLabel styleClass="col-sm-2 control-label"
+                                                   for="description"
+                                                   value="description" />
+
+                                    <div class="col-sm-2">
 
 
-											<f:selectItems
-												value="#{ajouterLieuControleur.listeCategorie}"  />
-										
-									</h:selectOneMenu>
-								</div>
+                                        <h:inputText styleClass="form-control" id="description"
+                                                     value="#{ajouterLieuControleur.lieu.description}">
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel for="numRue">Numéro de rue </h:outputLabel>
+                                   <div class="col-sm-2">
+                                    <h:inputText id="numRue" value="#{ajouterLieuControleur.lieu.numRue}" required="true" size="20" maxlength="60" />
+                                    <h:message id="numRueMessage" for="numRue" errorClass="erreur" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="rue">rue </h:outputLabel>
+                                <div class="col-sm-2">
 
-							
+                                    <h:inputText id="rue" value="#{ajouterLieuControleur.lieu.rue}" required="true" size="20" maxlength="60" />
+                                    <h:message id="rueMessage" for="rue" errorClass="erreur" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="ville">ville </h:outputLabel>
+                                <div class="col-sm-2">
+                                    <h:inputText id="ville" value="#{ajouterLieuControleur.lieu.ville}" required="true" size="20" maxlength="60" />
+                                    <h:message id="villeMessage" for="ville" errorClass="erreur" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="codePostal">Code Postal</h:outputLabel>
+                                <div class="col-sm-2">
+                                    <h:inputText id="codePostal" value="#{ajouterLieuControleur.lieu.codePostal}" required="true" size="20" maxlength="60" />
+                                    <h:message id="codePostalMessage" for="codePostal" errorClass="erreur" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="pays">pays</h:outputLabel>
+                                <div class="col-sm-2">
+                                    <h:inputText id="pays" value="#{ajouterLieuControleur.lieu.pays}" required="true" size="20" maxlength="60" />
+                                    <h:message id="paysMessage" for="pays" errorClass="erreur" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="tel">tel</h:outputLabel>
+                                <div class="col-sm-2">
+                                    <h:inputText id="tel" value="#{ajouterLieuControleur.lieu.tel}" required="true" size="20" maxlength="60" />
+                                    <h:message id="telMessage" for="tel" errorClass="erreur" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+
+                                <h:outputLabel styleClass="col-sm-2 control-label"
+                                               for="categorie"
+                                               value="Catégorie" />
+                                <div class="col-sm-2">
+                                    <h:selectOneMenu
+                                        value="#{ajouterLieuControleur.categ}"
+                                        id="categorie" styleClass="form-control">
+
+
+                                        <f:selectItems
+                                            value="#{ajouterLieuControleur.listeCategorie}"  />
+
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
 
 
 
-							</div>
-                                                </div>
-                                            	<div class="col-sm-2">
-									<h:commandButton id="buttonMensu" styleClass="btn btn-default"
-										type="submit"
-										value="Ajouter le lieu"
-										action="#{ajouterLieuControleur.ajouter()}">
-									</h:commandButton>
 
 
-								</div>
-				</div>
-                            
-			</div>
-		</h:form>
-		<br />
-		<br />
+                    <div class="col-sm-2">
+                        <h:commandButton id="buttonMensu" styleClass="btn btn-default"
+                                         type="submit"
+                                         value="Ajouter le lieu"
+                                         action="#{ajouterLieuControleur.ajouter()}">
+                        </h:commandButton>
 
-	 </ui:define>
+
+                    </div>
+                </div>
+
+                </div>
+              
+            </h:form>
+            <br />
+            <br />
+
+        </ui:define>
     </ui:composition>
 </html>
