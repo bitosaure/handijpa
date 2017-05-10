@@ -27,8 +27,9 @@ public class CategorieDAO implements DAO<CategorieEntity> {
 
    
     @Override
-    public List findAll() {
-        List<CategorieEntity> listCategorie = em.createQuery("Select c FROM CATEGORIE c").getResultList();
+    public List<CategorieEntity> findAll() {
+        
+        List<CategorieEntity> listCategorie = em.createQuery("Select entity FROM CategorieEntity as entity").getResultList();
         return listCategorie;
     }
 

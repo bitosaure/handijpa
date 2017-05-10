@@ -33,7 +33,6 @@ public class AjouterLieuControleur implements Serializable {
      private List<CategorieEntity> listeCategorie = new ArrayList<>();
     
      private CategorieDAO categDao;
-    private LieuDAO lieuDao;
 
     // Initialisation de l'entité utilisateur
     public AjouterLieuControleur() {
