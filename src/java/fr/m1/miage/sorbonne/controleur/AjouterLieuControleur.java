@@ -29,35 +29,34 @@ import static javax.security.auth.message.AuthStatus.SUCCESS;
 @SessionScoped
 public class AjouterLieuControleur implements Serializable {
 
-    private LieuEntity lieu = new LieuEntity();
+     private LieuEntity lieu = new LieuEntity();
 
-    private List<CategorieEntity> listeCategorie = new ArrayList<>();
-
-    private CategorieDAO categDao;
-    private LieuDAO lieuDao;
+     private List<CategorieEntity> listeCategorie = new ArrayList<>();
+    
+     private CategorieDAO categDao;
 
     // Initialisation de l'entité utilisateur
     public AjouterLieuControleur() {
-        categDao = new CategorieDAO();
+        categDao= new CategorieDAO();
         listeCategorie = categDao.findAll();
         lieu = new LieuEntity();
     }
 
-    public String initialiserPage() {
-        FacesContext context = FacesContext.getCurrentInstance();
+    public String initialiserPage(){
+          FacesContext context = FacesContext.getCurrentInstance();
 
-        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.isAuthenti}");
+         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.isAuthenti}");
 
-        if ((boolean) binding.getValue(context)) {
+        if((boolean) binding.getValue(context)){
             return "SUCCESS";
         }
-        FacesMessage message = new FacesMessage("Vous devez vous authentifier avant d'ajouter un lieu!");
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        FacesMessage message = new FacesMessage( "Vous devez vous authentifier avant d'ajouter un lieu!" );
+              FacesContext.getCurrentInstance().addMessage( null, message );
         return "ERROR";
-
+        
     }
-
-    public String ajouter() {
+    
+    public String ajouter(){
         return "SUCCESS";
     }
 
@@ -88,5 +87,4 @@ public class AjouterLieuControleur implements Serializable {
     public void setListeCategorie(List<CategorieEntity> listeCategorie) {
         this.listeCategorie = listeCategorie;
     }
-
 }

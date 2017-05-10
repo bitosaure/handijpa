@@ -7,6 +7,8 @@
 package fr.m1.miage.sorbonne.entity;
 
 import java.io.Serializable;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="CATEGORIE")
-
+@Access(AccessType.FIELD)
 public class CategorieEntity implements Serializable {
 
     private static long serialVersionUID = 1L;
