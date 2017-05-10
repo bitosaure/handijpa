@@ -33,8 +33,13 @@ public class AjouterLieuControleur implements Serializable {
 
      private List<CategorieEntity> listeCategorie = new ArrayList<>();
     
+     
+     
+     private String categ;
      private CategorieDAO categDao;
 
+     private LieuDAO lieuDao;
+     
     // Initialisation de l'entité utilisateur
     public AjouterLieuControleur() {
         categDao= new CategorieDAO();
@@ -57,7 +62,17 @@ public class AjouterLieuControleur implements Serializable {
     }
     
     public String ajouter(){
-        return "SUCCESS";
+            lieuDao   = new LieuDAO();
+            FacesContext context = FacesContext.getCurrentInstance();
+
+         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
+            lieu.setCreateur((PersonneEntity)binding.getValue(context));
+             lieuDao.create(lieu);
+        
+             FacesMessage message = new FacesMessage( "Succès de la création !" );
+              FacesContext.getCurrentInstance().addMessage( null, message );
+                return "SUCCESS";
+        
     }
 
     /**
@@ -86,5 +101,19 @@ public class AjouterLieuControleur implements Serializable {
      */
     public void setListeCategorie(List<CategorieEntity> listeCategorie) {
         this.listeCategorie = listeCategorie;
+    }
+
+    /**
+     * @return the categ
+     */
+    public String getCateg() {
+        return categ;
+    }
+
+    /**
+     * @param categ the categ to set
+     */
+    public void setCateg(String categ) {
+        this.categ = categ;
     }
 }

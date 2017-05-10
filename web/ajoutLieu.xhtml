@@ -88,13 +88,12 @@
 									for="categorie"
 									value="Catégorie" />
 									<h:selectOneMenu
-										value="#{ajouterLieuControleur.lieu.categorie}"
+										value="#{ajouterLieuControleur.categ}"
 										id="categorie" styleClass="form-control">
 
 
 											<f:selectItems
-												value="#{ajouterLieuControleur.listeCategorie}" var="c"
-												itemLabel="#{c}" itemValue="#{c}" />
+												value="#{ajouterLieuControleur.listeCategorie}"  />
 										
 									</h:selectOneMenu>
 								</div>

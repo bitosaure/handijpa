@@ -38,9 +38,7 @@ public class LieuEntity implements Serializable {
     private String adresseComplete;
     @JoinColumn(name = "description")
     private String description;
-    @JoinColumn(name = "dateCreation")
-    @Temporal(TemporalType.DATE)
-    private Date dateCreation;
+    
     @JoinColumn(name = "estValide",  columnDefinition="tinyint(1)")
     private Integer estValide;
     @JoinColumn(name = "categorie")
@@ -140,19 +138,7 @@ public class LieuEntity implements Serializable {
         this.description = description;
     }
 
-    /**
-     * @return the dateCreation
-     */
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    /**
-     * @param dateCreation the dateCreation to set
-     */
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
+  
 
     /**
      * @return the estValide
