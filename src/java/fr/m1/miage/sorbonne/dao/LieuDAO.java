@@ -34,6 +34,7 @@ public class LieuDAO implements DAO<LieuEntity> {
 
     @Override
     public void create(LieuEntity obj) {
+        em.flush();
         em.getTransaction().begin();
         em.persist(obj);
         em.getTransaction().commit();

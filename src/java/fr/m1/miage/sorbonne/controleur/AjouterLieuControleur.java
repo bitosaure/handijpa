@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
@@ -26,7 +27,7 @@ import static javax.security.auth.message.AuthStatus.SUCCESS;
  * @author emiliepisu
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class AjouterLieuControleur implements Serializable {
 
      private LieuEntity lieu = new LieuEntity();
@@ -67,6 +68,7 @@ public class AjouterLieuControleur implements Serializable {
 
          ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
             lieu.setCreateur((PersonneEntity)binding.getValue(context));
+            lieu.setEstValide(false);
              lieuDao.create(lieu);
         
              FacesMessage message = new FacesMessage( "Succès de la création !" );

@@ -33,12 +33,18 @@ public class AuthentificationControleur implements Serializable{
 
     // Initialisation de l'entité utilisateur
     public AuthentificationControleur() {
+        isAuthenti =false;
         personne = new PersonneEntity();
     }
     public String initialiserPage(){
         return "SUCCESS";
     }
 
+    
+    public String seDeconnecter(){
+        personne = new PersonneEntity();
+        return "SUCCESS";
+    }
     // Méthode d'action appelée lors du clic sur le bouton du formulaire
     // d'atuehtnification
     public String authentification() {

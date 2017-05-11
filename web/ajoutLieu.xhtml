@@ -69,14 +69,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h:outputLabel for="numRue">Numéro de rue </h:outputLabel>
+                                    <h:outputLabel styleClass="col-sm-2 control-label" for="numRue">Numéro de rue </h:outputLabel>
                                    <div class="col-sm-2">
                                     <h:inputText id="numRue" value="#{ajouterLieuControleur.lieu.numRue}" required="true" size="20" maxlength="60" />
                                     <h:message id="numRueMessage" for="numRue" errorClass="erreur" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="rue">rue </h:outputLabel>
+                                <h:outputLabel for="rue" styleClass="col-sm-2 control-label">rue </h:outputLabel>
                                 <div class="col-sm-2">
 
                                     <h:inputText id="rue" value="#{ajouterLieuControleur.lieu.rue}" required="true" size="20" maxlength="60" />
@@ -84,28 +84,28 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="ville">ville </h:outputLabel>
+                                <h:outputLabel for="ville" styleClass="col-sm-2 control-label">ville </h:outputLabel>
                                 <div class="col-sm-2">
                                     <h:inputText id="ville" value="#{ajouterLieuControleur.lieu.ville}" required="true" size="20" maxlength="60" />
                                     <h:message id="villeMessage" for="ville" errorClass="erreur" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="codePostal">Code Postal</h:outputLabel>
+                                <h:outputLabel for="codePostal" styleClass="col-sm-2 control-label">Code Postal</h:outputLabel>
                                 <div class="col-sm-2">
                                     <h:inputText id="codePostal" value="#{ajouterLieuControleur.lieu.codePostal}" required="true" size="20" maxlength="60" />
                                     <h:message id="codePostalMessage" for="codePostal" errorClass="erreur" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="pays">pays</h:outputLabel>
+                                <h:outputLabel for="pays" styleClass="col-sm-2 control-label">pays</h:outputLabel>
                                 <div class="col-sm-2">
                                     <h:inputText id="pays" value="#{ajouterLieuControleur.lieu.pays}" required="true" size="20" maxlength="60" />
                                     <h:message id="paysMessage" for="pays" errorClass="erreur" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="tel">tel</h:outputLabel>
+                                <h:outputLabel for="tel" styleClass="col-sm-2 control-label">tel</h:outputLabel>
                                 <div class="col-sm-2">
                                     <h:inputText id="tel" value="#{ajouterLieuControleur.lieu.tel}" required="true" size="20" maxlength="60" />
                                     <h:message id="telMessage" for="tel" errorClass="erreur" />
@@ -144,9 +144,10 @@
 
                     </div>
                 </div>
+                        </div>
+                                      </div>
+                                      </div>
 
-                </div>
-              
             </h:form>
             <br />
             <br />

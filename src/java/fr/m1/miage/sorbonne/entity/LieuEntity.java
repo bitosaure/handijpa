@@ -39,7 +39,7 @@ public class LieuEntity implements Serializable {
     private String description;
     
     @JoinColumn(name = "estValide",  columnDefinition="tinyint(1)")
-    private Integer estValide;
+    private boolean estValide;
     @JoinColumn(name = "categorie")
     @OneToOne(cascade = CascadeType.ALL)
     private CategorieEntity categorie;
@@ -141,14 +141,14 @@ public class LieuEntity implements Serializable {
     /**
      * @return the estValide
      */
-    public Integer isEstValide() {
+    public boolean isEstValide() {
         return estValide;
     }
 
     /**
      * @param estValide the estValide to set
      */
-    public void setEstValide(Integer estValide) {
+    public void setEstValide(boolean estValide) {
         this.estValide = estValide;
     }
 
