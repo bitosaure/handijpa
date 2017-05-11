@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
+
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+    <h:head>
+        <meta charset="utf-8" />
+        <title>Ajouter un lieu</title>
+
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <!-- Compiled and minified JavaScript -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    </h:head>
+    <ui:composition template="templateHandi.xhtml">
+        <ui:define name="body">
+
+
+            <h:form id="validerLieu">
+                <table>
+
+                    <ui:repeat var="l" value="#{validerLieuControleur.listEntity}" >
+
+
+                        <div class="container-fluid">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="form-title">
+                                        <h:outputText
+                                            value="#{l.nom}" />
+                                    </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-horizontal">
+
+                                        <h:outputLabel value="description:"> </h:outputLabel>
+
+                                        <h:outputLabel value="#{l.description}"> </h:outputLabel>
+
+
+                                        <br />
+
+                                        <h:outputLabel value="nom createur:"> </h:outputLabel>
+
+                                        <h:outputLabel value="#{l.createur.nom}"> </h:outputLabel>
+                                        <h:outputLabel value="prenom createur:"> </h:outputLabel>
+
+                                        <h:outputLabel value="#{l.createur.prenom}"> </h:outputLabel>
+
+
+                                        <br />
+                                        <h:commandButton value="Valider" action="#{validerLieuControleur.valider(l)}" styleClass="sansLabel" />
+
+                                        <h:commandButton value="Supprimer" action="#{validerLieuControleur.supprimer(l)}" styleClass="sansLabel" />
+                                        <br />
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </ui:repeat>
+
+                </table>
+
+            </h:form>
+            <br />
+            <br />
+
+        </ui:define>
+    </ui:composition>
+</html>

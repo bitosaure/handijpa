@@ -101,7 +101,7 @@ public class PersonneDAO implements DAO<PersonneEntity>{
         em.close();    }
 
     @Override
-    public PersonneEntity findById(int id) {
+    public PersonneEntity findById(String id) {
         return em.find(PersonneEntity.class, id);
     }
 }

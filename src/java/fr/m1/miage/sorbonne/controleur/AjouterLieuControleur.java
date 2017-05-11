@@ -34,9 +34,8 @@ public class AjouterLieuControleur implements Serializable {
 
      private List<CategorieEntity> listeCategorie = new ArrayList<>();
     
+     private String categ="";
      
-     
-     private String categ;
      private CategorieDAO categDao;
 
      private LieuDAO lieuDao;
@@ -64,9 +63,9 @@ public class AjouterLieuControleur implements Serializable {
     
     public String ajouter(){
             lieuDao   = new LieuDAO();
+            lieu.setCategorie(categDao.findById(categ));
             FacesContext context = FacesContext.getCurrentInstance();
-
-         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
+             ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
             lieu.setCreateur((PersonneEntity)binding.getValue(context));
             lieu.setEstValide(false);
              lieuDao.create(lieu);
