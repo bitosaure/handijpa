@@ -54,7 +54,7 @@ public class CategorieDAO implements DAO<CategorieEntity> {
         em.close();    }
 
     @Override
-    public CategorieEntity findById(int id) {
+    public CategorieEntity findById(String id) {
         return em.find(CategorieEntity.class, id);
     }
 }

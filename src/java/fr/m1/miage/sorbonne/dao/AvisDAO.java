@@ -54,7 +54,7 @@ public class AvisDAO implements DAO<AvisEntity>{
         em.close();    }
 
     @Override
-    public AvisEntity findById(int id) {
+    public AvisEntity findById(String id) {
         return em.find(AvisEntity.class, id);
     }
 }

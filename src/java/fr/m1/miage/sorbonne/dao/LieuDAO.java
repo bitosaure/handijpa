@@ -34,6 +34,7 @@ public class LieuDAO implements DAO<LieuEntity> {
    
     @Override
     public List findAll() {
+        
         List<LieuEntity> listLieuEntity = em.createQuery("Select a FROM LieuEntity a").getResultList();
         return listLieuEntity;
     }
@@ -46,7 +47,7 @@ public class LieuDAO implements DAO<LieuEntity> {
 		List<Predicate> predicateList = new ArrayList<Predicate>();
 
 		
-			predicateList.add(cb.equal(root.<String> get("isValidate"),
+			predicateList.add(cb.equal(root.<String> get("estValide"),
 					false));
 		
 
@@ -63,6 +64,7 @@ public class LieuDAO implements DAO<LieuEntity> {
     public void create(LieuEntity obj) {
         em.getTransaction().begin();
         em.persist(obj);
+        em.flush();
         em.getTransaction().commit();
         em.close();    }
 
@@ -81,7 +83,7 @@ public class LieuDAO implements DAO<LieuEntity> {
         em.close();    }
 
     @Override
-    public LieuEntity findById(int id) {
+    public LieuEntity findById(String id) {
         return em.find(LieuEntity.class, id);
     }
 }

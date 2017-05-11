@@ -54,7 +54,7 @@ public class NoteUnLieuDAO implements DAO<NoteUnLieuEntity>{
         em.close();    }
 
     @Override
-    public NoteUnLieuEntity findById(int id) {
+    public NoteUnLieuEntity findById(String id) {
         return em.find(NoteUnLieuEntity.class, id);
     }
 }
