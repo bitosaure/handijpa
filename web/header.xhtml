@@ -31,9 +31,7 @@
                     </div>		
                     
                     
-                                  bienvenue
-                   <h:outputLabel value="#{authentificationControleur.personne.nom}"></h:outputLabel>
-                                      <h:outputLabel value="#{authentificationControleur.personne.prenom}"></h:outputLabel>``
+                                  
                     <div class="col-xs-2 col-md-1">
                         <h:commandLink id="authent" style="color: black; "
                                        rendered="#{authentificationControleur.isAuthenti!='true'}"
@@ -48,10 +46,10 @@
 
                                        value="S'inscrire" action="#{inscriptionControleur.initialiserPage()}"/>
                         
-                         <h:commandLink id="inscri" style="color: black; "
-                                       rendered="#{authentificationControleur.isAuthenti!='true'}"
+                         <h:commandLink id="deco" style="color: black; "
+                                       rendered="#{authentificationControleur.isAuthenti!='false'}"
 
-                                       value="S'inscrire" action="#{authentificationControleur.seDeconnecter()}"/>
+                                       value="Se deconnecter" action="#{authentificationControleur.seDeconnecter()}"/>
                     </div>
                      
                        

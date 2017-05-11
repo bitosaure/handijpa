@@ -42,6 +42,8 @@ public class AuthentificationControleur implements Serializable{
 
     
     public String seDeconnecter(){
+                isAuthenti =false;
+
         personne = new PersonneEntity();
         return "SUCCESS";
     }
