@@ -94,12 +94,16 @@
                                     function () {
 
                                         $('.tableau')
-                                                .dataTable(
+                                                .dataTable({
+                                                        "language" : {
+                                                            "url": "French.json"
+                                                        }
+                                                    }
 
 
 
-
-                                                        )});
+                                                )
+                                    });
                 </script>
 
 
