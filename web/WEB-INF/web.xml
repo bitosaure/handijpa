@@ -9,18 +9,19 @@
         <param-value>Development</param-value>
     </context-param>
     <!-- Configuration JSF -->
-	<context-param>
-		<param-name>javax.faces.CONFIG_FILES</param-name>
-		<param-value>
-			/WEB-INF/authentification/faces-navigation.xml,		
-                        /WEB-INF/inscription/faces-navigation.xml,
-                        /WEB-INF/ajoutLieu/faces-navigation.xml,
-                        /WEB-INF/validerLieu/faces-navigation.xml
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>
+            /WEB-INF/authentification/faces-navigation.xml,		
+            /WEB-INF/inscription/faces-navigation.xml,
+            /WEB-INF/ajoutLieu/faces-navigation.xml,
+            /WEB-INF/validerLieu/faces-navigation.xml,
+            /WEB-INF/consulterLieux/faces-navigation.xml
 
 
 			
-		</param-value>
-	</context-param>
+        </param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -52,19 +53,19 @@
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
     <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-</servlet-mapping>
-<servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
-</servlet-mapping>
-<servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.faces</url-pattern>
-</servlet-mapping>
-<servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-</servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -28,20 +28,20 @@
                         <ul class="nav navbar-nav">
 
                             <li  id="divTableau"><h:commandLink id="consulLieu"
-
+                                                                action="#{consulterLieuxControleur.initialiserPage()}"                        
                                                                 value="Consulter lieux" /></li>
 
 
 
 
                             <li id="divCreationLieu"><h:commandLink id="creerLieu"
-                                action="#{ajouterLieuControleur.initialiserPage()}"
-                                                              value="Créer lieu" /></li>
-		
+                                                                    action="#{ajouterLieuControleur.initialiserPage()}"
+                                                                    value="Créer lieu" /></li>
 
-                                <li id="divValiderLieu"><h:commandLink id="validerLieu"
-                                action="#{validerLieuControleur.initialiserPage()}"
-                                                              value="valider lieu" /></li>
+
+                            <li id="divValiderLieu"><h:commandLink id="validerLieu"
+                                                                   action="#{validerLieuControleur.initialiserPage()}"
+                                                                   value="valider lieu" /></li>
 
                         </ul>
                     </div>
