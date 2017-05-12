@@ -14,6 +14,95 @@
 
 
             <h:form id="consulterLieux">
+                <h:dataTable id="tableau" var="var"  class="display"
+                             value="#{consulterLieuxControleur.lieux}"
+                             styleClass="tableau table table-responsive table-striped table-bordered table-hover">
+
+                    <h:column id="colNomLieu">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Nom du lieu"
+                                          id="nomLieu" />
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{var.nom}"
+                                      id="libelleLieu" />
+
+
+
+                    </h:column>
+                    <h:column id="colAdress">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Ville du lieu"
+                                          id="ville">
+
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText styleClass="outputText"
+                                      value="#{var.ville}" id="villeLieu" />
+
+
+
+                    </h:column>
+                    <h:column id="colPays">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Pays du lieu"
+                                          id="paysLieu">
+
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{var.pays}"
+                                      id="pays" />
+
+
+
+                    </h:column>
+                    <h:column id="categoriLieu">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Categorie du lieu"
+                                          id="categLieu">
+
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{var.categorie.libelle.toString()}"
+                                      id="categorieLieu" />
+
+
+
+                    </h:column>
+
+                    <h:column id="colDetail">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Voir détail"
+                                          id="detail">
+
+                            </h:outputText>
+                        </f:facet>
+
+
+
+                        <h:commandLink styleClass="commandLink" immediate="true"
+                                       action="#{consulterLieuxControleur.setLieuDetail(var)}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+
+                        </h:commandLink>
+                    </h:column>
+
+                </h:dataTable>
+
+                <script type="text/javascript">
+                    $(document)
+                            .ready(
+                                    function () {
+
+                                        $('.tableau')
+                                                .dataTable(
+
+
+
+
+                                                        )});
+                </script>
+
+
             </h:form>
         </ui:define>
     </ui:composition>

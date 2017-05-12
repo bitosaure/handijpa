@@ -26,6 +26,10 @@ public class ConsulterLieuxControleur {
 
     private List<LieuEntity> lieux = new ArrayList<>();
 
+    private LieuEntity lieuDetail;
+
+    
+
     private LieuDAO lieuDao;
     
     public ConsulterLieuxControleur() {        
@@ -41,5 +45,23 @@ public class ConsulterLieuxControleur {
 
         return "SUCCESS";
 
+    }
+    
+    public LieuEntity detailDuLieu(String index){
+        return lieuDao.findById(index);
+    }
+    public List<LieuEntity> getLieux() {
+        return lieux;
+    }
+
+    public void setLieux(List<LieuEntity> lieux) {
+        this.lieux = lieux;
+    }
+    public LieuEntity getLieuDetail() {
+        return lieuDetail;
+    }
+
+    public void setLieuDetail(LieuEntity lieuDetail) {
+        this.lieuDetail = lieuDetail;
     }
 }
