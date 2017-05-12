@@ -8,6 +8,7 @@ package fr.m1.miage.sorbonne.controleur;
 import fr.m1.miage.sorbonne.dao.LieuDAO;
 import fr.m1.miage.sorbonne.entity.LieuEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,13 +21,34 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class IndexControleur implements Serializable{
     private LieuDAO lieux;
+    private List<LieuEntity> lieuxIndex;
+
+    public IndexControleur(){
+        this.setLieuxIndex(lieuxIndex);
+    }
     
-    public List<LieuEntity> recupererLieux(){
+    private List<LieuEntity> recupererLieux(){
         lieux = new LieuDAO();
-        for (LieuEntity  object : (List<LieuEntity>)lieux.findAll()) {
-            System.out.println(object.getNom());
+        List<LieuEntity> maListe = new ArrayList<>();
+        List<LieuEntity> listeBd = lieux.findAll();
+        int flag = 5;
+        if(listeBd.size()<flag){
+            flag = listeBd.size();
         }
-        return lieux.findAll();
+        for (int i = 0; i < flag; i++) {
+            listeBd.get(i).setImage("./images/"+listeBd.get(i).getImage());
+            System.out.println(listeBd.get(i).getImage());
+            maListe.add(listeBd.get(i));
+        }      
+        return maListe;
+                
         
+    }
+    public List<LieuEntity> getLieuxIndex() {
+        return lieuxIndex;
+    }
+
+    public void setLieuxIndex(List<LieuEntity> lieuxIndex) {
+        this.lieuxIndex = recupererLieux();
     }
 }

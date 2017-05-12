@@ -33,9 +33,10 @@ public class LieuDAO implements DAO<LieuEntity> {
 
    
     @Override
-    public List findAll() {
+    public List<LieuEntity> findAll() {
         
         List<LieuEntity> listLieuEntity = em.createQuery("Select a FROM LieuEntity a").getResultList();
+        
         return listLieuEntity;
     }
     public List findNonValider(){

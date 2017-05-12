@@ -30,7 +30,7 @@
         <ui:define name="body">
 
 
-            <h:form id="ajoutLieu">
+            <h:form id="ajoutLieu" enctype="multipart/form-data">
                 <div class="container-fluid">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -109,6 +109,13 @@
                                 <div class="col-sm-2">
                                     <h:inputText id="tel" value="#{ajouterLieuControleur.lieu.tel}" required="true" size="20" maxlength="60" />
                                     <h:message id="telMessage" for="tel" errorClass="erreur" />
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                <h:outputLabel for="tel" styleClass="col-sm-2 control-label">Image</h:outputLabel>
+                                <div class="col-sm-2">
+                                    <h:inputFile id="fichier" value="#{ajouterLieuControleur.fichier}" required="true"/>
+                                    <h:message id="fichierMessage" for="fichier" errorClass="erreur" />
                                 </div>
                             </div>
                             <div class="form-group">

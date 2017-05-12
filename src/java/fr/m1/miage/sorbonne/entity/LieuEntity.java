@@ -44,9 +44,8 @@ public class LieuEntity implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private CategorieEntity categorie;
 
-    @JoinColumn(name = "createur")
-    @OneToOne(cascade = CascadeType.ALL)
-    private PersonneEntity createur;
+    
+    
     @JoinColumn(name = "codePostal")
     private Integer codePostal;
     @JoinColumn(name = "numRue")
@@ -167,19 +166,7 @@ public class LieuEntity implements Serializable {
         this.categorie = categorie;
     }
 
-    /**
-     * @return the createur
-     */
-    public PersonneEntity getCreateur() {
-        return createur;
-    }
-
-    /**
-     * @param createur the createur to set
-     */
-    public void setCreateur(PersonneEntity createur) {
-        this.createur = createur;
-    }
+    
 
     /**
      * @return the codePostal
