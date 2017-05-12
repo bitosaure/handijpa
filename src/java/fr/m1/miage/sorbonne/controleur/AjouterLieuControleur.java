@@ -21,6 +21,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import static javax.security.auth.message.AuthStatus.SUCCESS;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -39,6 +40,10 @@ public class AjouterLieuControleur implements Serializable {
      private CategorieDAO categDao;
 
      private LieuDAO lieuDao;
+     
+     private Part fichier;
+
+    
      
     // Initialisation de l'entité utilisateur
     public AjouterLieuControleur() {
@@ -116,5 +121,13 @@ public class AjouterLieuControleur implements Serializable {
      */
     public void setCateg(String categ) {
         this.categ = categ;
+    }
+    
+    public Part getFichier() {
+        return fichier;
+    }
+
+    public void setFichier(Part fichier) {
+        this.fichier = fichier;
     }
 }

@@ -37,8 +37,8 @@ public class LieuEntity implements Serializable {
 
     @JoinColumn(name = "description")
     private String description;
-    
-    @JoinColumn(name = "estValide",  columnDefinition="tinyint(1)")
+
+    @JoinColumn(name = "estValide", columnDefinition = "tinyint(1)")
     private boolean estValide;
     @JoinColumn(name = "categorie")
     @OneToOne(cascade = CascadeType.ALL)
@@ -47,18 +47,23 @@ public class LieuEntity implements Serializable {
     @JoinColumn(name = "createur")
     @OneToOne(cascade = CascadeType.ALL)
     private PersonneEntity createur;
-    @JoinColumn(name="codePostal")
+    @JoinColumn(name = "codePostal")
     private Integer codePostal;
-    @JoinColumn(name="numRue")
+    @JoinColumn(name = "numRue")
     private Integer numRue;
-    @JoinColumn(name="rue")
+    @JoinColumn(name = "rue")
     private String rue;
-    @JoinColumn(name="ville")
+    @JoinColumn(name = "ville")
     private String ville;
-    @JoinColumn(name="tel")
+    @JoinColumn(name = "tel")
     private Integer tel;
-    @JoinColumn(name="pays")
+
+    @JoinColumn(name = "image")
+    private String image;
+
+    @JoinColumn(name = "pays")
     private String pays;
+
     public Long getId() {
         return id;
     }
@@ -120,8 +125,6 @@ public class LieuEntity implements Serializable {
         this.nom = nom;
     }
 
-
-
     /**
      * @return the description
      */
@@ -135,8 +138,6 @@ public class LieuEntity implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-  
 
     /**
      * @return the estValide
@@ -262,6 +263,14 @@ public class LieuEntity implements Serializable {
      */
     public void setPays(String pays) {
         this.pays = pays;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }
