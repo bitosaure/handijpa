@@ -59,6 +59,26 @@ public class LieuDAO implements DAO<LieuEntity> {
 		return em.createQuery(query).getResultList();
     }
     
+    public List findValider(){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<LieuEntity> query = cb
+				.createQuery(LieuEntity.class);
+		// construction de la requete dynamique
+		Root<LieuEntity> root = query.from(LieuEntity.class);
+		List<Predicate> predicateList = new ArrayList<Predicate>();
+
+		
+			predicateList.add(cb.equal(root.<String> get("estValide"),
+					true));
+		
+
+		Predicate[] predicates = new Predicate[predicateList.size()];
+		predicateList.toArray(predicates);
+		query.where(predicates);
+		// exécution de la requete
+		return em.createQuery(query).getResultList();
+    }
+    
 
 
     @Override
