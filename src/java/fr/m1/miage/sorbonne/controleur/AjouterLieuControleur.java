@@ -84,7 +84,7 @@ public class AjouterLieuControleur implements Serializable {
 
     public String ajouter() {
         lieuDao = new LieuDAO();
-       //lieu.setCategorie(categDao.findById(categ));
+       lieu.setCategorie(categDao.findById(categ));
         FacesContext context = FacesContext.getCurrentInstance();
         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
         //lieu.setCreateur((PersonneEntity) binding.getValue(context));
@@ -103,7 +103,7 @@ public class AjouterLieuControleur implements Serializable {
         Path file = null;
         try {
             
-            file = Files.createTempFile(Paths.get("/Users/thibault/handijpa3/web/images"),str,".jpg");
+            file = Files.createTempFile(Paths.get("/Users/emiliepisu/handijpa/web/images"),str,".jpg");
             //InputStream in = fichier.getInputStream();
             System.out.println(file.getFileName());
             try (InputStream input = fichier.getInputStream()){

@@ -40,6 +40,23 @@
 
 
                                         <br />
+                                        
+                                        <h:outputLabel value="adresse"> </h:outputLabel>
+
+                                        <h:outputLabel value="#{l.adresse()}"> </h:outputLabel>
+                                        
+                                        <br />
+
+                                        <h:outputLabel value="catégorie: "> </h:outputLabel>
+
+                                        <h:outputLabel value="#{l.categorie.libelle}"> </h:outputLabel>
+                                        <br />
+
+                                        <div  class="tailleImage"> 
+
+                                        <img src="#{l.getImage()}"/>
+                                    </div>
+                                    <br />
                                         <h:commandButton value="Valider" action="#{validerLieuControleur.valider(l)}" styleClass="sansLabel" />
 
                                         <h:commandButton value="Supprimer" action="#{validerLieuControleur.supprimer(l)}" styleClass="sansLabel" />

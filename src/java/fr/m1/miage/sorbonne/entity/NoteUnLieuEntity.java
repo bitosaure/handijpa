@@ -35,11 +35,9 @@ public class NoteUnLieuEntity implements Serializable {
     private String commentaire;
 
     @JoinColumn(name = "personne")
-    @OneToOne(cascade = CascadeType.ALL)
     private PersonneEntity personne;
 
     @JoinColumn(name = "critere")
-    @OneToOne(cascade = CascadeType.ALL)
     private CritereEntity critere;
 
     public Long getId() {

@@ -42,6 +42,11 @@ public class ValiderLieuControleur implements Serializable{
     public String initialiserPage(){
             lieuDao= new LieuDAO();
             listEntity = lieuDao.findNonValider();
+            for (int i =0; i< listEntity.size() ; i++) {
+             listEntity.get(i).setImage("./images/"+listEntity.get(i).getImage());
+             }
+            
+          
             return "SUCCESS";
        
         

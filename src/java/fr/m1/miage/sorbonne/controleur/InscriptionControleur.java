@@ -44,6 +44,7 @@ public class InscriptionControleur implements Serializable{
                 return "ERROR";
         }
         else{
+            personne.setTypePersonne("lambda");
              personneDao.create(personne);
         
              FacesMessage message = new FacesMessage( "Succès de l'inscription !" );

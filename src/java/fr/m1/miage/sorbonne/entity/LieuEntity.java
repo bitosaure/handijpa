@@ -41,7 +41,6 @@ public class LieuEntity implements Serializable {
     @JoinColumn(name = "estValide", columnDefinition = "tinyint(1)")
     private boolean estValide;
     @JoinColumn(name = "categorie")
-    @OneToOne(cascade = CascadeType.ALL)
     private CategorieEntity categorie;
 
     
@@ -94,6 +93,10 @@ public class LieuEntity implements Serializable {
     @Override
     public String toString() {
         return "fr.sorbonne.m1.entity.LieuEntity[ id=" + getId() + " ]";
+    }
+    
+    public String adresse() {
+        return numRue + " " + rue + " "+ codePostal + " " + ville + " "+ pays;
     }
 
     /**

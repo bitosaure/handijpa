@@ -43,11 +43,9 @@ public class AvisEntity implements Serializable {
     private Integer estValide;
 
     @JoinColumn(name = "lieu")
-    @OneToOne(cascade = CascadeType.ALL)
     private LieuEntity lieu;
 
     @JoinColumn(name = "createur")
-    @OneToOne(cascade = CascadeType.ALL)
     private PersonneEntity createur;
 
     public Long getId() {
