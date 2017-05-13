@@ -37,13 +37,17 @@ public class ValiderLieuControleur implements Serializable{
     public ValiderLieuControleur() {
         lieuDao= new LieuDAO();
         listEntity = lieuDao.findNonValider();
+        for (int i =0; i< listEntity.size() ; i++) {
+             listEntity.get(i).setImage("http://localhost:8080/handijpa/images/"+listEntity.get(i).getImage());
+             }
+        
     }
 
     public String initialiserPage(){
             lieuDao= new LieuDAO();
             listEntity = lieuDao.findNonValider();
             for (int i =0; i< listEntity.size() ; i++) {
-             listEntity.get(i).setImage("./././images/"+listEntity.get(i).getImage());
+             listEntity.get(i).setImage("http://localhost:8080/handijpa/images/"+listEntity.get(i).getImage());
              }
             
           

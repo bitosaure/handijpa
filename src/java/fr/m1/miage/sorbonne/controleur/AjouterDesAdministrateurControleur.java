@@ -8,6 +8,7 @@ package fr.m1.miage.sorbonne.controleur;
 import fr.m1.miage.sorbonne.dao.PersonneDAO;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,21 +21,27 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class AjouterDesAdministrateurControleur implements Serializable{
     
-    private List<PersonneEntity> listesPersonnes;
+    private List<PersonneEntity> listesPersonnes = new ArrayList<>();
     
     private PersonneDAO persDao;
-    public String initialiserPage() {
+    public AjouterDesAdministrateurControleur(){
         persDao=new PersonneDAO();
+        listesPersonnes = persDao.rechercherPersonnesNonAdmin();
+    }
+    
+    public String initialiserPage() {
         
-        setListesPersonnes(persDao.rechercherPersonnesNonAdmin());
         return "SUCCESS";
 
     }
     
-    public String ajouterAdmin (PersonneEntity pers){
+    public String ajouterAdmin(PersonneEntity pers){
+        
         pers.setTypePersonne("admin");
-        persDao.update(pers);
+        
+        persDao.update(pers);  
         return "SUCCESS";
+        
     }
 
     /**

@@ -55,7 +55,7 @@
 
 
                     </h:column>
-                   
+
 
                     <h:column id="ajouterA">
                         <f:facet name="header">
@@ -67,7 +67,7 @@
 
 
 
-                        <h:commandLink styleClass="commandLink" immediate="true"
+                        <h:commandLink styleClass="commandLink" value="Ajouter" immediate="true"
                                        action="#{ajouterDesAdministrateurControleur.ajouterAdmin(var)}">
 
                         </h:commandLink>
@@ -82,10 +82,10 @@
 
                                         $('.tableau')
                                                 .dataTable({
-                                                        "language" : {
-                                                            "url": "French.json"
-                                                        }
+                                                    "language": {
+                                                        "url": "French.json"
                                                     }
+                                                }
 
 
 

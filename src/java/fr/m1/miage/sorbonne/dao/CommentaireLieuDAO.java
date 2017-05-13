@@ -5,8 +5,8 @@
  */
 package fr.m1.miage.sorbonne.dao;
 
-import fr.m1.miage.sorbonne.entity.AvisEntity;
-import fr.m1.miage.sorbonne.entity.CategorieEntity;
+import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
+import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,49 +16,44 @@ import javax.persistence.Persistence;
  *
  * @author emiliepisu
  */
-public class CategorieDAO implements DAO<CategorieEntity> {
-    
+public class CommentaireLieuDAO implements DAO<CommentaireLieuEntity>{
+     
     private EntityManager em;
 
-    public CategorieDAO() {
+    public CommentaireLieuDAO() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("handijpaPU");
         em = emf.createEntityManager();
     }
 
-   
     @Override
-    public List findAll() {
-        List<CategorieEntity> listCategorie = em.createQuery("Select c FROM CategorieEntity  c").getResultList();
-        return listCategorie;
+    public void create(CommentaireLieuEntity obj) {
+         em.getTransaction().begin();
+        em.persist(obj);
+        em.getTransaction().commit();
+        em.close();     }
+
+    @Override
+    public CommentaireLieuEntity findById(String id) {
+        return em.find(CommentaireLieuEntity.class, id);
     }
 
     @Override
-    public void create(CategorieEntity obj) {
+    public void update(CommentaireLieuEntity obj) {
         em.getTransaction().begin();
-        em.persist(obj);
+        em.merge(obj);
         em.getTransaction().commit();
-        em.close();    }
+        em.close();     }
 
     @Override
-    public void update(CategorieEntity obj) {
+    public void delete(CommentaireLieuEntity obj) {
         em.getTransaction().begin();
-         em.merge(obj);
-        em.getTransaction().commit();
-        em.close();    }
-
-    @Override
-    public void delete(CategorieEntity obj) {
-        em.getTransaction().begin();
-         obj = em.merge(obj);
-
         em.remove(obj);
         em.getTransaction().commit();
         em.close();    }
 
     @Override
-    public CategorieEntity findById(String id) {
-        
-        System.out.println("lib" +em.find(CategorieEntity.class, id).getLibelle());
-        return em.find(CategorieEntity.class, id);
+    public List<CommentaireLieuEntity> findAll() {
+        List<CommentaireLieuEntity> listPCommentaireLieuEntity = em.createQuery("Select a FROM CommentaireLieuEntity a").getResultList();
+        return listPCommentaireLieuEntity;   
     }
 }

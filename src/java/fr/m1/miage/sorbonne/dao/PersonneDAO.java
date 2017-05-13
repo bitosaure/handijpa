@@ -113,7 +113,7 @@ public class PersonneDAO implements DAO<PersonneEntity>{
     @Override
     public void update(PersonneEntity obj) {
         em.getTransaction().begin();
-         em.merge(obj);
+        em.merge(obj);
         em.getTransaction().commit();
         em.close();    }
 

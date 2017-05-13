@@ -6,6 +6,10 @@ body {
     margin: 10px;
 }
 
+tailleImage {
+    height: 20px;
+}
+
 h1 {
     font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     border-bottom: 1px solid #AFAFAF; 
@@ -27,3 +31,5 @@ a:link:hover, a:visited:hover  {
   font-weight : bold;
   text-decoration : underline;
 }
+
+

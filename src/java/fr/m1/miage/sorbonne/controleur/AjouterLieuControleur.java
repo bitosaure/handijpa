@@ -34,6 +34,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIViewRoot;
+import javax.faces.component.html.*;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 import static javax.security.auth.message.AuthStatus.SUCCESS;
@@ -65,7 +67,8 @@ public class AjouterLieuControleur implements Serializable {
         categDao = new CategorieDAO();
         listeCategorie = categDao.findAll();
         lieu = new LieuEntity();
-       
+        
+      
     }
 
     public String initialiserPage() {

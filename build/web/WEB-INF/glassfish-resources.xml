@@ -5,8 +5,8 @@
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="8889"/>
         <property name="databaseName" value="handiadvisor"/>
-        <property name="User" value="handi"/>
-        <property name="Password" value="handi"/>
+        <property name="User" value="root"/>
+        <property name="Password" value="root"/>
         <property name="URL" value="jdbc:mysql://localhost:8889/handiadvisor?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>

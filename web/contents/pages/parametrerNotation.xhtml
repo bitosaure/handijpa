@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+    <h:head>
+        <meta charset="utf-8" />
+        <title>Parametrer notation</title>
+
+
+    </h:head>
+
+    <ui:composition template="/././templateHandi.xhtml">
+        <ui:define name="body">
+            <h:form>
+                <fieldset>
+                    
+
+			<div class="container-fluid">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="form-title">
+							<h:outputText
+								value="Parametrer la notation" />
+						</h4>
+					</div>
+					<div class="panel-body">
+						<div class="form-horizontal">
+
+                    <h4 class="form-title">
+							<h:outputText
+								value="Ajouter critère" />
+						</h4>
+                            <h:outputLabel for="code">Code</h:outputLabel>
+                            <h:inputText id="code" class="form-control"  value="#{parametrerNotationControleur.critere.code}" size="20" maxlength="60" />
+                            <h:message id="codeMessage" for="code" errorClass="erreur" />
+                        
+                    <br />
+
+                    <h:outputLabel for="libelle">libelle</h:outputLabel>
+                    <h:inputText id="libelle" value="#{parametrerNotationControleur.critere.libelle}"  size="20" maxlength="20" />
+                    <h:message id="libelleMessage" for="libelle" errorClass="erreur" />
+                    <br />
+                    <h:commandButton value="Valider" action="#{parametrerNotationControleur.ajouter()}" styleClass="sansLabel" />
+
+
+                            <h4 class="form-title">
+							<h:outputLabel
+								value="Lister criteres " />
+						</h4>
+                    
+                     <h:dataTable id="tableau" var="var"  class="display"
+                             value="#{parametrerNotationControleur.listCriteres}"
+                             styleClass="tableau table table-responsive table-striped table-bordered table-hover">
+
+                    <h:column id="colCode">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="code"
+                                          id="code" />
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{var.code}"
+                                      id="labcode" />
+
+
+
+                    </h:column>
+                         
+                          <h:column id="colLibelle">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="libelle"
+                                          id="lablibelle" />
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{var.libelle}"
+                                      id="libelle" />
+
+
+
+                    </h:column>
+                         
+                          <h:column id="suppression">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="supprimer critère"
+                                          id="supp">
+
+                            </h:outputText>
+                        </f:facet>
+
+
+
+                        <h:commandLink styleClass="commandLink" value="suppri" immediate="true"
+                                       action="#{parametrerNotationControleur.supprimer(var)}">
+
+                        </h:commandLink>
+                    </h:column>
+    
+                         </h:dataTable>
+                    
+                    <br />
+                     </div>
+
+                                                                </div>
+
+                                                        </div>
+
+                                                </div>
+                </fieldset>
+                                   
+<script type="text/javascript">
+                    $(document)
+                            .ready(
+                                    function () {
+
+                                        $('.tableau')
+                                                .dataTable({
+                                                        "language" : {
+                                                            "url": "French.json"
+                                                        }
+                                                    }
+
+
+
+                                                )
+                                    });
+                </script>
+
+
+            </h:form> 
+        </ui:define>
+    </ui:composition>
+
+</html>

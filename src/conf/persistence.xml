@@ -3,13 +3,8 @@
   <persistence-unit name="handijpaPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/handiadvisor</jta-data-source>
-    <class>fr.m1.miage.sorbonne.entity.PersonneEntity</class>
-    <class>fr.m1.miage.sorbonne.entity.LieuEntity</class>
-    <class>fr.m1.miage.sorbonne.entity.CategorieEntity</class>
-    <class>fr.m1.miage.sorbonne.entity.NoteUnLieuEntity</class>
-    <class>fr.m1.miage.sorbonne.entity.AvisEntity</class>
-    <class>fr.m1.miage.sorbonne.entity.CritereEntity</class>
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+   
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>

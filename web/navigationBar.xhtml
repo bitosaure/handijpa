@@ -46,6 +46,11 @@
                             <li id="divAjouterAdmin"><h:commandLink id="ajouterAdmin"
                                                                    action="#{ajouterDesAdministrateurControleur.initialiserPage()}"
                                                                    value="ajouter admin" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                     <li id="divParamNotation"><h:commandLink id="parametrerNotation"
+                                                                   action="#{parametrerNotationControleur.initialiserPage()}"
+                                                                   value="parametrer notation" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                        
+                        
                         </ul>
                     </div>
                 </div>
