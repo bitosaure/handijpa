@@ -60,7 +60,7 @@ public class AuthentificationControleur implements Serializable {
             return "ERROR";
         } else {
             personne = listPers.get(0);
-
+            System.out.println("type pers" +personne.getTypePersonne());
             FacesMessage message = new FacesMessage("succès de l'authentification!");
             FacesContext.getCurrentInstance().addMessage(null, message);
             isAuthenti = true;

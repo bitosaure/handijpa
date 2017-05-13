@@ -43,6 +43,9 @@
                                                                    action="#{validerLieuControleur.initialiserPage()}"
                                                                    value="valider lieu" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
 
+                            <li id="divAjouterAdmin"><h:commandLink id="ajouterAdmin"
+                                                                   action="#{ajouterDesAdministrateurControleur.initialiserPage()}"
+                                                                   value="ajouter admin" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
                         </ul>
                     </div>
                 </div>

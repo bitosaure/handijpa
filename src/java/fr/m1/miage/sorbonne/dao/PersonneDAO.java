@@ -79,6 +79,30 @@ public class PersonneDAO implements DAO<PersonneEntity>{
 		// exécution de la requete
 		return em.createQuery(query).getResultList();
 	}
+     
+     
+     
+     
+     public List<PersonneEntity> rechercherPersonnesNonAdmin( ) {
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<PersonneEntity> query = cb
+				.createQuery(PersonneEntity.class);
+		// construction de la requete dynamique
+		Root<PersonneEntity> root = query.from(PersonneEntity.class);
+		List<Predicate> predicateList = new ArrayList<Predicate>();
+
+		
+			predicateList.add(cb.equal(root.<String> get("typePersonne"),
+					"lambda"));
+                       
+
+		Predicate[] predicates = new Predicate[predicateList.size()];
+		predicateList.toArray(predicates);
+		query.where(predicates);
+		// exécution de la requete
+		return em.createQuery(query).getResultList();
+	}
     @Override
     public void create(PersonneEntity obj) {
         em.getTransaction().begin();

@@ -42,8 +42,8 @@ public class LieuEntity implements Serializable {
     private boolean estValide;
     @JoinColumn(name = "categorie")
     private CategorieEntity categorie;
-
-    
+    @JoinColumn(name = "createur")
+    private PersonneEntity createur;
     
     @JoinColumn(name = "codePostal")
     private Integer codePostal;
@@ -261,6 +261,20 @@ public class LieuEntity implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    /**
+     * @return the createur
+     */
+    public PersonneEntity getCreateur() {
+        return createur;
+    }
+
+    /**
+     * @param createur the createur to set
+     */
+    public void setCreateur(PersonneEntity createur) {
+        this.createur = createur;
     }
 
 }

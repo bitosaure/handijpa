@@ -87,7 +87,7 @@ public class AjouterLieuControleur implements Serializable {
        lieu.setCategorie(categDao.findById(categ));
         FacesContext context = FacesContext.getCurrentInstance();
         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
-        //lieu.setCreateur((PersonneEntity) binding.getValue(context));
+        lieu.setCreateur((PersonneEntity) binding.getValue(context));
         lieu.setEstValide(false);
        
         
