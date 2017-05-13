@@ -3,8 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
-
+      
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Consulter Lieux</title>
@@ -14,7 +15,7 @@
 
 
             <h:form id="consulterLieux">
-                <h:dataTable id="tableau" var="var"  class="display"
+                <h:dataTable id="tableau" var="lieu"  class="display"
                              value="#{consulterLieuxControleur.lieux}"
                              styleClass="tableau table table-responsive table-striped table-bordered table-hover">
 
@@ -23,7 +24,7 @@
                             <h:outputText styleClass="outputText" value="Nom du lieu"
                                           id="nomLieu" />
                         </f:facet>
-                        <h:outputText styleClass="outputText" value="#{var.nom}"
+                        <h:outputText styleClass="outputText" value="#{lieu.nom}"
                                       id="libelleLieu" />
 
 
@@ -37,7 +38,7 @@
                             </h:outputText>
                         </f:facet>
                         <h:outputText styleClass="outputText"
-                                      value="#{var.ville}" id="villeLieu" />
+                                      value="#{lieu.ville}" id="villeLieu" />
 
 
 
@@ -49,7 +50,7 @@
 
                             </h:outputText>
                         </f:facet>
-                        <h:outputText styleClass="outputText" value="#{var.pays}"
+                        <h:outputText styleClass="outputText" value="#{lieu.pays}"
                                       id="pays" />
 
 
@@ -62,7 +63,7 @@
 
                             </h:outputText>
                         </f:facet>
-                        <h:outputText styleClass="outputText" value="#{var.categorie.libelle.toString()}"
+                        <h:outputText styleClass="outputText" value="#{lieu.categorie.libelle.toString()}"
                                       id="categorieLieu" />
 
 
@@ -78,15 +79,85 @@
                         </f:facet>
 
 
+                        <p:remoteCommand name="test" actionListener="#{consulterLieuxControleur.setLieuDetail(lieu.id)}"/>
+                        <p:commandLink id="lien" type="button" onclick="toto()" value="#{lieu.id}"></p:commandLink>
+                        
 
-                        <h:commandLink styleClass="commandLink" immediate="true"
-                                       action="#{consulterLieuxControleur.setLieuDetail(var)}">
-                            <span class="glyphicon glyphicon-pencil"></span>
 
-                        </h:commandLink>
                     </h:column>
 
                 </h:dataTable>
+
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">#{consulterLieuxControleur.lieuDetail.nom}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-4">.col-md-4</div>
+                                    <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+                                    <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        Level 1: .col-sm-9
+                                        <div class="row">
+                                            <div class="col-xs-8 col-sm-6">
+                                                Level 2: .col-xs-8 .col-sm-6
+                                            </div>
+                                            <div class="col-xs-4 col-sm-6">
+                                                Level 2: .col-xs-4 .col-sm-6
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+                <script type="text/javascript">
+                    function toto() {
+                        test();
+
+                        $('#myModal').modal();
+
+
+
+
+
+
+                    }
+                    ;
+                    function titi() {
+                        alert('alo');
+                        document.getElementById('hiddenLink').click();
+                        $('#hiddenLink').click();
+                        alert('ali');
+                    }
+                    ;
+                    function customFunction() {
+                        //your custom code
+                        setLieu(); //makes a remote call
+                    }
+                    ;
+                </script>
+
+
+
 
                 <script type="text/javascript">
                     $(document)
@@ -95,10 +166,10 @@
 
                                         $('.tableau')
                                                 .dataTable({
-                                                        "language" : {
-                                                            "url": "French.json"
-                                                        }
+                                                    "language": {
+                                                        "url": "French.json"
                                                     }
+                                                }
 
 
 

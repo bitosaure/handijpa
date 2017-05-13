@@ -23,7 +23,7 @@ import javax.persistence.criteria.Root;
  * @author emiliepisu
  */
 public class LieuDAO implements DAO<LieuEntity> {
-     
+
     private EntityManager em;
 
     public LieuDAO() {
@@ -31,55 +31,49 @@ public class LieuDAO implements DAO<LieuEntity> {
         em = emf.createEntityManager();
     }
 
-   
     @Override
     public List<LieuEntity> findAll() {
-        
+
         List<LieuEntity> listLieuEntity = em.createQuery("Select a FROM LieuEntity a").getResultList();
-        
+
         return listLieuEntity;
     }
-    public List findNonValider(){
+
+    public List findNonValider() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<LieuEntity> query = cb
-				.createQuery(LieuEntity.class);
-		// construction de la requete dynamique
-		Root<LieuEntity> root = query.from(LieuEntity.class);
-		List<Predicate> predicateList = new ArrayList<Predicate>();
+        CriteriaQuery<LieuEntity> query = cb
+                .createQuery(LieuEntity.class);
+        // construction de la requete dynamique
+        Root<LieuEntity> root = query.from(LieuEntity.class);
+        List<Predicate> predicateList = new ArrayList<Predicate>();
 
-		
-			predicateList.add(cb.equal(root.<String> get("estValide"),
-					false));
-		
+        predicateList.add(cb.equal(root.<String>get("estValide"),
+                false));
 
-		Predicate[] predicates = new Predicate[predicateList.size()];
-		predicateList.toArray(predicates);
-		query.where(predicates);
-		// exécution de la requete
-		return em.createQuery(query).getResultList();
+        Predicate[] predicates = new Predicate[predicateList.size()];
+        predicateList.toArray(predicates);
+        query.where(predicates);
+        // exécution de la requete
+        return em.createQuery(query).getResultList();
     }
-    
-    public List findValider(){
+
+    public List findValider() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<LieuEntity> query = cb
-				.createQuery(LieuEntity.class);
-		// construction de la requete dynamique
-		Root<LieuEntity> root = query.from(LieuEntity.class);
-		List<Predicate> predicateList = new ArrayList<Predicate>();
+        CriteriaQuery<LieuEntity> query = cb
+                .createQuery(LieuEntity.class);
+        // construction de la requete dynamique
+        Root<LieuEntity> root = query.from(LieuEntity.class);
+        List<Predicate> predicateList = new ArrayList<Predicate>();
 
-		
-			predicateList.add(cb.equal(root.<String> get("estValide"),
-					true));
-		
+        predicateList.add(cb.equal(root.<String>get("estValide"),
+                true));
 
-		Predicate[] predicates = new Predicate[predicateList.size()];
-		predicateList.toArray(predicates);
-		query.where(predicates);
-		// exécution de la requete
-		return em.createQuery(query).getResultList();
+        Predicate[] predicates = new Predicate[predicateList.size()];
+        predicateList.toArray(predicates);
+        query.where(predicates);
+        // exécution de la requete
+        return em.createQuery(query).getResultList();
     }
-    
-
 
     @Override
     public void create(LieuEntity obj) {
@@ -87,24 +81,36 @@ public class LieuDAO implements DAO<LieuEntity> {
         em.persist(obj);
         em.flush();
         em.getTransaction().commit();
-        em.close();    }
+        em.close();
+    }
 
     @Override
     public void update(LieuEntity obj) {
         em.getTransaction().begin();
-         em.merge(obj);
+        em.merge(obj);
         em.getTransaction().commit();
-        em.close();    }
+        em.close();
+    }
 
     @Override
     public void delete(LieuEntity obj) {
         em.getTransaction().begin();
         em.remove(obj);
         em.getTransaction().commit();
-        em.close();    }
+        em.close();
+    }
 
     @Override
     public LieuEntity findById(String id) {
+        //Long idd = Long.parseLong(id);
+        return em.find(LieuEntity.class, Long.getLong(id));
+
+    }
+    
+    
+    public LieuEntity findByIdLong(Long id) {
+        //Long idd = Long.parseLong(id);
         return em.find(LieuEntity.class, id);
+
     }
 }

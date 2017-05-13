@@ -28,13 +28,12 @@ public class ConsulterLieuxControleur {
 
     private LieuEntity lieuDetail;
 
-    
-
+    private String code="";
     private LieuDAO lieuDao;
-    
-    public ConsulterLieuxControleur() {        
+
+    public ConsulterLieuxControleur() {
         lieuDao = new LieuDAO();
-        lieux = lieuDao.findAll();
+        lieux = lieuDao.findValider();
 
     }
 
@@ -42,14 +41,14 @@ public class ConsulterLieuxControleur {
         //FacesContext context = FacesContext.getCurrentInstance();
 
         //ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.isAuthenti}");
-
         return "SUCCESS";
 
     }
-    
-    public LieuEntity detailDuLieu(String index){
+
+    public LieuEntity detailDuLieu(String index) {
         return lieuDao.findById(index);
     }
+
     public List<LieuEntity> getLieux() {
         return lieux;
     }
@@ -57,11 +56,44 @@ public class ConsulterLieuxControleur {
     public void setLieux(List<LieuEntity> lieux) {
         this.lieux = lieux;
     }
+
     public LieuEntity getLieuDetail() {
         return lieuDetail;
     }
 
-    public void setLieuDetail(LieuEntity lieuDetail) {
-        this.lieuDetail = lieuDetail;
+    public void setLieuDetail(String id) {
+        System.out.println("id entrée "+id);
+        //Long idd = Long.parseLong(id);
+        this.lieuDetail = lieuDao.findById(id);
+        System.out.println("nom lieu "+lieuDetail.getNom());
+        
+        
+    }
+
+    public void setLieu(String id) {
+        System.out.println("id" + id +" code "+code);
+
+        if (id == "") {
+            System.out.println("faux");
+
+        } else {
+            lieuDetail = lieuDao.findById(id);
+
+            System.out.println("nom" + lieuDetail.getNom());
+        }
+    }
+
+    /**
+     * @return the code
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * @param code the code to set
+     */
+    public void setCode(String code) {
+        this.code = code;
     }
 }
