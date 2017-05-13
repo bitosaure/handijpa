@@ -41,7 +41,7 @@
 
                             <li id="divValiderLieu"><h:commandLink id="validerLieu"
                                                                    action="#{validerLieuControleur.initialiserPage()}"
-                                                                   value="valider lieu" /></li>
+                                                                   value="valider lieu" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
 
                         </ul>
                     </div>
