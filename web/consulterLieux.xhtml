@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
-      
+
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Consulter Lieux</title>
@@ -15,6 +15,70 @@
 
 
             <h:form id="consulterLieux">
+
+                <div class="container-fluid">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="form-title">
+
+                                <h:outputText
+                                    value="#{consulterLieuxControleur.lieuDetail.nom}" />
+
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+
+
+                                    <h:outputLabel for="description">Description </h:outputLabel>
+                                    <h:outputText id="description" class="form-control"  value="#{consulterLieuxControleur.lieuDetail.description}"/>
+
+
+                                    <br />
+
+                                    <h:outputLabel for="adresse">Adresse</h:outputLabel>
+                                    <h:outputText id="adresse" class="form-control" value="#{consulterLieuxControleur.lieuDetail.adresse()}"/>
+
+                                    <br />
+                                    <h:outputLabel for="pays">Pays</h:outputLabel>
+                                    <h:outputText id="pays" class="form-control" value="#{consulterLieuxControleur.lieuDetail.pays}"/>
+
+
+
+                                    <br />
+                                    <h:outputLabel for="categorie">Catégorie</h:outputLabel>
+                                    <h:outputText id="categorie" class="form-control" value="#{consulterLieuxControleur.lieuDetail.categorie.libelle}"/>
+
+                                    <br />
+                                    <h:outputLabel for="tel">Téléphone</h:outputLabel>
+                                    <h:outputText id="tel" class="form-control" value="#{consulterLieuxControleur.lieuDetail.tel}"/>
+
+
+
+                                    <br />
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="#{consulterLieuxControleur.lieuDetail.image}" alt="#{consulterLieuxControleur.lieuDetail.nom}" class="img-circle" width="100%" height="100%"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- 16:9 aspect ratio -->
+
+
+                        <div class="panel-footer">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div id="detail">
+                    <h1></h1>
+                </div>
                 <h:dataTable id="tableau" var="lieu"  class="display"
                              value="#{consulterLieuxControleur.lieux}"
                              styleClass="tableau table table-responsive table-striped table-bordered table-hover">
@@ -79,66 +143,30 @@
                         </f:facet>
 
 
-                        <p:remoteCommand name="test" actionListener="#{consulterLieuxControleur.setLieuDetail(lieu.id)}"/>
-                        <p:commandLink id="lien" type="button" onclick="toto()" value="#{lieu.id}"></p:commandLink>
-                        
+
+                        <h:commandLink id="lien" type="button" action="#{consulterLieuxControleur.setLieuDetail(lieu)}" value="Voir détails "></h:commandLink>
+
 
 
                     </h:column>
 
                 </h:dataTable>
 
-                <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="gridSystemModalLabel">#{consulterLieuxControleur.lieuDetail.nom}</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-4">.col-md-4</div>
-                                    <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
-                                    <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-9">
-                                        Level 1: .col-sm-9
-                                        <div class="row">
-                                            <div class="col-xs-8 col-sm-6">
-                                                Level 2: .col-xs-8 .col-sm-6
-                                            </div>
-                                            <div class="col-xs-4 col-sm-6">
-                                                Level 2: .col-xs-4 .col-sm-6
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
+
 
                 <script type="text/javascript">
+                    function recupId(id) {
+                        var idd = document.getElementById(id).innerHTML;
+                        document.getElementById('consulterLieux:secret').innerHTML = idd;
+                        document.getElementById('consulterLieux:secret').value = idd;
+                        setTimeout(test, 1000);
+                        alert('#{consulterLieuxControleur.lieuDetail.nom}');
+                        toto();
+
+                    }
+                    ;
                     function toto() {
-                        test();
-
                         $('#myModal').modal();
-
-
-
-
-
 
                     }
                     ;

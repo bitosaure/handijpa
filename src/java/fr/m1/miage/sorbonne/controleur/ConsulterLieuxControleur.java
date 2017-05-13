@@ -10,9 +10,14 @@ import fr.m1.miage.sorbonne.dao.LieuDAO;
 import fr.m1.miage.sorbonne.entity.LieuEntity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIViewRoot;
+import javax.faces.component.html.HtmlInputText;
+import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
@@ -60,28 +65,38 @@ public class ConsulterLieuxControleur {
     public LieuEntity getLieuDetail() {
         return lieuDetail;
     }
+    public String recupId(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        UIViewRoot ui = context.getViewRoot();
+        
+        HtmlInputText html = (HtmlInputText) ui.findComponent("consulterLieux:secret");
+        if(html == null){
+            System.out.println("element null");
+        }
+        Map<String,Object> map = html.getAttributes();
+        
+        System.out.println(html.getValue().toString());
+        return html.getValue().toString();
+    }
 
-    public void setLieuDetail(String id) {
+    public void setLieuDetail(LieuEntity lieu){
+        this.lieuDetail = lieu;
+        //listeBd.get(i).setImage("./images/"+listeBd.get(i).getImage());
+        this.lieuDetail.setImage("./images/"+this.lieuDetail.getImage());
+        System.out.println(lieuDetail.adresse());
+    }
+    public void setLieuDetail() {
+        String id = recupId();
+        System.out.println(recupId());
         System.out.println("id entrée "+id);
         //Long idd = Long.parseLong(id);
-        this.lieuDetail = lieuDao.findById(id);
+        lieuDetail = lieuDao.findById(id);
         System.out.println("nom lieu "+lieuDetail.getNom());
         
         
     }
 
-    public void setLieu(String id) {
-        System.out.println("id" + id +" code "+code);
-
-        if (id == "") {
-            System.out.println("faux");
-
-        } else {
-            lieuDetail = lieuDao.findById(id);
-
-            System.out.println("nom" + lieuDetail.getNom());
-        }
-    }
+    
 
     /**
      * @return the code

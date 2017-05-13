@@ -102,8 +102,9 @@ public class LieuDAO implements DAO<LieuEntity> {
 
     @Override
     public LieuEntity findById(String id) {
-        //Long idd = Long.parseLong(id);
-        return em.find(LieuEntity.class, Long.getLong(id));
+        System.out.println(id);
+        Long idd = Long.parseLong(id);
+        return em.find(LieuEntity.class, idd);
 
     }
     

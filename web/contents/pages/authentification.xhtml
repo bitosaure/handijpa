@@ -14,45 +14,45 @@
         <ui:define name="body">
             <h:form>
                 <fieldset>
-                    
-
-			<div class="container-fluid">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="form-title">
-							<h:outputText
-								value="Authentification" />
-						</h4>
-					</div>
-					<div class="panel-body">
-						<div class="form-horizontal">
-
-                    
-                            <h:outputLabel for="login">Login </h:outputLabel>
-                            <h:inputText id="login" class="form-control"  value="#{authentificationControleur.personne.login}" required="true" size="20" maxlength="60" />
-                            <h:message id="emailMessage" for="login" errorClass="erreur" />
-                        
-                    <br />
-
-                    <h:outputLabel for="motdepasse">Mot de passe</h:outputLabel>
-                    <h:inputSecret id="motdepasse" value="#{authentificationControleur.personne.mdp}" required="true" size="20" maxlength="20" />
-                    <h:message id="motDePasseMessage" for="motdepasse" errorClass="erreur" />
-                    <br />
-
-                    <h:messages globalOnly="true" infoClass="info" />
 
 
-                    <h:commandButton value="Valider" action="#{authentificationControleur.authentification()}" styleClass="sansLabel" />
-                    <br />
-                     </div>
+                    <div class="container-fluid">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="form-title">
+                                    <h:outputText
+                                        value="Authentification" />
+                                </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-horizontal">
 
-                                                                </div>
 
-                                                        </div>
+                                    <h:outputLabel for="login">Login </h:outputLabel>
+                                    <h:inputText id="login" class="form-control"  value="#{authentificationControleur.personne.login}" required="true" size="20" maxlength="60" />
+                                    <h:message id="emailMessage" for="login" errorClass="erreur" />
 
-                                                </div>
+                                    <br />
+
+                                    <h:outputLabel for="motdepasse">Mot de passe</h:outputLabel>
+                                    <h:inputSecret id="motdepasse" value="#{authentificationControleur.personne.mdp}" required="true" size="20" maxlength="20" />
+                                    <h:message id="motDePasseMessage" for="motdepasse" errorClass="erreur" />
+                                    <br />
+
+                                    <h:messages globalOnly="true" infoClass="info" />
+
+
+                                    <h:commandButton value="Valider" action="#{authentificationControleur.authentification()}" styleClass="sansLabel" />
+                                    <br />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
                 </fieldset>
-                                   
+
 
             </h:form> 
         </ui:define>
