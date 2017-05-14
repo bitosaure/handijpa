@@ -7,10 +7,15 @@ package fr.m1.miage.sorbonne.dao;
 
 import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -36,7 +41,28 @@ public class CommentaireLieuDAO implements DAO<CommentaireLieuEntity>{
     public CommentaireLieuEntity findById(String id) {
         return em.find(CommentaireLieuEntity.class, id);
     }
+    
+    public List<CommentaireLieuEntity> rechercherCommentaireLieuDeLaPersonne(Long id, Long idLieu ) {
 
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<CommentaireLieuEntity> query = cb
+				.createQuery(CommentaireLieuEntity.class);
+		// construction de la requete dynamique
+		Root<CommentaireLieuEntity> root = query.from(CommentaireLieuEntity.class);
+		List<Predicate> predicateList = new ArrayList<Predicate>();
+
+		
+			predicateList.add(cb.equal(root.<String> get("lieu"),
+					idLieu));
+		predicateList.add(cb.equal(root.<String> get("personne"),
+					idLieu));
+
+		Predicate[] predicates = new Predicate[predicateList.size()];
+		predicateList.toArray(predicates);
+		query.where(predicates);
+		// exécution de la requete
+		return em.createQuery(query).getResultList();
+	}
     @Override
     public void update(CommentaireLieuEntity obj) {
         em.getTransaction().begin();

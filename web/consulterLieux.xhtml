@@ -26,6 +26,7 @@
 
                             </h4>
                         </div>
+                          <h:messages globalOnly="true" infoClass="info" />
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -57,9 +58,16 @@
 
 
                                     <br />
-                                </div>
-                                <div class="col-md-6">
-                                    <img src="#{consulterLieuxControleur.lieuDetail.image}" alt="#{consulterLieuxControleur.lieuDetail.nom}" class="img-circle" width="100%" height="100%"/>
+                              
+                                
+                                <h:outputLabel for="labCommentaire">Ajouter un commentaire</h:outputLabel>
+
+                                <h:inputTextarea value="#{consulterLieuxControleur.commentaire.commentaire}" cols="10" rows="10" />
+                                  <h:commandButton value="ajouter" action="#{consulterLieuxControleur.ajouterCommentaire()}"  />
+                               
+                                    </div>
+                                  <div class="col-md-6">
+                                    <img src="#{consulterLieuxControleur.lieuDetail.cheminImage()}" alt="#{consulterLieuxControleur.lieuDetail.nom}" class="img-circle" width="100%" height="100%"/>
                                 </div>
                             </div>
 

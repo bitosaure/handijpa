@@ -18,6 +18,8 @@
 
 
             <h:form id="validerLieu">
+                
+                
                 <table>
 
                     <ui:repeat var="l" value="#{validerLieuControleur.listEntity}" >
@@ -33,7 +35,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-horizontal">
-
+                                         <div class="col-md-6">
                                         <h:outputLabel value="description:"> </h:outputLabel>
 
                                         <h:outputLabel value="#{l.description}"> </h:outputLabel>
@@ -57,9 +59,10 @@
                                         <h:outputLabel value="#{l.createur.login}"> </h:outputLabel>
                                                                              
                                         <br />
-                                        <div  class="tailleImage"> 
+                                    </div>
+                                        <div class="col-md-6">
 
-                                        <img src="#{l.getImage()}"/>
+                                        <img src="#{l.cheminImage()}" class="img-circle" width="100%" height="100%"/>
                                     </div>
                                     <br />
                                         <h:commandButton value="Valider" action="#{validerLieuControleur.valider(l)}" styleClass="sansLabel" />

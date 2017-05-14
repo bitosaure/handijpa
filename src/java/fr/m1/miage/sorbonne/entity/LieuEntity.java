@@ -61,6 +61,10 @@ public class LieuEntity implements Serializable {
 
     @JoinColumn(name = "pays")
     private String pays;
+    
+    public String cheminImage(){
+        return "http://localhost:8080/handijpa/images/" + this.getImage();
+    }
 
     public Long getId() {
         return id;

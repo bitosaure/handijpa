@@ -10,8 +10,10 @@ import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
 import fr.m1.miage.sorbonne.entity.CritereEntity;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -43,15 +45,32 @@ public class ParametrerNotationControleur implements Serializable{
     
     public String ajouter(){
         critereDao=new CritereDAO();
-        critereDao.create(critere);
-        listCriteres.add(critere);
-        return "SUCCESS";
+        
+        if(critereDao.findById(critere.getCode())==null){
+            
+            critereDao.create(critere);
+            listCriteres.add(critere);
+            
+            FacesMessage message = new FacesMessage("l'ajout a bien été intégré!");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return "SUCCESS";
+        }
+        
+            FacesMessage message = new FacesMessage("un lieu avec le même code existe déjà");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return "ERROR";
+        
+    
+        
+      
     }
     
     public String supprimer(CritereEntity cri){
         critereDao=new CritereDAO();
         critereDao.delete(cri);
-        
+        listCriteres.remove(cri);
+          FacesMessage message = new FacesMessage("la suppression a bien été réalisé");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         System.out.println("je rentre");
         return "SUCCESS";
     }
