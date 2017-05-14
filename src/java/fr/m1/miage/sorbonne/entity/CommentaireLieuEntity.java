@@ -25,7 +25,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="COMMENTAIRE_LIEU")
-@Access(AccessType.FIELD)
 public class CommentaireLieuEntity implements Serializable{
    private static long serialVersionUID = 1L;
 

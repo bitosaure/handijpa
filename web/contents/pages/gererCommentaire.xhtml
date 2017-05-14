@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
+
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Gerer les commentaires</title>
+    </h:head>
+    <ui:composition template="/././templateHandi.xhtml">
+        <ui:define name="body">
+
+
+            <h:form id="gererCommentaire">
+                <h:dataTable id="tableau" var="var"  class="display"
+                             value="#{gererCommentaireControleur.listCommentaireSiganles}"
+                             styleClass="tableau table table-responsive table-striped table-bordered table-hover">
+
+                    <h:column id="colNomDuLieu">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="nom du lieu concerné"
+                                          id="labN" />
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{var.commentaireLieu.lieu.nom}"
+                                      id="nomLieu" />
+
+
+
+                    </h:column>
+                    <h:column id="colCreateur">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Login du créateur"
+                                          id="log">
+
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText styleClass="outputText"
+                                      value="#{var.createur.login}" id="login" />
+
+
+
+                    </h:column>
+                    <h:column id="colCommentaire">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="commentaire signalé"
+                                          id="labComm">
+
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{var.commentaireLieu.commentaire}"
+                                      id="comment" />
+
+
+
+                    </h:column>
+
+
+                    <h:column id="colvalider">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="valider"
+                                          id="validerCommen">
+
+                            </h:outputText>
+                        </f:facet>
+
+
+
+                        <h:commandLink styleClass="commandLink" value="Valider commentaire" immediate="true"
+                                       action="#{gererCommentaireControleur.validerCommentaire(var)}">
+
+                        </h:commandLink>
+                    </h:column>
+                <h:column id="colSupp">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="supprimer"
+                                          id="suppComm">
+
+                            </h:outputText>
+                        </f:facet>
+
+
+
+                        <h:commandLink styleClass="commandLink" value="supprimer commentaire" immediate="true"
+                                       action="#{gererCommentaireControleur.supprimerCommentaire(var)}">
+
+                        </h:commandLink>
+                    </h:column>
+
+                </h:dataTable>
+
+                <script type="text/javascript">
+                    $(document)
+                            .ready(
+                                    function () {
+
+                                        $('.tableau')
+                                                .dataTable({
+                                                    "language": {
+                                                        "url": "French.json"
+                                                    }
+                                                }
+
+
+
+                                                )
+                                    });
+                </script>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

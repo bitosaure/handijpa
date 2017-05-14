@@ -73,6 +73,7 @@ public class CommentaireLieuDAO implements DAO<CommentaireLieuEntity>{
     @Override
     public void delete(CommentaireLieuEntity obj) {
         em.getTransaction().begin();
+        em.merge(obj);
         em.remove(obj);
         em.getTransaction().commit();
         em.close();    }
