@@ -116,6 +116,7 @@ public class ConsulterLieuxControleur implements Serializable{
 
     public void setLieuDetail(LieuEntity lieu) {
         this.lieuDetail = lieu;
+        commentaireDAO = new CommentaireLieuDAO();
         //listeBd.get(i).setImage("./images/"+listeBd.get(i).getImage());
          listCommentaires =commentaireDAO.rechercherCommentaireLieu(lieuDetail);
         System.out.println(lieuDetail.adresse());
