@@ -62,7 +62,7 @@ public class ConsulterLieuxControleur implements Serializable{
         PersonneEntity pers = (PersonneEntity) binding.getValue(context);
         commentaire.setPersonne(pers);
         //FacesContext context = FacesContext.getCurrentInstance();
-
+        this.lieuDetail = null;
         //ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.isAuthenti}");
         return "SUCCESS";
 
@@ -121,6 +121,11 @@ public class ConsulterLieuxControleur implements Serializable{
         //listeBd.get(i).setImage("./images/"+listeBd.get(i).getImage());
          listCommentaires =commentaireDAO.rechercherCommentaireLieu(lieuDetail);
         System.out.println(lieuDetail.adresse());
+        FacesContext context = FacesContext.getCurrentInstance();
+        UIViewRoot ui = context.getViewRoot();
+
+        // html = (HtmlInputText) ui.findComponent("consulterLieux:secret");
+        
         
         
     }
