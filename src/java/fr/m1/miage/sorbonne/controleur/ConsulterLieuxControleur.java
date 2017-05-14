@@ -79,6 +79,7 @@ public class ConsulterLieuxControleur implements Serializable{
         commentaire.setLieu(lieuDetail);
         commentaire.setDateCreation(new Date());
         commentaireDAO.create(commentaire);
+        commentaire=new CommentaireLieuEntity();
         FacesMessage message = new FacesMessage("nous avons bien intégré votre commentaire");
         FacesContext.getCurrentInstance().addMessage(null, message);
 
