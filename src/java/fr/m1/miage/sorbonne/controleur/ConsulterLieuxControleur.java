@@ -13,6 +13,7 @@ import fr.m1.miage.sorbonne.entity.LieuEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -67,7 +68,7 @@ public class ConsulterLieuxControleur implements Serializable{
 
     }
 
-    public String ajouterCommentaire() {
+    public void ajouterCommentaire() {
         commentaireDAO = new CommentaireLieuDAO();
               FacesContext context = FacesContext.getCurrentInstance();
         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
@@ -76,11 +77,11 @@ public class ConsulterLieuxControleur implements Serializable{
         
         
         commentaire.setLieu(lieuDetail);
+        commentaire.setDateCreation(new Date());
         commentaireDAO.create(commentaire);
         FacesMessage message = new FacesMessage("nous avons bien intégré votre commentaire");
         FacesContext.getCurrentInstance().addMessage(null, message);
 
-        return "Success";
     }
 
     public LieuEntity detailDuLieu(String index) {
@@ -116,7 +117,7 @@ public class ConsulterLieuxControleur implements Serializable{
     public void setLieuDetail(LieuEntity lieu) {
         this.lieuDetail = lieu;
         //listeBd.get(i).setImage("./images/"+listeBd.get(i).getImage());
-
+         listCommentaires =commentaireDAO.rechercherCommentaireLieu(lieuDetail);
         System.out.println(lieuDetail.adresse());
         
         

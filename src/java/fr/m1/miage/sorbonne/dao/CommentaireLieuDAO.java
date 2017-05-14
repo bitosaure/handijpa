@@ -6,6 +6,7 @@
 package fr.m1.miage.sorbonne.dao;
 
 import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
+import fr.m1.miage.sorbonne.entity.LieuEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class CommentaireLieuDAO implements DAO<CommentaireLieuEntity>{
         return em.find(CommentaireLieuEntity.class, id);
     }
     
-    public List<CommentaireLieuEntity> rechercherCommentaireLieuDeLaPersonne(Long id, Long idLieu ) {
+    public List<CommentaireLieuEntity> rechercherCommentaireLieu(LieuEntity lieu ) {
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<CommentaireLieuEntity> query = cb
@@ -53,9 +54,8 @@ public class CommentaireLieuDAO implements DAO<CommentaireLieuEntity>{
 
 		
 			predicateList.add(cb.equal(root.<String> get("lieu"),
-					idLieu));
-		predicateList.add(cb.equal(root.<String> get("personne"),
-					idLieu));
+					lieu));
+		
 
 		Predicate[] predicates = new Predicate[predicateList.size()];
 		predicateList.toArray(predicates);
