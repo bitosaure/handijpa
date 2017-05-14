@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
+
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Consulter Lieux</title>
+    </h:head>
+    <ui:composition template="/././templateHandi.xhtml">
+        <ui:define name="body">
+
+
+            <h:form id="consulterLieux">
+
+                <div class="container-fluid">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="form-title">
+
+                                <h:outputText
+                                    value="#{consulterLieuxControleur.lieuDetail.nom}" />
+
+                            </h4>
+                        </div>
+                        <h:messages globalOnly="true" infoClass="info" />
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+
+
+                                    <h:outputLabel for="description">Description </h:outputLabel>
+                                    <h:outputText id="description" class="form-control"  value="#{consulterLieuxControleur.lieuDetail.description}"/>
+
+
+                                    <br />
+
+                                    <h:outputLabel for="adresse">Adresse</h:outputLabel>
+                                    <h:outputText id="adresse" class="form-control" value="#{consulterLieuxControleur.lieuDetail.adresse()}"/>
+
+                                    <br />
+                                    <h:outputLabel for="pays">Pays</h:outputLabel>
+                                    <h:outputText id="pays" class="form-control" value="#{consulterLieuxControleur.lieuDetail.pays}"/>
+
+
+
+                                    <br />
+                                    <h:outputLabel for="categorie">Catégorie</h:outputLabel>
+                                    <h:outputText id="categorie" class="form-control" value="#{consulterLieuxControleur.lieuDetail.categorie.libelle}"/>
+
+                                    <br />
+                                    <h:outputLabel for="tel">Téléphone</h:outputLabel>
+                                    <h:outputText id="tel" class="form-control" value="#{consulterLieuxControleur.lieuDetail.tel}"/>
+
+
+
+                                    <br />
+                                    <a href="#" onclick="$('#myModal').modal()">Ajouter un commentaire</a>
+                                    <a href="#" onclick="$('#myModal2').modal()">Voir les commentaires</a>
+
+
+
+
+
+
+
+
+
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="#{consulterLieuxControleur.lieuDetail.cheminImage()}" alt="#{consulterLieuxControleur.lieuDetail.nom}" class="img-circle" width="100%" height="100%"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- 16:9 aspect ratio -->
+
+
+                        <div class="panel-footer">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div id="detail">
+                    <h1></h1>
+                </div>
+                <h:dataTable id="tableau" var="lieu"  class="display"
+                             value="#{consulterLieuxControleur.lieux}"
+                             styleClass="tableau table table-responsive table-striped table-bordered table-hover">
+
+                    <h:column id="colNomLieu">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Nom du lieu"
+                                          id="nomLieu" />
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{lieu.nom}"
+                                      id="libelleLieu" />
+
+
+
+                    </h:column>
+                    <h:column id="colAdress">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Ville du lieu"
+                                          id="ville">
+
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText styleClass="outputText"
+                                      value="#{lieu.ville}" id="villeLieu" />
+
+
+
+                    </h:column>
+                    <h:column id="colPays">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Pays du lieu"
+                                          id="paysLieu">
+
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{lieu.pays}"
+                                      id="pays" />
+
+
+
+                    </h:column>
+                    <h:column id="categoriLieu">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Categorie du lieu"
+                                          id="categLieu">
+
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText styleClass="outputText" value="#{lieu.categorie.libelle.toString()}"
+                                      id="categorieLieu" />
+
+
+
+                    </h:column>
+
+                    <h:column id="colDetail">
+                        <f:facet name="header">
+                            <h:outputText styleClass="outputText" value="Voir détail"
+                                          id="detail">
+
+                            </h:outputText>
+                        </f:facet>
+
+
+
+                        <h:commandLink id="lien" type="button" action="#{consulterLieuxControleur.setLieuDetail(lieu)}" value="Voir détails "></h:commandLink>
+
+
+
+                    </h:column>
+
+                </h:dataTable>
+                <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                    <h:form id="modalCom">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h5 class="modal-title">Ajouter un commentaire</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <h:outputLabel for="titreCom">Titre du commentaire </h:outputLabel>
+                                    <h:inputText id="titreCom" class="form-control"  value="#{consulterLieuxControleur.commentaire.titre}" size="20" maxlength="60" />
+                                    <h:outputLabel for="labCommentaire">Texte du commentaire</h:outputLabel>
+
+                                    <h:inputTextarea value="#{consulterLieuxControleur.commentaire.commentaire}" cols="10" rows="10" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                    <h:commandButton class="btn btn-default" value="ajouter" action="#{consulterLieuxControleur.ajouterCommentaire()}"  />
+
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </h:form>
+                </div><!-- /.modal -->
+
+                <div id="myModal2" class="modal fade" tabindex="-1" role="dialog">
+                    <h:form id="modalComs">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h5 class="modal-title">Commentaires</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <ui:repeat var="com" value="#{consulterLieuxControleur.listCommentaires}">
+                                        <h:outputLabel for="titre">#{com.titre}</h:outputLabel>
+                                        <h:outputText id="com" class="form-control"  value="#{com.commentaire}"/>
+                                    </ui:repeat>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                    
+
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </h:form>
+                </div><!-- /.modal -->
+
+
+
+                <script type="text/javascript">
+                    function recupId(id) {
+                        var idd = document.getElementById(id).innerHTML;
+                        document.getElementById('consulterLieux:secret').innerHTML = idd;
+                        document.getElementById('consulterLieux:secret').value = idd;
+                        setTimeout(test, 1000);
+                        alert('#{consulterLieuxControleur.lieuDetail.nom}');
+                        toto();
+
+                    }
+                    ;
+                    function toto() {
+                        $('#myModal').modal();
+
+                    }
+                    ;
+                    function titi() {
+                        alert('alo');
+                        document.getElementById('hiddenLink').click();
+                        $('#hiddenLink').click();
+                        alert('ali');
+                    }
+                    ;
+                    function customFunction() {
+                        //your custom code
+                        setLieu(); //makes a remote call
+                    }
+                    ;
+                </script>
+
+
+
+
+                <script type="text/javascript">
+                    $(document)
+                            .ready(
+                                    function () {
+
+                                        $('.tableau')
+                                                .dataTable({
+                                                    "language": {
+                                                        "url": "../../French.json"
+                                                    }
+                                                }
+
+
+
+                                                )
+                                    });
+                </script>
+
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

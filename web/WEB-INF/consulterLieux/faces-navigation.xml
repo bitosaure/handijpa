@@ -15,7 +15,7 @@
 		<navigation-case>
 			<from-action>#{consulterLieuxControleur.initialiserPage()}</from-action>
 			<from-outcome>SUCCESS</from-outcome>
-			<to-view-id>/consulterLieux.xhtml</to-view-id>
+			<to-view-id>./contents/pages/consulterLieux.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
         <navigation-rule>
