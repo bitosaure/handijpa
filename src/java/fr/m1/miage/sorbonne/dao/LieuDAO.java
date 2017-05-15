@@ -91,8 +91,7 @@ public class LieuDAO implements DAO<LieuEntity> {
         em.getTransaction().commit();
         em.close();
     }
-
-    @Override
+ @Override
     public void delete(LieuEntity obj) {
         em.getTransaction().begin();
         em.remove(obj);
@@ -100,7 +99,6 @@ public class LieuDAO implements DAO<LieuEntity> {
         em.close();
     }
 
-    @Override
     public LieuEntity findById(String id) {
         System.out.println(id);
         Long idd = Long.parseLong(id);

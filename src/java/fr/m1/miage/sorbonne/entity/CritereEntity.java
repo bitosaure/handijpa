@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -34,6 +35,8 @@ public class CritereEntity implements Serializable {
     @JoinColumn(name="libelle")
     private String libelle;
    
+    @Transient
+    private Double nbEtoiles;
 
     @Override
     public boolean equals(Object object) {
@@ -93,6 +96,20 @@ public class CritereEntity implements Serializable {
      */
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    /**
+     * @return the nbEtoiles
+     */
+    public Double getNbEtoiles() {
+        return nbEtoiles;
+    }
+
+    /**
+     * @param nbEtoiles the nbEtoiles to set
+     */
+    public void setNbEtoiles(Double nbEtoiles) {
+        this.nbEtoiles = nbEtoiles;
     }
 
 }

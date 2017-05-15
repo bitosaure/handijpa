@@ -18,6 +18,8 @@
             /WEB-INF/validerLieu/faces-navigation.xml,
             /WEB-INF/consulterLieux/faces-navigation.xml,
             /WEB-INF/ajouterAdmin/faces-navigation.xml,
+            /WEB-INF/gererCommentaire/faces-navigation.xml,
+
              /WEB-INF/parametrerNotation/faces-navigation.xml
 
 

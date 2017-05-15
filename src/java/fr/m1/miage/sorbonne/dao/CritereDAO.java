@@ -32,7 +32,6 @@ public class CritereDAO implements DAO<CritereEntity>{
         em.getTransaction().commit();
         em.close();     }
 
-    @Override
     public CritereEntity findById(String id) {
         return em.find(CritereEntity.class, id);
     }
@@ -43,8 +42,8 @@ public class CritereDAO implements DAO<CritereEntity>{
         em.merge(obj);  
         em.getTransaction().commit();
         em.close();     }
-
     @Override
+
     public void delete(CritereEntity obj) {
         em.getTransaction().begin();
                  obj = em.merge(obj);

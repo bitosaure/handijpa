@@ -43,8 +43,13 @@ public class ValiderLieuControleur implements Serializable{
 
     public String initialiserPage(){
             lieuDao= new LieuDAO();
-            listEntity = lieuDao.findNonValider();
             
+            
+            listEntity = lieuDao.findNonValider();
+            if (listEntity.size()==0){
+                FacesMessage message = new FacesMessage("Il n'y a pas de lieu à valider ");
+                  FacesContext.getCurrentInstance().addMessage(null, message);
+            }
             
           
             return "SUCCESS";
@@ -55,12 +60,16 @@ public class ValiderLieuControleur implements Serializable{
     public String supprimer(LieuEntity lieu){
       
         lieuDao.delete(lieu);
+        initialiserPage();
         return "SUCCESS";
     }
     
     public String valider(LieuEntity lieu){
+        
         lieu.setEstValide(true);
         lieuDao.update(lieu);
+                initialiserPage();
+
         return "SUCCESS";
     }
     

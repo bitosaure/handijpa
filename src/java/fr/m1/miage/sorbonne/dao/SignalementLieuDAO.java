@@ -32,7 +32,7 @@ public class SignalementLieuDAO implements DAO<SignalementLieuEntity>{
         em.getTransaction().commit();
         em.close();     }
 
-    @Override
+ 
     public SignalementLieuEntity findById(String id) {
         return em.find(SignalementLieuEntity.class, id);
     }
@@ -43,8 +43,7 @@ public class SignalementLieuDAO implements DAO<SignalementLieuEntity>{
         em.merge(obj);  
         em.getTransaction().commit();
         em.close();     }
-
-    @Override
+     @Override
     public void delete(SignalementLieuEntity obj) {
         em.getTransaction().begin();
                  obj = em.merge(obj);

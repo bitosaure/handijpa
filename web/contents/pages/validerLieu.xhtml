@@ -16,9 +16,10 @@
     <ui:composition template="/././templateHandi.xhtml">
         <ui:define name="body">
 
+                   <h:messages class="form-title" globalOnly="true" infoClass="info" />
 
-            <h:form id="validerLieu">
-                
+                   <h:form id="validerLieu" rendered="#{validerLieuControleur.listEntity.size()!=0}">
+
                 
                 <table>
 

@@ -10,7 +10,6 @@ public interface DAO<T> {
     
     public void create(T obj);
     
-    public T findById(String id);
     
     public void update(T obj);
     

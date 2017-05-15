@@ -39,8 +39,7 @@ public class CommentaireLieuDAO implements DAO<CommentaireLieuEntity> {
         em.close();
     }
 
-    @Override
-    public CommentaireLieuEntity findById(String id) {
+    public CommentaireLieuEntity findById(Long id) {
         return em.find(CommentaireLieuEntity.class, id);
     }
 
@@ -70,9 +69,9 @@ public class CommentaireLieuDAO implements DAO<CommentaireLieuEntity> {
         em.getTransaction().commit();
         em.close();
     }
-
     @Override
     public void delete(CommentaireLieuEntity obj) {
+        obj=this.findById(obj.getId());
         em.getTransaction().begin();
         em.merge(obj);
         em.remove(obj);
@@ -85,4 +84,6 @@ public class CommentaireLieuDAO implements DAO<CommentaireLieuEntity> {
         List<CommentaireLieuEntity> listPCommentaireLieuEntity = em.createQuery("Select a FROM CommentaireLieuEntity a").getResultList();
         return listPCommentaireLieuEntity;
     }
+
+    
 }

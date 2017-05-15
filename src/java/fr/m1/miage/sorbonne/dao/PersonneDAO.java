@@ -116,7 +116,6 @@ public class PersonneDAO implements DAO<PersonneEntity>{
         em.merge(obj);
         em.getTransaction().commit();
         em.close();    }
-
     @Override
     public void delete(PersonneEntity obj) {
         em.getTransaction().begin();
@@ -124,7 +123,6 @@ public class PersonneDAO implements DAO<PersonneEntity>{
         em.getTransaction().commit();
         em.close();    }
 
-    @Override
     public PersonneEntity findById(String id) {
         return em.find(PersonneEntity.class, id);
     }

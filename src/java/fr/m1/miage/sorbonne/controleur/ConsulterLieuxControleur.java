@@ -5,12 +5,16 @@
  */
 package fr.m1.miage.sorbonne.controleur;
 
+import static com.sun.faces.facelets.util.Path.context;
 import fr.m1.miage.sorbonne.dao.CategorieDAO;
 import fr.m1.miage.sorbonne.dao.CommentaireLieuDAO;
+import fr.m1.miage.sorbonne.dao.CritereDAO;
 import fr.m1.miage.sorbonne.dao.LieuDAO;
 import fr.m1.miage.sorbonne.dao.SignalementCommentaireDAO;
 import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
+import fr.m1.miage.sorbonne.entity.CritereEntity;
 import fr.m1.miage.sorbonne.entity.LieuEntity;
+import fr.m1.miage.sorbonne.entity.NoteUnLieuEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import fr.m1.miage.sorbonne.entity.SignalementCommentaireEntity;
 import java.io.Serializable;
@@ -28,6 +32,7 @@ import javax.faces.component.html.HtmlInputText;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
@@ -44,6 +49,7 @@ public class ConsulterLieuxControleur implements Serializable {
     private String code = "";
     private LieuDAO lieuDao;
 
+    private List<CritereEntity> listCritere = new ArrayList<CritereEntity>();
     private List<CommentaireLieuEntity> listCommentaires = new ArrayList<CommentaireLieuEntity>();
 
     private CommentaireLieuDAO commentaireDAO;
@@ -57,12 +63,15 @@ public class ConsulterLieuxControleur implements Serializable {
 
     public String initialiserPage() {
         setCommentaire(new CommentaireLieuEntity());
-
+        CritereDAO critereDao = new CritereDAO();
+        setListCritere(critereDao.findAll());
         FacesContext context = FacesContext.getCurrentInstance();
         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
         PersonneEntity pers = (PersonneEntity) binding.getValue(context);
         commentaire.setPersonne(pers);
         //FacesContext context = FacesContext.getCurrentInstance();
+        System.out.println("pers: " + pers.getTypePersonne());
+
         this.lieuDetail = null;
         //ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.isAuthenti}");
         return "SUCCESS";
@@ -79,7 +88,9 @@ public class ConsulterLieuxControleur implements Serializable {
         commentaire.setLieu(lieuDetail);
         commentaire.setDateCreation(new Date());
         commentaireDAO.create(commentaire);
+
         commentaire = new CommentaireLieuEntity();
+        listCommentaires.add(commentaire);
         FacesMessage message = new FacesMessage("nous avons bien intégré votre commentaire");
         FacesContext.getCurrentInstance().addMessage(null, message);
 
@@ -160,6 +171,26 @@ public class ConsulterLieuxControleur implements Serializable {
 
     }
 
+    public void noterLieu() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
+        SignalementCommentaireEntity signalement = new SignalementCommentaireEntity();
+        PersonneEntity pers = (PersonneEntity) binding.getValue(context);
+        if (pers.getId() == null) {
+            FacesMessage message = new FacesMessage("Pour noter un lieu, veuillez vous authentifier");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else {
+            NoteUnLieuEntity note;
+            for (CritereEntity criter : listCritere) {
+                note = new NoteUnLieuEntity();
+               
+            }
+
+        }
+
+    }
+
     /**
      * @return the code
      */
@@ -202,4 +233,17 @@ public class ConsulterLieuxControleur implements Serializable {
         this.listCommentaires = listCommentaires;
     }
 
+    /**
+     * @return the listCritere
+     */
+    public List<CritereEntity> getListCritere() {
+        return listCritere;
+    }
+
+    /**
+     * @param listCritere the listCritere to set
+     */
+    public void setListCritere(List<CritereEntity> listCritere) {
+        this.listCritere = listCritere;
+    }
 }

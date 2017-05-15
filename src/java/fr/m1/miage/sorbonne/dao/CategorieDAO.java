@@ -44,7 +44,6 @@ public class CategorieDAO implements DAO<CategorieEntity> {
          em.merge(obj);
         em.getTransaction().commit();
         em.close();    }
-
     @Override
     public void delete(CategorieEntity obj) {
         em.getTransaction().begin();
@@ -54,7 +53,7 @@ public class CategorieDAO implements DAO<CategorieEntity> {
         em.getTransaction().commit();
         em.close();    }
 
-    @Override
+    
     public CategorieEntity findById(String id) {
         
         System.out.println("lib" +em.find(CategorieEntity.class, id).getLibelle());

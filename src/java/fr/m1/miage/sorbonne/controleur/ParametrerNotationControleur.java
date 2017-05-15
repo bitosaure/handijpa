@@ -39,6 +39,11 @@ public class ParametrerNotationControleur implements Serializable{
     public String initialiserPage(){
         critereDao=new CritereDAO();
         setListCriteres(critereDao.findAll());
+        
+         if (listCriteres.size()==0){
+                FacesMessage message = new FacesMessage("Il n'y a pas de critère de note ");
+                  FacesContext.getCurrentInstance().addMessage(null, message);
+            }
         return "SUCCESS";
      
     }

@@ -60,40 +60,40 @@
 
                                         <br />
 
-                                        <h:panelGroup id="ajouterComm" rendered="#{authentificationControleur.personne.typePersonne!='lambda'}">
+                                        <h:panelGroup id="ajouterComm" rendered="#{authentificationControleur.personne.typePersonne!=null}">
 
 
                                             <a href="#" onclick="$('#myModal').modal()">Ajouter un commentaire</a>
                                         </h:panelGroup>
                                         <br />
-                                        <h:panelGroup id="ajouterAuthen" rendered="#{authentificationControleur.personne.typePersonne!='admin'}">
+                                        <h:panelGroup id="ajouterAuthen" rendered="#{authentificationControleur.personne.typePersonne==null}">
 
                                             <h:commandLink id="auth" style="color: black; "
 
 
-                                                           value="Pout ajouter un commentaire, veuillez vous authentifier" action="#{authentificationControleur.initialiserPage()}"/>
+                                                           value="Pour ajouter un commentaire, veuillez vous authentifier" action="#{authentificationControleur.initialiserPage()}"/>
                                         </h:panelGroup>
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        <h:panelGroup id="ajouterNote" rendered="#{authentificationControleur.personne.typePersonne!='lambda'}">
+
+
+
+
+
+                                        <h:panelGroup id="ajouterNote" rendered="#{authentificationControleur.personne.typePersonne!=null}">
 
 
                                             <a href="#" onclick="$('#myModal3').modal()">Noter le lieu</a>
                                         </h:panelGroup>
                                         <br />
-                                        <h:panelGroup id="ajouterNoteAuthen" rendered="#{authentificationControleur.personne.typePersonne!='admin'}">
+                                        <h:panelGroup id="ajouterNoteAuthen" rendered="#{authentificationControleur.personne.typePersonne==null}">
 
                                             <h:commandLink id="authNote" style="color: black; "
 
 
-                                                           value="Pout noter le lieu, veuillez vous authentifier" action="#{authentificationControleur.initialiserPage()}"/>
+                                                           value="Pour noter le lieu, veuillez vous authentifier" action="#{authentificationControleur.initialiserPage()}"/>
                                         </h:panelGroup>
-                                        
-                                        
-                                        
+
+
+
                                         <br />
                                         <a href="#" onclick="$('#myModal2').modal()">Voir les commentaires</a>
 
@@ -190,9 +190,9 @@
                     </h:column>
 
                 </h:dataTable>
-                
-                
-                
+
+
+
 
 
 
@@ -249,91 +249,93 @@
 
 
             </h:form>
-            
+
             <div id="myModal2" class="modal fade" tabindex="-1" role="dialog">
-                    <h:form id="modalComs">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h5 class="modal-title">Commentaires</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <ui:repeat var="com" value="#{consulterLieuxControleur.listCommentaires}">
+                <h:form id="modalComs">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h5 class="modal-title">Commentaires</h5>
+                            </div>
+                            <div class="modal-body">
+                                <ui:repeat var="com" value="#{consulterLieuxControleur.listCommentaires}">
+                                    <h:panelGrid columns="2">
                                         <h:outputLabel>#{com.titre}      <strong>Auteur : </strong>#{com.personne.login} 
 
 
                                         </h:outputLabel>
 
                                         <h:commandLink  value="Signaler"  action="#{consulterLieuxControleur.signalerCommentaire(com)}"/>
-                                        <h:outputText id="com" class="form-control"  value="#{com.commentaire}"/>
-                                    </ui:repeat>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
-                                    <br />
-
-
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </h:form>
-                </div><!-- /.modal -->
-                <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
-                    <h:form id="modalCom">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h5 class="modal-title">Ajouter un commentaire</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <h:outputLabel for="titreCom">Titre du commentaire </h:outputLabel>
-                                    <h:inputText id="titreCom" class="form-control"  value="#{consulterLieuxControleur.commentaire.titre}" size="20" maxlength="60" />
-                                    <h:outputLabel>Texte du commentaire</h:outputLabel>
-
-                                    <h:inputTextarea value="#{consulterLieuxControleur.commentaire.commentaire}" cols="10" rows="10" />
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
-                                    <h:commandButton class="btn btn-default" value="ajouter" action="#{consulterLieuxControleur.ajouterCommentaire()}"  />
-
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </h:form>
-                </div><!-- /.modal -->
-                
-                <div id="myModal3" class="modal fade" tabindex="-1" role="dialog">
-                    <h:form id="modalNote">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h5 class="modal-title">Noter le lieu</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <h:panelGrid columns="2" cellpadding="5">
-                                        <h:outputText value="Note 1"/>
-                                        <p:rating></p:rating>
-                                        <h:outputText value="Note 2"/>
-                                        <p:rating></p:rating>
-                                        <h:outputText value="Note 3"/>                                       
-                                        <p:rating></p:rating>
-                                        <h:outputText value="Note 4"/>
-                                        <p:rating></p:rating>
                                     </h:panelGrid>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
-                                    <h:commandButton class="btn btn-default" value="Valider"   />
+                                    <h:outputText id="com" class="form-control"  value="#{com.commentaire}"/>
+                                </ui:repeat>
 
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal-dialog -->
-                    </h:form>
-                </div><!-- /.modal -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                <br />
+
+
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </h:form>
+            </div><!-- /.modal -->
+            <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                <h:form id="modalCom">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h5 class="modal-title">Ajouter un commentaire</h5>
+                            </div>
+                            <div class="modal-body">
+                                <h:outputLabel for="titreCom">Titre du commentaire </h:outputLabel>
+                                <h:inputText id="titreCom" class="form-control"  value="#{consulterLieuxControleur.commentaire.titre}" size="20" maxlength="60" />
+                                <h:outputLabel>Texte du commentaire</h:outputLabel>
+
+                                <h:inputTextarea value="#{consulterLieuxControleur.commentaire.commentaire}" cols="10" rows="10" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                <h:commandButton class="btn btn-default" value="ajouter" action="#{consulterLieuxControleur.ajouterCommentaire()}"  />
+
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </h:form>
+            </div><!-- /.modal -->
+
+            <div id="myModal3" class="modal fade" tabindex="-1" role="dialog">
+                <h:form id="modalNote">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h5 class="modal-title">Noter le lieu</h5>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <h:panelGrid columns="2" cellpadding="5">
+                                     <ui:repeat var="com" value="#{consulterLieuxControleur.listCritere}">
+                                         <h:outputText value="#{com.nbEtoiles}"/>
+                                    <h:outputText value="#{com.libelle}"/>
+                                                                       
+                                    <p:rating value="#{com.nbEtoiles}"></p:rating>
+                                    
+                                     </ui:repeat>
+                                </h:panelGrid>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                <h:commandButton class="btn btn-default" value="#{consulterLieuxControleur.noterLieu()}"/>
+
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </h:form>
+            </div><!-- /.modal -->
 
         </ui:define>
     </ui:composition>

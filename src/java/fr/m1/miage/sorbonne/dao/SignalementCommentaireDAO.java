@@ -32,7 +32,7 @@ public class SignalementCommentaireDAO implements DAO<SignalementCommentaireEnti
         em.getTransaction().commit();
         em.close();     }
 
-    @Override
+    
     public SignalementCommentaireEntity findById(String id) {
         return em.find(SignalementCommentaireEntity.class, id);
     }
@@ -43,8 +43,7 @@ public class SignalementCommentaireDAO implements DAO<SignalementCommentaireEnti
         em.merge(obj);  
         em.getTransaction().commit();
         em.close();     }
-
-    @Override
+     @Override
     public void delete(SignalementCommentaireEntity obj) {
         em.getTransaction().begin();
                  obj = em.merge(obj);

@@ -12,8 +12,10 @@ import fr.m1.miage.sorbonne.entity.SignalementCommentaireEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -30,6 +32,10 @@ public class GererCommentaireControleur implements Serializable {
     public String initialiserPage() {
         signalementDao= new SignalementCommentaireDAO();
         listCommentaireSiganles= signalementDao.findAll();
+         if (listCommentaireSiganles.size()==0){
+                FacesMessage message = new FacesMessage("Aucun commentaire n'a été signalé");
+                  FacesContext.getCurrentInstance().addMessage(null, message);
+            }
         return "SUCCESS";
     }
     

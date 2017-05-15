@@ -7,6 +7,7 @@ package fr.m1.miage.sorbonne.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -62,8 +64,13 @@ public class LieuEntity implements Serializable {
     @JoinColumn(name = "pays")
     private String pays;
     
+    
+    @OneToMany
+     private List<NoteUnLieuEntity> notes ;
+    
+  
     public String cheminImage(){
-        return "http://localhost:55857/handijpa3/images/" + this.getImage();
+        return "http://localhost:8080/handijpa/images/" + this.getImage();
     }
 
     public Long getId() {
@@ -279,6 +286,20 @@ public class LieuEntity implements Serializable {
      */
     public void setCreateur(PersonneEntity createur) {
         this.createur = createur;
+    }
+
+    /**
+     * @return the notes
+     */
+    public List<NoteUnLieuEntity> getNotes() {
+        return notes;
+    }
+
+    /**
+     * @param notes the notes to set
+     */
+    public void setNotes(List<NoteUnLieuEntity> notes) {
+        this.notes = notes;
     }
 
 }

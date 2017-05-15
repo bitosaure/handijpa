@@ -31,8 +31,6 @@ public class NoteUnLieuEntity implements Serializable {
     @JoinColumn(name = "nombreEtoile")
     private Integer nombreEtoile;
 
-    @JoinColumn(name = "commentaire")
-    private String commentaire;
 
     @JoinColumn(name = "personne")
     private PersonneEntity personne;
@@ -101,19 +99,7 @@ public class NoteUnLieuEntity implements Serializable {
         this.nombreEtoile = nombreEtoile;
     }
 
-    /**
-     * @return the commentaire
-     */
-    public String getCommentaire() {
-        return commentaire;
-    }
-
-    /**
-     * @param commentaire the commentaire to set
-     */
-    public void setCommentaire(String commentaire) {
-        this.commentaire = commentaire;
-    }
+   
 
     /**
      * @return the personne

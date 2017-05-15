@@ -45,15 +45,14 @@ public class NoteUnLieuDAO implements DAO<NoteUnLieuEntity>{
          em.merge(obj);
         em.getTransaction().commit();
         em.close();    }
-
-    @Override
+        @Override
     public void delete(NoteUnLieuEntity obj) {
         em.getTransaction().begin();
         em.remove(obj);
         em.getTransaction().commit();
         em.close();    }
 
-    @Override
+    
     public NoteUnLieuEntity findById(String id) {
         return em.find(NoteUnLieuEntity.class, id);
     }
