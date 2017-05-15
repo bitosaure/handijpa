@@ -82,29 +82,29 @@ public class ConsulterLieuxControleur implements Serializable {
         commentaire = new CommentaireLieuEntity();
         FacesMessage message = new FacesMessage("nous avons bien intégré votre commentaire");
         FacesContext.getCurrentInstance().addMessage(null, message);
-        
+
         System.out.println("toto");
 
     }
 
     public void signalerCommentaire(CommentaireLieuEntity comm) {
-                System.out.println("totonnn");
-         
+        System.out.println("totonnn");
+
         FacesContext context = FacesContext.getCurrentInstance();
 
         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
         SignalementCommentaireEntity signalement = new SignalementCommentaireEntity();
         PersonneEntity pers = (PersonneEntity) binding.getValue(context);
         if (pers.getId() == null) {
-                FacesMessage message = new FacesMessage( "Pour signaler un commentaire, veuillez vous authentifier" );
-              FacesContext.getCurrentInstance().addMessage( null, message );
+            FacesMessage message = new FacesMessage("Pour signaler un commentaire, veuillez vous authentifier");
+            FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
             signalement.setCreateur(pers);
-            signalement.setCommentaireLieu(commentaire);
+            signalement.setCommentaireLieu(comm);
             SignalementCommentaireDAO signDAO = new SignalementCommentaireDAO();
             signDAO.create(signalement);
         }
-        
+
         System.out.println("signaler");
     }
 

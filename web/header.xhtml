@@ -8,57 +8,49 @@
 
 
     <h:form id="EnteteForm">
-        <nav class="navbar navbar-default ">
-            <div class="col-xs-6 col-md-2">
-                <h3 style="color:black">HandiAdvisor</h3>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                <div class="centreHeader">
-                    
-                </div>
-            </ul>
-                                                         
-                                           
-                
-            <div class="container-fluid">
-                <div id="navbar_mine" class="navbar-collapse collapse">
-                    <div class="col-xs-6 col-md-5">
-                        <div class="nav navbar-nav">
-                            <div class="centreTitle">
-                                <h:outputLabel value="Notez vos lieux visités !"></h:outputLabel>
-                            </div>
-                        </div>
-                    </div>		
-                    
-                    
-                                  
-                    <div class="col-xs-2 col-md-1">
-                        <h:commandLink id="authent" style="color: black; "
-                                       rendered="#{authentificationControleur.isAuthenti!='true'}"
-                                       value="S'authentifier" action="#{authentificationControleur.initialiserPage()}"/>
+        <h:panelGrid columns="5">
 
-                    </div>
-                    <div class="col-xs-4 col-md-4">
+            <h3 style="color:black">HandiAdvisor</h3>
 
 
-                        <h:commandLink id="inscri" style="color: black; "
-                                       rendered="#{authentificationControleur.isAuthenti!='true'}"
-
-                                       value="S'inscrire" action="#{inscriptionControleur.initialiserPage()}"/>
-                        
-                         <h:commandLink id="deco" style="color: black; "
-                                       rendered="#{authentificationControleur.isAuthenti!='false'}"
-
-                                       value="Se deconnecter" action="#{authentificationControleur.seDeconnecter()}"/>
-                    </div>
-                     
-                       
 
 
-                </div>
 
-            </div>
-        </nav>
+
+
+            <h:outputLabel value="Notez vos lieux visités !"></h:outputLabel>
+
+
+
+
+
+
+            <h:commandLink id="authent" style="color: black; "
+                           rendered="#{authentificationControleur.isAuthenti!='true'}"
+                           value="S'authentifier" action="#{authentificationControleur.initialiserPage()}"/>
+
+
+
+
+
+            <h:commandLink id="inscri" style="color: black; "
+                           rendered="#{authentificationControleur.isAuthenti!='true'}"
+
+                           value="S'inscrire" action="#{inscriptionControleur.initialiserPage()}"/>
+
+            <h:commandLink id="deco" style="color: black; "
+                           rendered="#{authentificationControleur.isAuthenti!='false'}"
+
+                           value="Se deconnecter" action="#{authentificationControleur.seDeconnecter()}"/>
+
+
+
+
+
+
+
+
+        </h:panelGrid>  
     </h:form>
 </html>
 

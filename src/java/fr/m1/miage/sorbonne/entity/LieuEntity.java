@@ -63,7 +63,7 @@ public class LieuEntity implements Serializable {
     private String pays;
     
     public String cheminImage(){
-        return "http://localhost:8080/handijpa/images/" + this.getImage();
+        return "http://localhost:55857/handijpa3/images/" + this.getImage();
     }
 
     public Long getId() {

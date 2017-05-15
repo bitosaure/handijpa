@@ -4,7 +4,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
-
+      xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
@@ -73,6 +73,27 @@
 
                                                            value="Pout ajouter un commentaire, veuillez vous authentifier" action="#{authentificationControleur.initialiserPage()}"/>
                                         </h:panelGroup>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <h:panelGroup id="ajouterNote" rendered="#{authentificationControleur.personne.typePersonne!='lambda'}">
+
+
+                                            <a href="#" onclick="$('#myModal3').modal()">Noter le lieu</a>
+                                        </h:panelGroup>
+                                        <br />
+                                        <h:panelGroup id="ajouterNoteAuthen" rendered="#{authentificationControleur.personne.typePersonne!='admin'}">
+
+                                            <h:commandLink id="authNote" style="color: black; "
+
+
+                                                           value="Pout noter le lieu, veuillez vous authentifier" action="#{authentificationControleur.initialiserPage()}"/>
+                                        </h:panelGroup>
+                                        
+                                        
+                                        
                                         <br />
                                         <a href="#" onclick="$('#myModal2').modal()">Voir les commentaires</a>
 
@@ -277,6 +298,36 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
                                     <h:commandButton class="btn btn-default" value="ajouter" action="#{consulterLieuxControleur.ajouterCommentaire()}"  />
+
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </h:form>
+                </div><!-- /.modal -->
+                
+                <div id="myModal3" class="modal fade" tabindex="-1" role="dialog">
+                    <h:form id="modalNote">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h5 class="modal-title">Noter le lieu</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText value="Note 1"/>
+                                        <p:rating></p:rating>
+                                        <h:outputText value="Note 2"/>
+                                        <p:rating></p:rating>
+                                        <h:outputText value="Note 3"/>                                       
+                                        <p:rating></p:rating>
+                                        <h:outputText value="Note 4"/>
+                                        <p:rating></p:rating>
+                                    </h:panelGrid>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                    <h:commandButton class="btn btn-default" value="Valider"   />
 
                                 </div>
                             </div><!-- /.modal-content -->

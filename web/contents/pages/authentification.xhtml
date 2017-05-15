@@ -13,7 +13,7 @@
     <ui:composition template="/././templateHandi.xhtml">
         <ui:define name="body">
             <h:form>
-                <fieldset>
+                
 
 
                     <div class="container-fluid">
@@ -42,16 +42,19 @@
                                     <h:messages globalOnly="true" infoClass="info" />
 
 
-                                    <h:commandButton value="Valider" action="#{authentificationControleur.authentification()}" styleClass="sansLabel" />
-                                    <br />
+                                    
+                                    
                                 </div>
 
+                            </div>
+                            <div class="panel-footer">
+                                <h:commandButton value="Valider" action="#{authentificationControleur.authentification()}" styleClass="sansLabel" />
                             </div>
 
                         </div>
 
                     </div>
-                </fieldset>
+                
 
 
             </h:form> 
