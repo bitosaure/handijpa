@@ -8,9 +8,11 @@ package fr.m1.miage.sorbonne.controleur;
 import fr.m1.miage.sorbonne.dao.CategorieDAO;
 import fr.m1.miage.sorbonne.dao.CommentaireLieuDAO;
 import fr.m1.miage.sorbonne.dao.LieuDAO;
+import fr.m1.miage.sorbonne.dao.SignalementCommentaireDAO;
 import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
 import fr.m1.miage.sorbonne.entity.LieuEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
+import fr.m1.miage.sorbonne.entity.SignalementCommentaireEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +35,7 @@ import javax.faces.el.ValueBinding;
  */
 @ManagedBean
 @SessionScoped
-public class ConsulterLieuxControleur implements Serializable{
+public class ConsulterLieuxControleur implements Serializable {
 
     private List<LieuEntity> lieux = new ArrayList<>();
 
@@ -42,20 +44,19 @@ public class ConsulterLieuxControleur implements Serializable{
     private String code = "";
     private LieuDAO lieuDao;
 
-    private List<CommentaireLieuEntity> listCommentaires =new ArrayList<CommentaireLieuEntity>();
+    private List<CommentaireLieuEntity> listCommentaires = new ArrayList<CommentaireLieuEntity>();
 
     private CommentaireLieuDAO commentaireDAO;
-    private CommentaireLieuEntity commentaire= new CommentaireLieuEntity();
+    private CommentaireLieuEntity commentaire = new CommentaireLieuEntity();
 
     public ConsulterLieuxControleur() {
         lieuDao = new LieuDAO();
         lieux = lieuDao.findValider();
-        
 
     }
 
     public String initialiserPage() {
-           setCommentaire(new CommentaireLieuEntity());
+        setCommentaire(new CommentaireLieuEntity());
 
         FacesContext context = FacesContext.getCurrentInstance();
         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
@@ -70,19 +71,41 @@ public class ConsulterLieuxControleur implements Serializable{
 
     public void ajouterCommentaire() {
         commentaireDAO = new CommentaireLieuDAO();
-              FacesContext context = FacesContext.getCurrentInstance();
+        FacesContext context = FacesContext.getCurrentInstance();
         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
         PersonneEntity pers = (PersonneEntity) binding.getValue(context);
         commentaire.setPersonne(pers);
-        
-        
+
         commentaire.setLieu(lieuDetail);
         commentaire.setDateCreation(new Date());
         commentaireDAO.create(commentaire);
-        commentaire=new CommentaireLieuEntity();
+        commentaire = new CommentaireLieuEntity();
         FacesMessage message = new FacesMessage("nous avons bien intégré votre commentaire");
         FacesContext.getCurrentInstance().addMessage(null, message);
+        
+        System.out.println("toto");
 
+    }
+
+    public void signalerCommentaire(CommentaireLieuEntity comm) {
+                System.out.println("totonnn");
+         
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
+        SignalementCommentaireEntity signalement = new SignalementCommentaireEntity();
+        PersonneEntity pers = (PersonneEntity) binding.getValue(context);
+        if (pers.getId() == null) {
+                FacesMessage message = new FacesMessage( "Pour signaler un commentaire, veuillez vous authentifier" );
+              FacesContext.getCurrentInstance().addMessage( null, message );
+        } else {
+            signalement.setCreateur(pers);
+            signalement.setCommentaireLieu(commentaire);
+            SignalementCommentaireDAO signDAO = new SignalementCommentaireDAO();
+            signDAO.create(signalement);
+        }
+        
+        System.out.println("signaler");
     }
 
     public LieuEntity detailDuLieu(String index) {
@@ -119,15 +142,12 @@ public class ConsulterLieuxControleur implements Serializable{
         this.lieuDetail = lieu;
         commentaireDAO = new CommentaireLieuDAO();
         //listeBd.get(i).setImage("./images/"+listeBd.get(i).getImage());
-         listCommentaires =commentaireDAO.rechercherCommentaireLieu(lieuDetail);
+        listCommentaires = commentaireDAO.rechercherCommentaireLieu(lieuDetail);
         System.out.println(lieuDetail.adresse());
         FacesContext context = FacesContext.getCurrentInstance();
         UIViewRoot ui = context.getViewRoot();
 
         // html = (HtmlInputText) ui.findComponent("consulterLieux:secret");
-        
-        
-        
     }
 
     public void setLieuDetail() {
@@ -165,7 +185,7 @@ public class ConsulterLieuxControleur implements Serializable{
      * @param commentaire the commentaire to set
      */
     public void setCommentaire(CommentaireLieuEntity commentaire) {
-       this.commentaire=commentaire;
+        this.commentaire = commentaire;
     }
 
     /**
@@ -182,5 +202,4 @@ public class ConsulterLieuxControleur implements Serializable{
         this.listCommentaires = listCommentaires;
     }
 
-   
 }

@@ -59,9 +59,23 @@
 
 
                                         <br />
-                                        <a href="#" onclick="$('#myModal').modal()">Ajouter un commentaire</a>
-                                        <a href="#" onclick="$('#myModal2').modal()">Voir les commentaires</a>
+                                        
+                                       <h:panelGroup id="ajouterComm" rendered="#{authentificationControleur.personne.typePersonne=='admin'}">
 
+                                        
+                                        <a href="#" onclick="$('#myModal').modal()">Ajouter un commentaire</a>
+                                       </h:panelGroup>
+                                        <br />
+                                         <h:panelGroup id="ajouterAuthen" rendered="#{authentificationControleur.personne.typePersonne!='admin'}">
+                                          
+                                          <h:commandLink id="auth" style="color: black; "
+                                     
+
+                                       value="Pout ajouter un commentaire, veuillez vous authentifier" action="#{authentificationControleur.initialiserPage()}"/>
+                                         </h:panelGroup>
+                                         <br />
+                                        <a href="#" onclick="$('#myModal2').modal()">Voir les commentaires</a>
+                                           
                                     </div>
                                     <div class="col-md-6">
                                         <img src="#{consulterLieuxControleur.lieuDetail.cheminImage()}" alt="#{consulterLieuxControleur.lieuDetail.nom}" class="img-circle" width="100%" height="100%"/>
@@ -190,13 +204,19 @@
                                 </div>
                                 <div class="modal-body">
                                     <ui:repeat var="com" value="#{consulterLieuxControleur.listCommentaires}">
-                                        <h:outputLabel for="titre">#{com.titre}      <strong>Auteur : </strong>#{com.personne.login} <h:commandLink styleClass="align : right">Signaler</h:commandLink></h:outputLabel>
+                                        <h:outputLabel for="titre">#{com.titre}      <strong>Auteur : </strong>#{com.personne.login} 
+                                                                                  
+
+                                        </h:outputLabel>
+
+                                        <h:commandLink  value="Signaler" type="button" action="#{consulterLieuxControleur.signalerCommentaire(com)}" immediate="true" />
                                         <h:outputText id="com" class="form-control"  value="#{com.commentaire}"/>
                                     </ui:repeat>
 
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                    <br />
 
 
                                 </div>
