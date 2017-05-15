@@ -29,7 +29,7 @@ public class NoteUnLieuEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @JoinColumn(name = "nombreEtoile")
-    private Integer nombreEtoile;
+    private Double nombreEtoile;
 
 
     @JoinColumn(name = "personne")
@@ -88,14 +88,14 @@ public class NoteUnLieuEntity implements Serializable {
     /**
      * @return the nombreEtoile
      */
-    public Integer getNombreEtoile() {
+    public Double getNombreEtoile() {
         return nombreEtoile;
     }
 
     /**
      * @param nombreEtoile the nombreEtoile to set
      */
-    public void setNombreEtoile(Integer nombreEtoile) {
+    public void setNombreEtoile(Double nombreEtoile) {
         this.nombreEtoile = nombreEtoile;
     }
 

@@ -117,6 +117,7 @@ public class ConsulterLieuxControleur implements Serializable {
         }
 
         System.out.println("signaler");
+        
     }
 
     public LieuEntity detailDuLieu(String index) {
@@ -184,8 +185,18 @@ public class ConsulterLieuxControleur implements Serializable {
             NoteUnLieuEntity note;
             for (CritereEntity criter : listCritere) {
                 note = new NoteUnLieuEntity();
-               
+               note.setCritere(criter);
+               note.setPersonne(pers);
+               System.out.println(criter.getNbEtoiles().toString());
+               note.setNombreEtoile(criter.getNbEtoiles());
+               lieuDetail.getNotes().add(note);
+              
             }
+            LieuDAO lieDao = new LieuDAO();
+            lieDao.update(lieuDetail);
+            CritereDAO critereDao = new CritereDAO();
+        setListCritere(critereDao.findAll());
+            
 
         }
 
