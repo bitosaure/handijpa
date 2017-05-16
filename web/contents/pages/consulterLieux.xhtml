@@ -316,16 +316,18 @@
                                 <h5 class="modal-title">Noter le lieu</h5>
                             </div>
                             <div class="modal-body">
-                                
-                                <h:panelGrid columns="2" cellpadding="5">
-                                     <ui:repeat var="com" value="#{consulterLieuxControleur.listCritere}">
-                                         <h:outputText value="#{com.nbEtoiles}"/>
-                                    <h:outputText value="#{com.libelle}"/>
-                                                                       
-                                    <p:rating value="#{com.nbEtoiles}"></p:rating>
-                                    
-                                     </ui:repeat>
-                                </h:panelGrid>
+
+
+                                <ui:repeat var="com" value="#{consulterLieuxControleur.listCritere}">
+                                    <div class="row">
+                                        <h:outputText value="#{com.libelle}"/>
+                                    <!--<h:outputText value="#{com.nbEtoiles}"/>-->
+                                  
+
+                                        <p:rating value="#{com.nbEtoiles}"></p:rating>
+                                    </div>
+                                </ui:repeat>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
