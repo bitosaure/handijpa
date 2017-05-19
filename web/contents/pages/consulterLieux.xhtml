@@ -59,6 +59,22 @@
 
 
                                         <br />
+                                        <h:outputLabel >Liste des moyennes</h:outputLabel>
+                                        <ui:repeat var="com" value="#{consulterLieuxControleur.listCriterLieuDetailMoyenne}">
+                                    <div class="row">
+                                        <h:outputText value="#{com.libelle}"/>: 
+                                    <!--<h:outputText value="#{com.nbEtoiles}"/>-->
+                                   <h:panelGroup id="noteCi" rendered="#{com.nbPersonnes!=0}">
+                                           <h:outputLabel  value="#{com.nbEtoiles}"/>/5
+                                   </h:panelGroup>
+                                           <h:panelGroup id="noteNonCi" rendered="#{com.nbPersonnes==0}">
+                                           <h:outputLabel  value="Aucune personne n'a donnée de note pour ce critère"/>
+
+                                           </h:panelGroup>
+                                    </div>
+                                </ui:repeat>
+                                        
+                                        <br />
 
                                         <h:panelGroup id="ajouterComm" rendered="#{authentificationControleur.personne.typePersonne!=null}">
 

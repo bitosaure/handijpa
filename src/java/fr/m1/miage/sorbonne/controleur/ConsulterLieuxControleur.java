@@ -55,6 +55,8 @@ public class ConsulterLieuxControleur implements Serializable {
     private CommentaireLieuDAO commentaireDAO;
     private CommentaireLieuEntity commentaire = new CommentaireLieuEntity();
 
+    private List<CritereEntity> listCriterLieuDetailMoyenne = new ArrayList<CritereEntity>();
+
     public ConsulterLieuxControleur() {
         lieuDao = new LieuDAO();
         lieux = lieuDao.findValider();
@@ -117,7 +119,7 @@ public class ConsulterLieuxControleur implements Serializable {
         }
 
         System.out.println("signaler");
-        
+
     }
 
     public LieuEntity detailDuLieu(String index) {
@@ -159,6 +161,32 @@ public class ConsulterLieuxControleur implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         UIViewRoot ui = context.getViewRoot();
 
+        CritereDAO critereDao = new CritereDAO();
+        int j;
+        setListCriterLieuDetailMoyenne(critereDao.findAll());
+        for (int i = 0; i < getListCriterLieuDetailMoyenne().size(); i++) {
+            getListCriterLieuDetailMoyenne().get(i).setNbEtoiles(0.0);
+            getListCriterLieuDetailMoyenne().get(i).setNbPersonnes(0);
+            System.out.println("critere " + getListCriterLieuDetailMoyenne().get(i).getCode());
+        }
+        for (NoteUnLieuEntity note : lieuDetail.getNotes()) {
+
+            j = getListCriterLieuDetailMoyenne().indexOf(note.getCritere());
+            System.out.println("note" + note.getCritere().getCode());
+            getListCriterLieuDetailMoyenne().get(j).setNbEtoiles(getListCriterLieuDetailMoyenne().get(j).getNbEtoiles() + note.getNombreEtoile());
+            getListCriterLieuDetailMoyenne().get(j).setNbPersonnes(getListCriterLieuDetailMoyenne().get(j).getNbPersonnes() + 1);
+        }
+
+        for (CritereEntity obj : getListCriterLieuDetailMoyenne()) {
+            if (obj.getNbPersonnes() != 0) {
+
+                obj.setNbEtoiles(obj.getNbEtoiles() / obj.getNbPersonnes());
+                
+            } else {
+                obj.setNbEtoiles(null);
+            }
+        }
+
         // html = (HtmlInputText) ui.findComponent("consulterLieux:secret");
     }
 
@@ -185,18 +213,17 @@ public class ConsulterLieuxControleur implements Serializable {
             NoteUnLieuEntity note;
             for (CritereEntity criter : listCritere) {
                 note = new NoteUnLieuEntity();
-               note.setCritere(criter);
-               note.setPersonne(pers);
-               System.out.println(criter.getNbEtoiles().toString());
-               note.setNombreEtoile(criter.getNbEtoiles());
-               lieuDetail.getNotes().add(note);
-              
+                note.setCritere(criter);
+                note.setPersonne(pers);
+                System.out.println(criter.getNbEtoiles().toString());
+                note.setNombreEtoile(criter.getNbEtoiles());
+                lieuDetail.getNotes().add(note);
+
             }
             LieuDAO lieDao = new LieuDAO();
             lieDao.update(lieuDetail);
             CritereDAO critereDao = new CritereDAO();
-        setListCritere(critereDao.findAll());
-            
+            setListCritere(critereDao.findAll());
 
         }
 
@@ -256,5 +283,19 @@ public class ConsulterLieuxControleur implements Serializable {
      */
     public void setListCritere(List<CritereEntity> listCritere) {
         this.listCritere = listCritere;
+    }
+
+    /**
+     * @return the listCriterLieuDetailMoyenne
+     */
+    public List<CritereEntity> getListCriterLieuDetailMoyenne() {
+        return listCriterLieuDetailMoyenne;
+    }
+
+    /**
+     * @param listCriterLieuDetailMoyenne the listCriterLieuDetailMoyenne to set
+     */
+    public void setListCriterLieuDetailMoyenne(List<CritereEntity> listCriterLieuDetailMoyenne) {
+        this.listCriterLieuDetailMoyenne = listCriterLieuDetailMoyenne;
     }
 }

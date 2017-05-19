@@ -37,6 +37,9 @@ public class CritereEntity implements Serializable {
    
     @Transient
     private Double nbEtoiles;
+     @Transient
+    private Integer nbPersonnes=0;
+    
 
     @Override
     public boolean equals(Object object) {
@@ -45,7 +48,7 @@ public class CritereEntity implements Serializable {
             return false;
         }
         CritereEntity other = (CritereEntity) object;
-        if ((this.getCode() == null && other.getCode() != null) || (this.getCode() != null && !this.code.equals(other.code))) {
+        if (( !this.code.equals(other.code))) {
             return false;
         }
         return true;
@@ -110,6 +113,20 @@ public class CritereEntity implements Serializable {
      */
     public void setNbEtoiles(Double nbEtoiles) {
         this.nbEtoiles = nbEtoiles;
+    }
+
+    /**
+     * @return the nbPersonnes
+     */
+    public Integer getNbPersonnes() {
+        return nbPersonnes;
+    }
+
+    /**
+     * @param nbPersonnes the nbPersonnes to set
+     */
+    public void setNbPersonnes(Integer nbPersonnes) {
+        this.nbPersonnes = nbPersonnes;
     }
 
 }
