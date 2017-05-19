@@ -58,6 +58,7 @@ public class ParametrerNotationControleur implements Serializable{
             
             FacesMessage message = new FacesMessage("l'ajout a bien été intégré!");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            critere = new CritereEntity();
             return "SUCCESS";
         }
         

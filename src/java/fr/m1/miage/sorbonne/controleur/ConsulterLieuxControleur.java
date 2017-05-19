@@ -5,8 +5,6 @@
  */
 package fr.m1.miage.sorbonne.controleur;
 
-import static com.sun.faces.facelets.util.Path.context;
-import fr.m1.miage.sorbonne.dao.CategorieDAO;
 import fr.m1.miage.sorbonne.dao.CommentaireLieuDAO;
 import fr.m1.miage.sorbonne.dao.CritereDAO;
 import fr.m1.miage.sorbonne.dao.LieuDAO;
@@ -22,17 +20,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputText;
-import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
-import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
@@ -42,27 +36,65 @@ import org.apache.jasper.tagplugins.jstl.ForEach;
 @SessionScoped
 public class ConsulterLieuxControleur implements Serializable {
 
+    /**
+     * *
+     * Liste de tous les lieux présents dans la base de données
+     */
     private List<LieuEntity> lieux = new ArrayList<>();
 
+    /**
+     * *
+     * lieu que l'on souhaite consulter
+     */
     private LieuEntity lieuDetail;
 
-    private String code = "";
+    /**
+     * DAO permettant d'agir sur la table lieu présente dans la base de données
+     */
     private LieuDAO lieuDao;
 
+    /**
+     * Liste des critères applicables à des lieux
+     */
     private List<CritereEntity> listCritere = new ArrayList<CritereEntity>();
+
+    /**
+     * *
+     * Liste des commentaires sur le lieu consulté
+     */
     private List<CommentaireLieuEntity> listCommentaires = new ArrayList<CommentaireLieuEntity>();
 
+    /**
+     * DAO permettant d'agir sur la table COMMENTAIRE présente dans la base de
+     * données
+     */
     private CommentaireLieuDAO commentaireDAO;
+
+    /**
+     * Commentaire que l'on souhaite créér concernant le lieu consulté
+     */
     private CommentaireLieuEntity commentaire = new CommentaireLieuEntity();
 
+    /**
+     * Liste des moyennes des critères sur le lieu consulté
+     */
     private List<CritereEntity> listCriterLieuDetailMoyenne = new ArrayList<CritereEntity>();
 
+    /**
+     * *
+     * Constructeur de la classe
+     */
     public ConsulterLieuxControleur() {
         lieuDao = new LieuDAO();
         lieux = lieuDao.findValider();
 
     }
 
+    /**
+     * Méthode appelée lorsque l'on souhaite consulter la page consulterLieux
+     *
+     * @return String : pour savoir si un problème est apparu ou non
+     */
     public String initialiserPage() {
         setCommentaire(new CommentaireLieuEntity());
         CritereDAO critereDao = new CritereDAO();
@@ -72,8 +104,7 @@ public class ConsulterLieuxControleur implements Serializable {
         PersonneEntity pers = (PersonneEntity) binding.getValue(context);
         commentaire.setPersonne(pers);
         //FacesContext context = FacesContext.getCurrentInstance();
-        System.out.println("pers: " + pers.getTypePersonne());
-
+        commentaireDAO = new CommentaireLieuDAO();
         this.lieuDetail = null;
         //ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.isAuthenti}");
         return "SUCCESS";
@@ -81,7 +112,6 @@ public class ConsulterLieuxControleur implements Serializable {
     }
 
     public void ajouterCommentaire() {
-        commentaireDAO = new CommentaireLieuDAO();
         FacesContext context = FacesContext.getCurrentInstance();
         ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
         PersonneEntity pers = (PersonneEntity) binding.getValue(context);
@@ -91,17 +121,15 @@ public class ConsulterLieuxControleur implements Serializable {
         commentaire.setDateCreation(new Date());
         commentaireDAO.create(commentaire);
 
-        commentaire = new CommentaireLieuEntity();
         listCommentaires.add(commentaire);
+        commentaire = new CommentaireLieuEntity();
+
         FacesMessage message = new FacesMessage("nous avons bien intégré votre commentaire");
         FacesContext.getCurrentInstance().addMessage(null, message);
-
-        System.out.println("toto");
 
     }
 
     public void signalerCommentaire(CommentaireLieuEntity comm) {
-        System.out.println("totonnn");
 
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -118,24 +146,6 @@ public class ConsulterLieuxControleur implements Serializable {
             signDAO.create(signalement);
         }
 
-        System.out.println("signaler");
-
-    }
-
-    public LieuEntity detailDuLieu(String index) {
-        return lieuDao.findById(index);
-    }
-
-    public List<LieuEntity> getLieux() {
-        return lieux;
-    }
-
-    public void setLieux(List<LieuEntity> lieux) {
-        this.lieux = lieux;
-    }
-
-    public LieuEntity getLieuDetail() {
-        return lieuDetail;
     }
 
     public String recupId() {
@@ -154,25 +164,49 @@ public class ConsulterLieuxControleur implements Serializable {
 
     public void setLieuDetail(LieuEntity lieu) {
         this.lieuDetail = lieu;
-        commentaireDAO = new CommentaireLieuDAO();
         //listeBd.get(i).setImage("./images/"+listeBd.get(i).getImage());
         listCommentaires = commentaireDAO.rechercherCommentaireLieu(lieuDetail);
-        System.out.println(lieuDetail.adresse());
-        FacesContext context = FacesContext.getCurrentInstance();
-        UIViewRoot ui = context.getViewRoot();
 
+        actualiserNote();
+
+        // html = (HtmlInputText) ui.findComponent("consulterLieux:secret");
+    }
+
+    public void noterLieu() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
+        PersonneEntity pers = (PersonneEntity) binding.getValue(context);
+
+        NoteUnLieuEntity note;
+        for (CritereEntity criter : listCritere) {
+            note = new NoteUnLieuEntity();
+            note.setCritere(criter);
+            note.setPersonne(pers);
+            note.setNombreEtoile(criter.getNbEtoiles());
+            lieuDetail.getNotes().add(note);
+
+        }
+        LieuDAO lieDao = new LieuDAO();
+        lieDao.update(lieuDetail);
+        CritereDAO critereDao = new CritereDAO();
+        setListCritere(critereDao.findAll());
+
+        actualiserNote();
+
+    }
+
+    private void actualiserNote() {
         CritereDAO critereDao = new CritereDAO();
         int j;
         setListCriterLieuDetailMoyenne(critereDao.findAll());
         for (int i = 0; i < getListCriterLieuDetailMoyenne().size(); i++) {
             getListCriterLieuDetailMoyenne().get(i).setNbEtoiles(0.0);
             getListCriterLieuDetailMoyenne().get(i).setNbPersonnes(0);
-            System.out.println("critere " + getListCriterLieuDetailMoyenne().get(i).getCode());
         }
         for (NoteUnLieuEntity note : lieuDetail.getNotes()) {
 
             j = getListCriterLieuDetailMoyenne().indexOf(note.getCritere());
-            System.out.println("note" + note.getCritere().getCode());
             getListCriterLieuDetailMoyenne().get(j).setNbEtoiles(getListCriterLieuDetailMoyenne().get(j).getNbEtoiles() + note.getNombreEtoile());
             getListCriterLieuDetailMoyenne().get(j).setNbPersonnes(getListCriterLieuDetailMoyenne().get(j).getNbPersonnes() + 1);
         }
@@ -180,67 +214,13 @@ public class ConsulterLieuxControleur implements Serializable {
         for (CritereEntity obj : getListCriterLieuDetailMoyenne()) {
             if (obj.getNbPersonnes() != 0) {
 
-                obj.setNbEtoiles(obj.getNbEtoiles() / obj.getNbPersonnes());
-                
+                obj.setNbEtoiles((double) Math.round(obj.getNbEtoiles() / obj.getNbPersonnes() * 100) / 100);
+
             } else {
                 obj.setNbEtoiles(null);
             }
         }
 
-        // html = (HtmlInputText) ui.findComponent("consulterLieux:secret");
-    }
-
-    public void setLieuDetail() {
-        String id = recupId();
-        System.out.println(recupId());
-        System.out.println("id entrée " + id);
-        //Long idd = Long.parseLong(id);
-        lieuDetail = lieuDao.findById(id);
-        System.out.println("nom lieu " + lieuDetail.getNom());
-
-    }
-
-    public void noterLieu() {
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
-        SignalementCommentaireEntity signalement = new SignalementCommentaireEntity();
-        PersonneEntity pers = (PersonneEntity) binding.getValue(context);
-        if (pers.getId() == null) {
-            FacesMessage message = new FacesMessage("Pour noter un lieu, veuillez vous authentifier");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        } else {
-            NoteUnLieuEntity note;
-            for (CritereEntity criter : listCritere) {
-                note = new NoteUnLieuEntity();
-                note.setCritere(criter);
-                note.setPersonne(pers);
-                System.out.println(criter.getNbEtoiles().toString());
-                note.setNombreEtoile(criter.getNbEtoiles());
-                lieuDetail.getNotes().add(note);
-
-            }
-            LieuDAO lieDao = new LieuDAO();
-            lieDao.update(lieuDetail);
-            CritereDAO critereDao = new CritereDAO();
-            setListCritere(critereDao.findAll());
-
-        }
-
-    }
-
-    /**
-     * @return the code
-     */
-    public String getCode() {
-        return code;
-    }
-
-    /**
-     * @param code the code to set
-     */
-    public void setCode(String code) {
-        this.code = code;
     }
 
     /**
@@ -297,5 +277,21 @@ public class ConsulterLieuxControleur implements Serializable {
      */
     public void setListCriterLieuDetailMoyenne(List<CritereEntity> listCriterLieuDetailMoyenne) {
         this.listCriterLieuDetailMoyenne = listCriterLieuDetailMoyenne;
+    }
+
+    public LieuEntity detailDuLieu(String index) {
+        return lieuDao.findById(index);
+    }
+
+    public List<LieuEntity> getLieux() {
+        return lieux;
+    }
+
+    public void setLieux(List<LieuEntity> lieux) {
+        this.lieux = lieux;
+    }
+
+    public LieuEntity getLieuDetail() {
+        return lieuDetail;
     }
 }
