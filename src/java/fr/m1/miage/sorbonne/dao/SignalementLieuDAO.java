@@ -6,11 +6,18 @@
 package fr.m1.miage.sorbonne.dao;
 
 import fr.m1.miage.sorbonne.entity.CritereEntity;
+import fr.m1.miage.sorbonne.entity.LieuEntity;
+import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import fr.m1.miage.sorbonne.entity.SignalementLieuEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -31,7 +38,28 @@ public class SignalementLieuDAO implements DAO<SignalementLieuEntity>{
         em.persist(obj);
         em.getTransaction().commit();
         em.close();     }
+    
+    
+        public List<SignalementLieuEntity> rechercherSiganlementLieu(LieuEntity lieu ) {
 
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<SignalementLieuEntity> query = cb
+				.createQuery(SignalementLieuEntity.class);
+		// construction de la requete dynamique
+		Root<SignalementLieuEntity> root = query.from(SignalementLieuEntity.class);
+		List<Predicate> predicateList = new ArrayList<Predicate>();
+
+		
+			predicateList.add(cb.equal(root.<String> get("lieu"),
+					lieu));
+		
+
+		Predicate[] predicates = new Predicate[predicateList.size()];
+		predicateList.toArray(predicates);
+		query.where(predicates);
+		// exécution de la requete
+		return em.createQuery(query).getResultList();
+	}
  
     public SignalementLieuEntity findById(String id) {
         return em.find(SignalementLieuEntity.class, id);

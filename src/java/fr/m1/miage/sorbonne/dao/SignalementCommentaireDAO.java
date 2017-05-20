@@ -5,12 +5,19 @@
  */
 package fr.m1.miage.sorbonne.dao;
 
+import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
+import fr.m1.miage.sorbonne.entity.LieuEntity;
 import fr.m1.miage.sorbonne.entity.SignalementCommentaireEntity;
 import fr.m1.miage.sorbonne.entity.SignalementLieuEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -57,6 +64,25 @@ public class SignalementCommentaireDAO implements DAO<SignalementCommentaireEnti
         List<SignalementCommentaireEntity> listSignalementCommentaireEntity= em.createQuery("Select a FROM SignalementCommentaireEntity a").getResultList();
         return listSignalementCommentaireEntity;   
     }
-    
+    public List<SignalementCommentaireEntity> rechercherSiganlementCommentaire(CommentaireLieuEntity comm ) {
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<SignalementCommentaireEntity> query = cb
+				.createQuery(SignalementCommentaireEntity.class);
+		// construction de la requete dynamique
+		Root<SignalementCommentaireEntity> root = query.from(SignalementCommentaireEntity.class);
+		List<Predicate> predicateList = new ArrayList<Predicate>();
+
+		
+			predicateList.add(cb.equal(root.<String> get("commentaireLieu"),
+					comm));
+		
+
+		Predicate[] predicates = new Predicate[predicateList.size()];
+		predicateList.toArray(predicates);
+		query.where(predicates);
+		// exécution de la requete
+		return em.createQuery(query).getResultList();
+	}
     
 }

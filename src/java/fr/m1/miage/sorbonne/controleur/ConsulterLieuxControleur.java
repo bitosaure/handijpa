@@ -201,6 +201,7 @@ public class ConsulterLieuxControleur implements Serializable {
         signalementLieu.setLieu(lieuDetail);
         SignalementLieuDAO signalementDao = new SignalementLieuDAO();
         signalementDao.create(signalementLieu);
+        signalementLieu= new SignalementLieuEntity();
     }
 
     public void noterLieu() {
@@ -308,9 +309,7 @@ public class ConsulterLieuxControleur implements Serializable {
         this.listCriterLieuDetailMoyenne = listCriterLieuDetailMoyenne;
     }
 
-    public LieuEntity detailDuLieu(String index) {
-        return lieuDao.findById(index);
-    }
+  
 
     public List<LieuEntity> getLieux() {
         return lieux;

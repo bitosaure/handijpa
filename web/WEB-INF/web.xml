@@ -20,7 +20,9 @@
             /WEB-INF/ajouterAdmin/faces-navigation.xml,
             /WEB-INF/gererCommentaire/faces-navigation.xml,
 
-             /WEB-INF/parametrerNotation/faces-navigation.xml
+             /WEB-INF/parametrerNotation/faces-navigation.xml,
+                         /WEB-INF/signalementLieu/faces-navigation.xml
+
 
 
 

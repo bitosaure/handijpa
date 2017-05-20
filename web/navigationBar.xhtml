@@ -53,8 +53,10 @@
                            <li id="divGestionDesSignaleComm"><h:commandLink id="parametrerSigna"
                                                                    action="#{gererCommentaireControleur.initialiserPage()}"
                                                                    value="Gerer les commentaires" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
-                        
-                        
+                        <li id="divGestionDesSignaleLieu"><h:commandLink id="parametreSignaLieu"
+                                                                   action="#{signalementLieuControleur.initialiserPage()}"
+                                                                   value="Gerer les lieux signalés " rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                       
                         </ul>
                     </div>
                 </div>
