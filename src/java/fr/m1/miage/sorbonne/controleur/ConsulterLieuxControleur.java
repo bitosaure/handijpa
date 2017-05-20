@@ -9,12 +9,14 @@ import fr.m1.miage.sorbonne.dao.CommentaireLieuDAO;
 import fr.m1.miage.sorbonne.dao.CritereDAO;
 import fr.m1.miage.sorbonne.dao.LieuDAO;
 import fr.m1.miage.sorbonne.dao.SignalementCommentaireDAO;
+import fr.m1.miage.sorbonne.dao.SignalementLieuDAO;
 import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
 import fr.m1.miage.sorbonne.entity.CritereEntity;
 import fr.m1.miage.sorbonne.entity.LieuEntity;
 import fr.m1.miage.sorbonne.entity.NoteUnLieuEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import fr.m1.miage.sorbonne.entity.SignalementCommentaireEntity;
+import fr.m1.miage.sorbonne.entity.SignalementLieuEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +37,20 @@ import javax.faces.el.ValueBinding;
 @ManagedBean
 @SessionScoped
 public class ConsulterLieuxControleur implements Serializable {
+
+    /**
+     * @return the signalementLieu
+     */
+    public SignalementLieuEntity getSignalementLieu() {
+        return signalementLieu;
+    }
+
+    /**
+     * @param signalementLieu the signalementLieu to set
+     */
+    public void setSignalementLieu(SignalementLieuEntity signalementLieu) {
+        this.signalementLieu = signalementLieu;
+    }
 
     /**
      * *
@@ -79,6 +95,11 @@ public class ConsulterLieuxControleur implements Serializable {
      * Liste des moyennes des critères sur le lieu consulté
      */
     private List<CritereEntity> listCriterLieuDetailMoyenne = new ArrayList<CritereEntity>();
+    
+    /**
+     * Signalement du lieu choisi qui peut être une suppression ou une modification
+     */
+    private SignalementLieuEntity signalementLieu = new SignalementLieuEntity();
 
     /**
      * *
@@ -112,10 +133,8 @@ public class ConsulterLieuxControleur implements Serializable {
     }
 
     public void ajouterCommentaire() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
-        PersonneEntity pers = (PersonneEntity) binding.getValue(context);
-        commentaire.setPersonne(pers);
+        
+        commentaire.setPersonne(recuperationPersonneConnectée());
 
         commentaire.setLieu(lieuDetail);
         commentaire.setDateCreation(new Date());
@@ -128,14 +147,17 @@ public class ConsulterLieuxControleur implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
 
     }
+    
+    private PersonneEntity recuperationPersonneConnectée(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
+        return (PersonneEntity) binding.getValue(context);
+    }
 
     public void signalerCommentaire(CommentaireLieuEntity comm) {
 
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
         SignalementCommentaireEntity signalement = new SignalementCommentaireEntity();
-        PersonneEntity pers = (PersonneEntity) binding.getValue(context);
+        PersonneEntity pers = recuperationPersonneConnectée();
         if (pers.getId() == null) {
             FacesMessage message = new FacesMessage("Pour signaler un commentaire, veuillez vous authentifier");
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -171,12 +193,19 @@ public class ConsulterLieuxControleur implements Serializable {
 
         // html = (HtmlInputText) ui.findComponent("consulterLieux:secret");
     }
+    
+    
+    public void signalerLieu(){
+        signalementLieu.setCreateur(recuperationPersonneConnectée());
+        
+        signalementLieu.setLieu(lieuDetail);
+        SignalementLieuDAO signalementDao = new SignalementLieuDAO();
+        signalementDao.create(signalementLieu);
+    }
 
     public void noterLieu() {
-        FacesContext context = FacesContext.getCurrentInstance();
-
-        ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.personne}");
-        PersonneEntity pers = (PersonneEntity) binding.getValue(context);
+        
+        PersonneEntity pers = recuperationPersonneConnectée();
 
         NoteUnLieuEntity note;
         for (CritereEntity criter : listCritere) {

@@ -6,14 +6,19 @@
 package fr.m1.miage.sorbonne.controleur;
 
 import fr.m1.miage.sorbonne.dao.CritereDAO;
+import fr.m1.miage.sorbonne.dao.LieuDAO;
+import fr.m1.miage.sorbonne.dao.NoteUnLieuDAO;
 import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
 import fr.m1.miage.sorbonne.entity.CritereEntity;
+import fr.m1.miage.sorbonne.entity.LieuEntity;
+import fr.m1.miage.sorbonne.entity.NoteUnLieuEntity;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
@@ -72,6 +77,24 @@ public class ParametrerNotationControleur implements Serializable{
     }
     
     public String supprimer(CritereEntity cri){
+        NoteUnLieuDAO notelieuDAO = new NoteUnLieuDAO();
+        List<NoteUnLieuEntity> listeNote =notelieuDAO.rechercherNoteParCritere(cri);
+        System.out.println("taille note " + listeNote.size());
+        LieuDAO lieuDao = new LieuDAO();
+        for(NoteUnLieuEntity note: listeNote){
+            lieuDao = new LieuDAO();
+            List<LieuEntity> listeLieu = lieuDao.rechercherLieuNoteParCritere(note);
+            for (LieuEntity lieu: listeLieu) {
+                lieu.getNotes().remove(note);
+                
+                lieuDao.update(lieu);
+                
+            }
+            notelieuDAO = new NoteUnLieuDAO();
+            notelieuDAO.delete(note);
+        }
+        
+        
         critereDao=new CritereDAO();
         critereDao.delete(cri);
         listCriteres.remove(cri);

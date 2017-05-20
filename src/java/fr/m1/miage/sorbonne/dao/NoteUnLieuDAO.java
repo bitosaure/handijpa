@@ -6,11 +6,19 @@
 package fr.m1.miage.sorbonne.dao;
 
 import fr.m1.miage.sorbonne.entity.CategorieEntity;
+import fr.m1.miage.sorbonne.entity.CommentaireLieuEntity;
+import fr.m1.miage.sorbonne.entity.CritereEntity;
+import fr.m1.miage.sorbonne.entity.LieuEntity;
 import fr.m1.miage.sorbonne.entity.NoteUnLieuEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -44,16 +52,37 @@ public class NoteUnLieuDAO implements DAO<NoteUnLieuEntity>{
         em.getTransaction().begin();
          em.merge(obj);
         em.getTransaction().commit();
-        em.close();    }
+        em.close();   
+    }
         @Override
     public void delete(NoteUnLieuEntity obj) {
+        obj=this.findById(obj.getId());
         em.getTransaction().begin();
+        em.merge(obj);
         em.remove(obj);
         em.getTransaction().commit();
         em.close();    }
 
     
-    public NoteUnLieuEntity findById(String id) {
+    public NoteUnLieuEntity findById(Long id) {
         return em.find(NoteUnLieuEntity.class, id);
+    }
+     public List<NoteUnLieuEntity> rechercherNoteParCritere(CritereEntity critere) {
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<NoteUnLieuEntity> query = cb
+                .createQuery(NoteUnLieuEntity.class);
+        // construction de la requete dynamique
+        Root<NoteUnLieuEntity> root = query.from(NoteUnLieuEntity.class);
+        List<Predicate> predicateList = new ArrayList<Predicate>();
+
+        predicateList.add(cb.equal(root.<String>get("critere"),
+                critere));
+
+        Predicate[] predicates = new Predicate[predicateList.size()];
+        predicateList.toArray(predicates);
+        query.where(predicates);
+        // exécution de la requete
+        return em.createQuery(query).getResultList();
     }
 }

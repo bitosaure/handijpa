@@ -6,7 +6,9 @@
 package fr.m1.miage.sorbonne.dao;
 
 import fr.m1.miage.sorbonne.entity.CategorieEntity;
+import fr.m1.miage.sorbonne.entity.CritereEntity;
 import fr.m1.miage.sorbonne.entity.LieuEntity;
+import fr.m1.miage.sorbonne.entity.NoteUnLieuEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,25 @@ public class LieuDAO implements DAO<LieuEntity> {
 
         predicateList.add(cb.equal(root.<String>get("estValide"),
                 false));
+
+        Predicate[] predicates = new Predicate[predicateList.size()];
+        predicateList.toArray(predicates);
+        query.where(predicates);
+        // exécution de la requete
+        return em.createQuery(query).getResultList();
+    }
+    
+     public List<LieuEntity> rechercherLieuNoteParCritere(NoteUnLieuEntity note) {
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<LieuEntity> query = cb
+                .createQuery(LieuEntity.class);
+        // construction de la requete dynamique
+        Root<LieuEntity> root = query.from(LieuEntity.class);
+        List<Predicate> predicateList = new ArrayList<Predicate>();
+
+        predicateList.add(cb.equal(root.<String>get("notes"),
+                note));
 
         Predicate[] predicates = new Predicate[predicateList.size()];
         predicateList.toArray(predicates);

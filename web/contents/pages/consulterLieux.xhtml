@@ -61,19 +61,19 @@
                                         <br />
                                         <h:outputLabel >Liste des moyennes</h:outputLabel>
                                         <ui:repeat var="com" value="#{consulterLieuxControleur.listCriterLieuDetailMoyenne}">
-                                    <div class="row">
-                                        <h:outputText value="#{com.libelle}"/>: 
-                                    <!--<h:outputText value="#{com.nbEtoiles}"/>-->
-                                   <h:panelGroup id="noteCi" rendered="#{com.nbPersonnes!=0}">
-                                           <h:outputLabel  value="#{com.nbEtoiles}"/>/5
-                                   </h:panelGroup>
-                                           <h:panelGroup id="noteNonCi" rendered="#{com.nbPersonnes==0}">
-                                           <h:outputLabel  value="Aucune personne n'a donnée de note pour ce critère"/>
+                                            <div class="row">
+                                                <h:outputText value="#{com.libelle}"/>: 
+                                            <!--<h:outputText value="#{com.nbEtoiles}"/>-->
+                                                <h:panelGroup id="noteCi" rendered="#{com.nbPersonnes!=0}">
+                                                    <h:outputLabel  value="#{com.nbEtoiles}"/>/5
+                                                </h:panelGroup>
+                                                <h:panelGroup id="noteNonCi" rendered="#{com.nbPersonnes==0}">
+                                                    <h:outputLabel  value="Aucune personne n'a donnée de note pour ce critère"/>
 
-                                           </h:panelGroup>
-                                    </div>
-                                </ui:repeat>
-                                        
+                                                </h:panelGroup>
+                                            </div>
+                                        </ui:repeat>
+
                                         <br />
 
                                         <h:panelGroup id="ajouterComm" rendered="#{authentificationControleur.personne.typePersonne!=null}">
@@ -109,6 +109,19 @@
                                         </h:panelGroup>
 
 
+                                        <h:panelGroup id="ajouterSignal" rendered="#{authentificationControleur.personne.typePersonne!=null}">
+
+
+                                            <a href="#" onclick="$('#myModal4').modal()">Signaler Lieu</a>
+                                        </h:panelGroup>
+                                        <br />
+                                        <h:panelGroup id="ajouterSignalAuthen" rendered="#{authentificationControleur.personne.typePersonne==null}">
+
+                                            <h:commandLink id="signalLieuAuth" style="color: black; "
+
+
+                                                           value="Pour signaler un lieu, veuillez vous authentifier" action="#{authentificationControleur.initialiserPage()}"/>
+                                        </h:panelGroup>
 
                                         <br />
                                         <a href="#" onclick="$('#myModal2').modal()">Voir les commentaires</a>
@@ -338,7 +351,7 @@
                                     <div class="row">
                                         <h:outputText value="#{com.libelle}"/>
                                     <!--<h:outputText value="#{com.nbEtoiles}"/>-->
-                                  
+
 
                                         <p:rating value="#{com.nbEtoiles}"></p:rating>
                                     </div>
@@ -348,6 +361,51 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
                                 <h:commandButton class="btn btn-default" value="valider" action="#{consulterLieuxControleur.noterLieu()}"/>
+
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </h:form>
+            </div><!-- /.modal -->
+
+
+            <div id="myModal4" class="modal fade" tabindex="-1" role="dialog">
+                <h:form id="modalSignalementLieu">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h5 class="modal-title">Signaler le lieu</h5>
+                            </div>
+                            <div class="modal-body">
+
+
+
+                                <div class="row">
+                                    <h:outputLabel value="Commentaire lié au signalement"/>
+                                <!--<h:outputText value="#{com.nbEtoiles}"/>-->
+                                      <h:inputText styleClass="form-control" id="nom"
+                                                     value="#{consulterLieuxControleur.signalementLieu.commentaire}">
+                                        </h:inputText>
+
+
+
+                                </div>
+                                <div class="row">
+                                    <h:outputLabel value="type du signalement"/>
+                                    <h:selectOneMenu   id="type" styleClass="form-control" value = "#{consulterLieuxControleur.signalementLieu.type}"> 
+                                        <f:selectItem itemValue = "Modification" itemLabel = "Modification" /> 
+                                        <f:selectItem itemValue = "Suppression" itemLabel = "Suppression" /> 
+                                    </h:selectOneMenu> 
+
+
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                                <h:commandButton class="btn btn-default" value="valider" action="#{consulterLieuxControleur.signalerLieu()}"/>
 
                             </div>
                         </div><!-- /.modal-content -->
