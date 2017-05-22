@@ -69,6 +69,7 @@
                                                 </h:panelGroup>
                                                 <h:panelGroup id="noteNonCi" rendered="#{com.nbPersonnes==0}">
                                                     <h:outputLabel  value="Aucune personne n'a donnée de note pour ce critère"/>
+                                                    
 
                                                 </h:panelGroup>
                                             </div>
@@ -391,7 +392,6 @@
 
                                 <div class="row">
                                     <h:outputLabel value="Commentaire lié au signalement"/>
-                                <!--<h:outputText value="#{com.nbEtoiles}"/>-->
                                     <h:inputText styleClass="form-control" id="nom"
                                                  value="#{consulterLieuxControleur.signalementLieu.commentaire}">
                                     </h:inputText>
@@ -399,15 +399,7 @@
 
 
                                 </div>
-                                <div class="row">
-                                    <h:outputLabel value="type du signalement"/>
-                                    <h:selectOneMenu   id="type" styleClass="form-control" value = "#{consulterLieuxControleur.signalementLieu.type}"> 
-                                        <f:selectItem itemValue = "Modification" itemLabel = "Modification" /> 
-                                        <f:selectItem itemValue = "Suppression" itemLabel = "Suppression" /> 
-                                    </h:selectOneMenu> 
-
-
-                                </div>
+                           
 
 
                             </div>

@@ -3,9 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr"
-
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:f="http://java.sun.com/jsf/core" xml:lang="fr" lang="fr">
     <h:head>
         <title>Gerer les signalements de lieu</title>
     </h:head>
@@ -13,7 +11,7 @@
         <ui:define name="body">
 
             <h:messages globalOnly="true" infoClass="info" />
-
+            
             <h:form id="gererSignalementLieu" rendered="#{signalementLieuControleur.listSignalementLieu.size()!=0}">
                 <h:dataTable id="tableau" var="var"  class="display"
                              value="#{signalementLieuControleur.listSignalementLieu}"
@@ -56,38 +54,12 @@
 
 
                     </h:column>
-                    
-                      <h:column id="colType">
-                        <f:facet name="header">
-                            <h:outputText styleClass="outputText" value="type"
-                                          id="labType">
 
-                            </h:outputText>
-                        </f:facet>
-                        <h:outputText styleClass="outputText" value="#{var.type}"
-                                      id="type" />
+                  
 
 
-
-                    </h:column>
-
-
-                    <h:column id="colmofifier">
-                        <f:facet name="header">
-                            <h:outputText styleClass="outputText" value="Modifier"
-                                          id="modifierLieu">
-
-                            </h:outputText>
-                        </f:facet>
-
-
-
-                        <h:commandLink styleClass="commandLink" value="ModifierLieu" immediate="true"
-                                       action="#{signalementLieuControleur.afficherModifierLieu(var)}">
-
-                        </h:commandLink>
-                    </h:column>
-                <h:column id="colSupp">
+                  
+                    <h:column id="colSupp">
                         <f:facet name="header">
                             <h:outputText styleClass="outputText" value="supprimer"
                                           id="suppComm">
@@ -113,7 +85,7 @@
                                         $('.tableau')
                                                 .dataTable({
                                                     "language": {
-                                                        "url": "French.json"
+                                                        "url": "../../French.json"
                                                     }
                                                 }
 

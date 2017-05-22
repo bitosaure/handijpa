@@ -126,6 +126,8 @@ public class ConsulterLieuxControleur implements Serializable {
         commentaire.setPersonne(pers);
         //FacesContext context = FacesContext.getCurrentInstance();
         commentaireDAO = new CommentaireLieuDAO();
+        lieuDao = new LieuDAO();
+        lieux = lieuDao.findValider();
         this.lieuDetail = null;
         //ValueBinding binding = context.getApplication().createValueBinding("#{authentificationControleur.isAuthenti}");
         return "SUCCESS";
@@ -135,7 +137,7 @@ public class ConsulterLieuxControleur implements Serializable {
     public void ajouterCommentaire() {
         
         commentaire.setPersonne(recuperationPersonneConnectée());
-
+            commentaireDAO= new CommentaireLieuDAO();
         commentaire.setLieu(lieuDetail);
         commentaire.setDateCreation(new Date());
         commentaireDAO.create(commentaire);

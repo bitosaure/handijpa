@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
@@ -44,58 +45,78 @@ public class SignalementLieuControleur implements Serializable {
      */
     private LieuDAO lieuDao;
 
+
+
+    /**
+     * *
+     * Signalement du lieu que l'on souhaite modifier
+     */
+    private SignalementLieuEntity signalementLieu;
+
     /**
      * *
      * Méthode appelée lors du chargement de la page
      */
     public String initialiserPage() {
         lieuDao = new LieuDAO();
-        signalementLieuDao = new SignalementLieuDAO();
-        setListSignalementLieu(signalementLieuDao.findAll());
+        setSignalementLieuDao(new SignalementLieuDAO());
+        setListSignalementLieu(getSignalementLieuDao().findAll());
         return "SUCCESS";
-        
+
     }
-    public SignalementLieuControleur(){
+
+    public SignalementLieuControleur() {
         lieuDao = new LieuDAO();
         signalementLieuDao = new SignalementLieuDAO();
-        setListSignalementLieu(signalementLieuDao.findAll());
+        listSignalementLieu = signalementLieuDao.findAll();
     }
 
     /**
-     * mMéthode permettant de supprimer le lieu, les commentaires, notes, signalements associés à ce lieucd
+     * mMéthode permettant de supprimer le lieu, les commentaires, notes,
+     * signalements associés à ce lieucd
+     *
+     * @param sign
      */
     public void supprimerLieu(SignalementLieuEntity sign) {
         System.out.println("je passe");
-        LieuEntity lieu =sign.getLieu();
+        LieuEntity lieu = sign.getLieu();
 
         List<NoteUnLieuEntity> listeNotes = lieu.getNotes();
-        lieu.setNotes(new ArrayList<NoteUnLieuEntity>());
-        
+        lieu.setNotes(new ArrayList<>());
+
         lieuDao.update(lieu);
-        
-        NoteUnLieuDAO notelieuDAO ;
+
+        NoteUnLieuDAO notelieuDAO;
         for (NoteUnLieuEntity note : listeNotes) {
             notelieuDAO = new NoteUnLieuDAO();
             notelieuDAO.delete(note);
         }
-        SignalementCommentaireDAO signCommentDAO = new SignalementCommentaireDAO();
-        
-        CommentaireLieuDAO commDao= new CommentaireLieuDAO();
-        List<CommentaireLieuEntity> listCommDuLieu =commDao.rechercherCommentaireLieu(lieu);
-        for(CommentaireLieuEntity com:listCommDuLieu){
-            List<SignalementCommentaireEntity> listCSignalement =signCommentDAO.rechercherSiganlementCommentaire(com);
-            
+        SignalementCommentaireDAO signCommentDAO;
+
+        CommentaireLieuDAO commDao = new CommentaireLieuDAO();
+        List<CommentaireLieuEntity> listCommDuLieu = commDao.rechercherCommentaireLieu(lieu);
+        for (CommentaireLieuEntity com : listCommDuLieu) {
+            signCommentDAO = new SignalementCommentaireDAO();
+            List<SignalementCommentaireEntity> listCSignalement = signCommentDAO.rechercherSiganlementCommentaire(com);
+            for (SignalementCommentaireEntity signalemComm : listCSignalement) {
+                signCommentDAO = new SignalementCommentaireDAO();
+                signCommentDAO.delete(signalemComm);
+            }
+            commDao = new CommentaireLieuDAO();
+            commDao.delete(com);
+        }
+        List<SignalementLieuEntity> listSignLieu = getSignalementLieuDao().rechercherSiganlementLieu(lieu);
+        for (SignalementLieuEntity signEntity : listSignLieu) {
+            setSignalementLieuDao(new SignalementLieuDAO());
+            getSignalementLieuDao().delete(signEntity);
 
         }
-                
-        signalementLieuDao.delete(sign);
+        setSignalementLieuDao(new SignalementLieuDAO());
+
+        listSignalementLieu = getSignalementLieuDao().findAll();
         lieuDao = new LieuDAO();
         lieuDao.delete(lieu);
-        
-    }
-    
-    public void afficherModifierLieu(SignalementLieuEntity sign) {
-        
+
     }
 
     /**
@@ -111,5 +132,35 @@ public class SignalementLieuControleur implements Serializable {
     public void setListSignalementLieu(List<SignalementLieuEntity> listSignalementLieu) {
         this.listSignalementLieu = listSignalementLieu;
     }
-    
+
+    /**
+     * @return the signalementLieuDao
+     */
+    public SignalementLieuDAO getSignalementLieuDao() {
+        return signalementLieuDao;
+    }
+
+    /**
+     * @param signalementLieuDao the signalementLieuDao to set
+     */
+    public void setSignalementLieuDao(SignalementLieuDAO signalementLieuDao) {
+        this.signalementLieuDao = signalementLieuDao;
+    }
+
+    /**
+     * @return the signalementLieu
+     */
+    public SignalementLieuEntity getSignalementLieu() {
+        return signalementLieu;
+    }
+
+    /**
+     * @param signalementLieu the signalementLieu to set
+     */
+    public void setSignalementLieu(SignalementLieuEntity signalementLieu) {
+        this.signalementLieu = signalementLieu;
+    }
+
+   
+
 }

@@ -108,11 +108,11 @@ public class AjouterLieuControleur implements Serializable {
                     Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
                 } catch (Exception e) {
                 }
+                lieu.setImage(file.getFileName().toString());
 
             } catch (IOException ex) {
                 Logger.getLogger(AjouterLieuControleur.class.getName()).log(Level.SEVERE, null, ex);
             }
-            lieu.setImage(file.getFileName().toString());
 
         } else {
             lieu.setImage("Pas d'image pour ce lieu !");
