@@ -53,7 +53,6 @@ public class AvisDAO implements DAO<AvisEntity>{
         em.getTransaction().commit();
         em.close();    }
 
-    @Override
     public AvisEntity findById(String id) {
         return em.find(AvisEntity.class, id);
     }

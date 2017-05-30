@@ -7,18 +7,12 @@ package fr.m1.miage.sorbonne.controleur;
 
 import fr.m1.miage.sorbonne.dao.CategorieDAO;
 import fr.m1.miage.sorbonne.dao.LieuDAO;
-import fr.m1.miage.sorbonne.dao.PersonneDAO;
 import fr.m1.miage.sorbonne.entity.CategorieEntity;
 import fr.m1.miage.sorbonne.entity.LieuEntity;
 import fr.m1.miage.sorbonne.entity.PersonneEntity;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,12 +25,8 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIViewRoot;
-import javax.faces.component.html.*;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
-import static javax.security.auth.message.AuthStatus.SUCCESS;
 import javax.servlet.http.Part;
 
 /**
@@ -47,16 +37,35 @@ import javax.servlet.http.Part;
 @RequestScoped
 public class AjouterLieuControleur implements Serializable {
 
+    /**
+     * Lieu que l'on souhaite ajouter
+     */
     private LieuEntity lieu = new LieuEntity();
 
+    /**
+     * *
+     * Liste des catégories présentes dans la base de données
+     */
     private List<CategorieEntity> listeCategorie = new ArrayList<>();
 
+    /**
+     * code de la catégorie correspond au lieu
+     */
     private String categ = "";
-
+    /**
+     * dao permettant de modifier la table Categorie de la base de données
+     */
     private CategorieDAO categDao;
 
+    /**
+     * dao permettant de modifier la table lieu de la base de données
+     */
     private LieuDAO lieuDao;
 
+    /**
+     * *
+     * Imgae que l'on souhaite ajouter au lieu
+     */
     private Part fichier;
 
     // Initialisation de l'entité utilisateur
@@ -67,6 +76,13 @@ public class AjouterLieuControleur implements Serializable {
 
     }
 
+    /**
+     * *
+     * Méthode appelée lorsque l'on souhaite consulter la page ajoutLieu.xhtml
+     *
+     * @return String permettant de savoir si les données nécessaires à la page
+     * ont bien été initialisé
+     */
     public String initialiserPage() {
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -80,7 +96,10 @@ public class AjouterLieuControleur implements Serializable {
         return "ERROR";
 
     }
-
+    /**
+     * mMéthode permettant d'ajouter le lieu saisie par l'utilisateur
+     * @return String permettant de savoir si l'ajout a été réalisé ou pas
+     */
     public String ajouter() {
         lieuDao = new LieuDAO();
         lieu.setCategorie(categDao.findById(categ));
@@ -123,51 +142,64 @@ public class AjouterLieuControleur implements Serializable {
     }
 
     /**
-     * @return the lieu
+     * retrourne le lieu qui doit être créé
+     * @return the lieu que l'utilisateur souhaite créer
      */
     public LieuEntity getLieu() {
         return lieu;
     }
 
     /**
-     * @param lieu the lieu to set
+     * set le lieu avec le lieu passé en paramètre
+     * @param lieu the lieu to set le lieu
      */
     public void setLieu(LieuEntity lieu) {
         this.lieu = lieu;
     }
 
     /**
-     * @return the listeCategorie
+     * retourne les catégories présents dans la base de données
+     * @return the listeCategorie de tyoe List<CategorieEntity>
      */
     public List<CategorieEntity> getListeCategorie() {
         return listeCategorie;
     }
 
     /**
-     * @param listeCategorie the listeCategorie to set
+     * set la liste des catégories présents dans la base de données
+     * @param listeCategorie the listeCategorie to set 
      */
     public void setListeCategorie(List<CategorieEntity> listeCategorie) {
         this.listeCategorie = listeCategorie;
     }
 
     /**
-     * @return the categ
+     * retourne le code de la catégorie du lieu choisi par l'utilisateur
+     * @return the categ de type String
      */
     public String getCateg() {
         return categ;
     }
 
     /**
-     * @param categ the categ to set
+     * modifie le code de la catégorie du lieu choisi par l'utilisateur
+     * @param categ the categ to set de type String
      */
     public void setCateg(String categ) {
         this.categ = categ;
     }
 
+    /**
+     * retourne l'image associé au lieu créé par l'utilisateur
+     * @return the file associé au lieu de type Part
+     **/
     public Part getFichier() {
         return fichier;
     }
-
+    /***
+     * MODIFIE l'image associé au lieu créé par l'utilisateur
+     * @param fichier to set fichier de type Part
+     */
     public void setFichier(Part fichier) {
         this.fichier = fichier;
     }

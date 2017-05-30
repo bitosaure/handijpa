@@ -11,10 +11,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.el.ValueBinding;
 
 /**
  *
@@ -25,10 +23,19 @@ import javax.faces.el.ValueBinding;
 @SessionScoped
 public class AuthentificationControleur implements Serializable {
 
+    /**
+     * Personne qui souhaite s'authentifier
+     */
     private PersonneEntity personne = new PersonneEntity();
 
+    /**
+     * DAO permettant de modifier les données de la table personne
+     */
     private PersonneDAO personneDao;
 
+    /**
+     * boolean permettant de savoir si la personne est authentifié
+     */
     private boolean isAuthenti = false;
 
     // Initialisation de l'entité utilisateur
@@ -37,10 +44,20 @@ public class AuthentificationControleur implements Serializable {
         personne = new PersonneEntity();
     }
 
+    /**
+     * Méthode appelée lorsque l'utilisateur souhaite accèder à la page
+     * authentification.xhtml pour s'authentifier
+     *
+     * @return String permettant de savoir si la méthode a générer des erreurs
+     */
     public String initialiserPage() {
         return "SUCCESS";
     }
 
+    /**
+     * Méthode permettant de se déconnecter
+     * @return String permettant de savoir si l'utilisateur s'est bien deconnecté
+     */
     public String seDeconnecter() {
         isAuthenti = false;
 
@@ -48,8 +65,15 @@ public class AuthentificationControleur implements Serializable {
         return "SUCCESS";
     }
 
-    // Méthode d'action appelée lors du clic sur le bouton du formulaire
-    // d'atuehtnification
+   
+    
+    /**
+     * Méthode d'action appelée lors du clic sur le bouton du formulaire
+    * d'atuehtnification
+     * @return String permettant de savoir si la personne a bien été authentifier
+     * success si le login + mot de passe de la personne a été trouvé
+     * sinon error
+     */
     public String authentification() {
         personneDao = new PersonneDAO();
         List<PersonneEntity> listPers = personneDao.rechercherPersonnesAvecLoginAnMdp(personne.getLogin(), personne.getMdp());
@@ -60,7 +84,7 @@ public class AuthentificationControleur implements Serializable {
             return "ERROR";
         } else {
             personne = listPers.get(0);
-            System.out.println("type pers" +personne.getTypePersonne());
+            System.out.println("type pers" + personne.getTypePersonne());
             FacesMessage message = new FacesMessage("succès de l'authentification!");
             FacesContext.getCurrentInstance().addMessage(null, message);
             isAuthenti = true;
@@ -70,19 +94,25 @@ public class AuthentificationControleur implements Serializable {
 
     }
 
+    /**
+     * retounre la personne souhaitant s'authentifier
+     * @return la personne qui souhaite s'authentifier de type PersonneEntity
+     */
     public PersonneEntity getPersonne() {
         return personne;
     }
 
     /**
-     * @return the isAuthenti
+     * retourne un boolean permettant de savoir si la personne est authentifié
+     * @return the isAuthenti de tyoe boolean
      */
     public boolean isIsAuthenti() {
         return isAuthenti;
     }
 
     /**
-     * @param isAuthenti the isAuthenti to set
+     * set the  boolean permettant de savoir si la personne est authentifié
+     * @param isAuthenti the isAuthenti to set s
      */
     public void setIsAuthenti(boolean isAuthenti) {
         this.isAuthenti = isAuthenti;

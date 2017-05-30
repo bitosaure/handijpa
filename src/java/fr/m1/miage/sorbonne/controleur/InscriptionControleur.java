@@ -20,16 +20,27 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 public class InscriptionControleur implements Serializable{
+    /**
+     * personne souhaitant s'inscrire
+     */
      private PersonneEntity personne = new PersonneEntity();
 
-    
+    /**
+     * DAO permettant de modifier les données présentes dans la table personnes
+     */
     private PersonneDAO   personneDao;
 
     // Initialisation de l'entité utilisateur
+    /**
+     * CONSTRUCTEUR permettant d'inialiser la personne
+     */
     public InscriptionControleur() {
         personne = new PersonneEntity();
     }
-
+    /**
+     * Mathode appelée lorsque l'utilisateur souhaite consulter la page inscription.xhtml
+     * @return String permettant de savoir si toutes les données nécessaores ont été initialisé
+     */
     public String initialiserPage(){
         personne = new PersonneEntity();
         return "SUCCESS";
@@ -55,6 +66,10 @@ public class InscriptionControleur implements Serializable{
        
     }
 
+    /**
+     * Retourne la personne qui doit être créé
+     * @return PersonneEntity
+     */
     public PersonneEntity getPersonne() {
         return personne;
     }

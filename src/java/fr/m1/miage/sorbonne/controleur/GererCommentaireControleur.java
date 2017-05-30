@@ -25,10 +25,21 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class GererCommentaireControleur implements Serializable {
 
-    
+    /**
+     * DAO permettant de modifier les données de la table signalementCommentaire
+     */
     private SignalementCommentaireDAO signalementDao;
-    private List<SignalementCommentaireEntity> listCommentaireSiganles = new ArrayList<SignalementCommentaireEntity>();
+   
+    /***
+     * Liste des signalements des commentaires
+     */
+    private List<SignalementCommentaireEntity> listCommentaireSiganles;
 
+    
+    /***
+     * Methode appelée lorsque l'on souhaite consulter la page gererCommentaire.xhtml
+     * @return String permettant de savoir si les données ont bien été intitialisées
+     */
     public String initialiserPage() {
         signalementDao= new SignalementCommentaireDAO();
         listCommentaireSiganles= signalementDao.findAll();
@@ -39,7 +50,11 @@ public class GererCommentaireControleur implements Serializable {
         return "SUCCESS";
     }
     
-    
+    /***
+     * méthode permettant de supprimer un commentaire passé en paramètre
+     * @param sign de type SignalementCommentaireEntity
+     * @return String permettant de savoir si le commentaire a bien été supprimé
+     */
      public String supprimerCommentaire(SignalementCommentaireEntity sign) {
          SignalementCommentaireDAO signalementCommeDAO = new SignalementCommentaireDAO();
          
@@ -53,6 +68,12 @@ public class GererCommentaireControleur implements Serializable {
         return "SUCCESS";
     }
      
+     
+     /**
+      * Methode permettant de valider un commentaire passé en paramètre
+      * @param sign
+      * @return 
+      */
      public String validerCommentaire(SignalementCommentaireEntity sign) {
          SignalementCommentaireDAO signalementCommeDAO = new SignalementCommentaireDAO();
          signalementCommeDAO.delete(sign);
@@ -63,6 +84,7 @@ public class GererCommentaireControleur implements Serializable {
     }
 
     /**
+     * retourne la liste des commentaires signalés
      * @return the listCommentaireSiganles
      */
     public List<SignalementCommentaireEntity> getListCommentaireSiganles() {
@@ -70,6 +92,7 @@ public class GererCommentaireControleur implements Serializable {
     }
 
     /**
+     * set liste des commentaires signalés
      * @param listCommentaireSiganles the listCommentaireSiganles to set
      */
     public void setListCommentaireSiganles(List<SignalementCommentaireEntity> listCommentaireSiganles) {

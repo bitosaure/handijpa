@@ -21,20 +21,38 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class AjouterDesAdministrateurControleur implements Serializable{
     
+    /***
+     * Listes des personnes qui ne sont pas administrateurs
+     */
     private List<PersonneEntity> listesPersonnes = new ArrayList<>();
     
+    /**
+     * DAO permettant de gérer les données de la table Personne
+     */
     private PersonneDAO persDao;
+    /**
+     * Constructeur ne prenant aucun paramètre
+     * initaliser persDao
+     * appel de la dao pour pousser les personnes non administrateurs dans la liste persDao
+     */
     public AjouterDesAdministrateurControleur(){
         persDao=new PersonneDAO();
         listesPersonnes = persDao.rechercherPersonnesNonAdmin();
     }
-    
+    /***
+     * méthode appelée lorsque l'on souhaite consulter la page ajouterAdmin.xhtml
+     * @return String
+     */
     public String initialiserPage() {
         
         return "SUCCESS";
 
     }
-    
+    /***
+     * Méthode permettant de donner le statut admin à la personne passée en paramètre
+     * @param pers de type PersonneEntity
+     * @return String
+     */
     public String ajouterAdmin(PersonneEntity pers){
         
         pers.setTypePersonne("admin");
@@ -45,14 +63,16 @@ public class AjouterDesAdministrateurControleur implements Serializable{
     }
 
     /**
-     * @return the listesPersonnes
+     * retourne la liste des personnes administrateurs
+     * @return the listesPersonnes de type List<PersonneEntity>
      */
     public List<PersonneEntity> getListesPersonnes() {
         return listesPersonnes;
     }
 
     /**
-     * @param listesPersonnes the listesPersonnes to set
+     * set la liste des personnes administrateurs
+     * @param listesPersonnes de type List<PersonneEntity>
      */
     public void setListesPersonnes(List<PersonneEntity> listesPersonnes) {
         this.listesPersonnes = listesPersonnes;
