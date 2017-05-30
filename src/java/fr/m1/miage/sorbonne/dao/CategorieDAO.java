@@ -16,47 +16,74 @@ import javax.persistence.Persistence;
  * @author emiliepisu
  */
 public class CategorieDAO implements DAO<CategorieEntity> {
-    
+
+    /**
+     * *
+     * entityManager permettant d'accéder à la base de données
+     */
     private EntityManager em;
 
+    /**
+     * Constructeur permettant d'initaliser l'entité manager
+     */
     public CategorieDAO() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("handijpaPU");
         em = emf.createEntityManager();
     }
-
-   
+    /***
+     * Recupère tous les CategorieEntity présents dans la base de données 
+     * @return  List<CategorieEntity>
+     */
     @Override
     public List findAll() {
         List<CategorieEntity> listCategorie = em.createQuery("Select c FROM CategorieEntity  c").getResultList();
         return listCategorie;
     }
-
+    /***
+     *  Méthode permettant de créer une catégorie dans la table catégorie de la base de données
+     * @param obj de type CategorieEntity
+     */
     @Override
     public void create(CategorieEntity obj) {
         em.getTransaction().begin();
         em.persist(obj);
         em.getTransaction().commit();
-        em.close();    }
-
+        em.close();
+    }
+    /**
+     * modifie le CategorieEntity présent dans la base de données
+     * @param obj de type CategorieEntity
+     */
     @Override
     public void update(CategorieEntity obj) {
         em.getTransaction().begin();
-         em.merge(obj);
+        em.merge(obj);
         em.getTransaction().commit();
-        em.close();    }
+        em.close();
+    }
+    /**
+     * Méthode permettant de supprimer le CategorieEntity passé en paramère
+     * @param obj de type CategorieEntity
+     */
     @Override
     public void delete(CategorieEntity obj) {
         em.getTransaction().begin();
-         obj = em.merge(obj);
+        obj = em.merge(obj);
 
         em.remove(obj);
         em.getTransaction().commit();
-        em.close();    }
-
-    
+        em.close();
+    }
+    /**
+     * Méthode permettant de récuperer l'entité CategorieEntity présent dans la base
+     * de données qui correspond à l'identifiant passé en parametre
+     *
+     * @param id de type String
+     * @return CategorieEntity
+     */
     public CategorieEntity findById(String id) {
-        
-        System.out.println("lib" +em.find(CategorieEntity.class, id).getLibelle());
+
+        System.out.println("lib" + em.find(CategorieEntity.class, id).getLibelle());
         return em.find(CategorieEntity.class, id);
     }
 }
