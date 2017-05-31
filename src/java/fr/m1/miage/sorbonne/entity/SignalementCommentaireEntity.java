@@ -62,7 +62,10 @@ public class SignalementCommentaireEntity implements Serializable {
         }
         return true;
     }
-
+    /**
+     * Retourne une chaine de caractère 
+     * @return String
+     */
     @Override
     public String toString() {
         return "fr.m1.miage.sorbonne.entity.SignalementCommentaireEntity[ id=" + id + " ]";

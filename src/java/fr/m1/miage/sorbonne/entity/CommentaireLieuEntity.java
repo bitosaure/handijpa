@@ -7,9 +7,6 @@ package fr.m1.miage.sorbonne.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

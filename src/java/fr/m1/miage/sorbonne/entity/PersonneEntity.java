@@ -80,7 +80,10 @@ public class PersonneEntity implements Serializable {
         }
         return true;
     }
-
+    /**
+     * Retourne une chaine de caractère 
+     * @return String
+     */
     @Override
     public String toString() {
         return "fr.sorbonne.m1.entity.PersonneEntity[ id=" + getId() + " ]";

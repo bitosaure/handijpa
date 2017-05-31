@@ -9,10 +9,7 @@ package fr.m1.miage.sorbonne.entity;
 import java.io.Serializable;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -25,24 +22,40 @@ import javax.persistence.Table;
 @Table(name="CATEGORIE")
 @Access(AccessType.FIELD)
 public class CategorieEntity implements Serializable {
-
+    /***
+     * SerialVersion
+     */
     private static long serialVersionUID = 1L;
+    /***
+     * code de la catégorie, est une clef primaire 
+     */
     @Id
     @JoinColumn(name = "code")
     private String code;
-
+    /**
+     * LIBELLE DE la catégorie
+     */
     @JoinColumn(name="libelle")
     private String libelle;
     
     
-
+    /**
+     * méthode hashCode
+     *
+     * @return INT
+     */
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (getCode() != null ? getCode().hashCode() : 0);
         return hash;
     }
-
+    /**
+     * méthode permettant de savoir si l'objet passé en paramètre est = à this
+     *
+     * @param object
+     * @return boolean
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -55,7 +68,10 @@ public class CategorieEntity implements Serializable {
         }
         return true;
     }
-
+    /**
+     * Retourne une chaine de caractère 
+     * @return String
+     */
     @Override
     public String toString() {
         return this.libelle;

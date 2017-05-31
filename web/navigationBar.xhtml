@@ -34,30 +34,43 @@
 
 
 
-                            <li id="divCreationLieu"><h:commandLink id="creerLieu"
+                            <li id="divCreationLieu">
+                                
+                                <h:commandLink id="creerLieu"
                                                                     action="#{ajouterLieuControleur.initialiserPage()}"
                                                                     value="Créer lieu" /></li>
+                     
+                            <li  id="divAdmin"><span style="line-height:50px">       
+                                                            <h:panelGroup id="panel" rendered="#{authentificationControleur.personne.typePersonne=='admin'}">
 
+                                <a href="#" 
+                                                                  data-toggle="dropdown" role="button"
+                                                                  aria-haspopup="true" aria-expanded="false"  > Admin <span
+                                        class="caret"></span></a>
+                                <ul class="dropdown-menu">
 
-                            <li id="divValiderLieu"><h:commandLink id="validerLieu"
-                                                                   action="#{validerLieuControleur.initialiserPage()}"
-                                                                   value="Valider lieu" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                                    <li id="divValiderLieu"><h:commandLink id="validerLieu"
+                                                                           action="#{validerLieuControleur.initialiserPage()}"
+                                                                           value="Valider lieu" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
 
-                            <li id="divAjouterAdmin"><h:commandLink id="ajouterAdmin"
-                                                                   action="#{ajouterDesAdministrateurControleur.initialiserPage()}"
-                                                                   value="Ajouter admin" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
-                     <li id="divParamNotation"><h:commandLink id="parametrerNotation"
-                                                                   action="#{parametrerNotationControleur.initialiserPage()}"
-                                                                   value="Parametrer notation" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
-                        
-                           <li id="divGestionDesSignaleComm"><h:commandLink id="parametrerSigna"
-                                                                   action="#{gererCommentaireControleur.initialiserPage()}"
-                                                                   value="Gerer les commentaires" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
-                        <li id="divGestionDesSignaleLieu"><h:commandLink id="parametreSignaLieu"
-                                                                   action="#{signalementLieuControleur.initialiserPage()}"
-                                                                   value="Gerer les lieux signalés " rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
-                       
+                                    <li id="divAjouterAdmin"><h:commandLink id="ajouterAdmin"
+                                                                            action="#{ajouterDesAdministrateurControleur.initialiserPage()}"
+                                                                            value="Ajouter admin" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                                    <li id="divParamNotation"><h:commandLink id="parametrerNotation"
+                                                                             action="#{parametrerNotationControleur.initialiserPage()}"
+                                                                             value="Parametrer notation" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+
+                                    <li id="divGestionDesSignaleComm"><h:commandLink id="parametrerSigna"
+                                                                                     action="#{gererCommentaireControleur.initialiserPage()}"
+                                                                                     value="Gerer les commentaires" rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                                    <li id="divGestionDesSignaleLieu"><h:commandLink id="parametreSignaLieu"
+                                                                                     action="#{signalementLieuControleur.initialiserPage()}"
+                                                                                     value="Gerer les lieux signalés " rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                                </ul>
+                                                            </h:panelGroup></span></li>
+                           
                         </ul>
+
                     </div>
                 </div>
             </nav>
