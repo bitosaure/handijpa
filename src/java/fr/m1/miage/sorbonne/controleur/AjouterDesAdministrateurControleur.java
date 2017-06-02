@@ -10,8 +10,10 @@ import fr.m1.miage.sorbonne.entity.PersonneEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -44,7 +46,11 @@ public class AjouterDesAdministrateurControleur implements Serializable{
      * @return String
      */
     public String initialiserPage() {
-        
+        if (listesPersonnes.size() == 0) {
+            FacesMessage message = new FacesMessage("Il n'y a pas d'administrateur à valider ");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+
         return "SUCCESS";
 
     }

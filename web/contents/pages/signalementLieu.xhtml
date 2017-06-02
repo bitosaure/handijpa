@@ -11,90 +11,104 @@
         <ui:define name="body">
 
             <h:messages globalOnly="true" infoClass="info" />
-            
+
             <h:form id="gererSignalementLieu" rendered="#{signalementLieuControleur.listSignalementLieu.size()!=0}">
-                <h:dataTable id="tableau" var="var"  class="display"
-                             value="#{signalementLieuControleur.listSignalementLieu}"
-                             styleClass="tableau table table-responsive table-striped table-bordered table-hover">
 
-                    <h:column id="colNomDuLieu">
-                        <f:facet name="header">
-                            <h:outputText styleClass="outputText" value="nom du lieu concerné"
-                                          id="labN" />
-                        </f:facet>
-                        <h:outputText styleClass="outputText" value="#{var.lieu.nom}"
-                                      id="nomLieu" />
+                <div class="container-fluid">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="form-title">
 
+                                <h:outputText
+                                    value="Gerer les lieux signalés" />
 
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                        <h:dataTable id="tableau" var="var"  class="display"
+                                     value="#{signalementLieuControleur.listSignalementLieu}"
+                                     styleClass="tableau table table-responsive table-striped table-bordered table-hover">
 
-                    </h:column>
-                    <h:column id="colCreateur">
-                        <f:facet name="header">
-                            <h:outputText styleClass="outputText" value="Login du créateur"
-                                          id="log">
-
-                            </h:outputText>
-                        </f:facet>
-                        <h:outputText styleClass="outputText"
-                                      value="#{var.createur.login}" id="login" />
-
-
-
-                    </h:column>
-                    <h:column id="colCommentaire">
-                        <f:facet name="header">
-                            <h:outputText styleClass="outputText" value="commentaire sur le signalement"
-                                          id="labComm">
-
-                            </h:outputText>
-                        </f:facet>
-                        <h:outputText styleClass="outputText" value="#{var.commentaire}"
-                                      id="comment" />
+                            <h:column id="colNomDuLieu">
+                                <f:facet name="header">
+                                    <h:outputText styleClass="outputText" value="nom du lieu concerné"
+                                                  id="labN" />
+                                </f:facet>
+                                <h:outputText styleClass="outputText" value="#{var.lieu.nom}"
+                                              id="nomLieu" />
 
 
 
-                    </h:column>
+                            </h:column>
+                            <h:column id="colCreateur">
+                                <f:facet name="header">
+                                    <h:outputText styleClass="outputText" value="Login du créateur"
+                                                  id="log">
 
-                  
-
-
-                  
-                    <h:column id="colSupp">
-                        <f:facet name="header">
-                            <h:outputText styleClass="outputText" value="supprimer"
-                                          id="suppComm">
-
-                            </h:outputText>
-                        </f:facet>
+                                    </h:outputText>
+                                </f:facet>
+                                <h:outputText styleClass="outputText"
+                                              value="#{var.createur.login}" id="login" />
 
 
 
-                        <h:commandLink styleClass="commandLink" value="supprimer lieu" immediate="true"
-                                       action="#{signalementLieuControleur.supprimerLieu(var)}">
+                            </h:column>
+                            <h:column id="colCommentaire">
+                                <f:facet name="header">
+                                    <h:outputText styleClass="outputText" value="commentaire sur le signalement"
+                                                  id="labComm">
 
-                        </h:commandLink>
-                    </h:column>
-
-                </h:dataTable>
-
-                <script type="text/javascript">
-                    $(document)
-                            .ready(
-                                    function () {
-
-                                        $('.tableau')
-                                                .dataTable({
-                                                    "language": {
-                                                        "url": "../../French.json"
-                                                    }
-                                                }
+                                    </h:outputText>
+                                </f:facet>
+                                <h:outputText styleClass="outputText" value="#{var.commentaire}"
+                                              id="comment" />
 
 
 
-                                                )
-                                    });
-                </script>
+                            </h:column>
 
+
+
+
+
+                            <h:column id="colSupp">
+                                <f:facet name="header">
+                                    <h:outputText styleClass="outputText" value="supprimer"
+                                                  id="suppComm">
+
+                                    </h:outputText>
+                                </f:facet>
+
+
+
+                                <h:commandLink styleClass="commandLink" immediate="true"
+                                               action="#{signalementLieuControleur.supprimerLieu(var)}" >
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </h:commandLink>
+                            </h:column>
+
+                        </h:dataTable>
+
+                        <script type="text/javascript">
+                            $(document)
+                                    .ready(
+                                            function () {
+
+                                                $('.tableau')
+                                                        .dataTable({
+                                                            "language": {
+                                                                "url": "../../French.json"
+                                                            }
+                                                        }
+
+
+
+                                                        )
+                                            });
+                        </script>
+                    </div>
+                </div>
+                </div>
 
             </h:form>
         </ui:define>
