@@ -21,32 +21,53 @@ import javax.persistence.TemporalType;
  * @author emiliepisu
  */
 @Entity
-@Table(name="COMMENTAIRE_LIEU")
-public class CommentaireLieuEntity implements Serializable{
-   private static long serialVersionUID = 1L;
-
-     @Id
+@Table(name = "COMMENTAIRE_LIEU")
+public class CommentaireLieuEntity implements Serializable {
+    
+    /***
+     * serial Version Uid
+     */
+    private static long serialVersionUID = 1L;
+    /**
+     * ID DU Commentaire
+     * clé primaire
+     * de type long qui s incrémente automatiquement
+     */
+    @Id
     @JoinColumn(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-     @JoinColumn(name = "lieu")
+    /***
+     * lieu auquel le commentaire est associé
+     */
+    @JoinColumn(name = "lieu")
     private LieuEntity lieu;
+
     
+    /***
+     * Personne qui a écrit le commentaire
+     */
     @JoinColumn(name = "personne")
     private PersonneEntity personne;
-    
+
+    /***
+     * LE commentaire (texte) que le personne a donné à ce lieu
+     */
     @JoinColumn(name = "commentaire", columnDefinition = "TEXT")
     private String commentaire;
-    
-    
-     @JoinColumn(name = "titre")
+    /**
+     * Le titre qu'a donné la personne au commentaire
+     */
+    @JoinColumn(name = "titre")
     private String titre;
-     
-     
-     @Temporal(TemporalType.DATE)
-     @JoinColumn(name = "dateCreation")
-     private Date dateCreation;
+
+    /***
+     * La date a laquelle le commentaire a été créé
+     */
+    @Temporal(TemporalType.DATE)
+    @JoinColumn(name = "dateCreation")
+    private Date dateCreation;
 
     /**
      * @return the lieu

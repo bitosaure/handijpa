@@ -3,14 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package fr.m1.miage.sorbonne.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -21,26 +17,54 @@ import javax.persistence.Transient;
  * @author Thibault Le Grand Emilie Pisu
  */
 @Entity
-@Table(name="CRITERE")
+@Table(name = "CRITERE")
 public class CritereEntity implements Serializable {
 
+    /**
+     * *
+     * Serial version
+     */
     private static long serialVersionUID = 1L;
-    @Id
-    @JoinColumn(name="code")
-    private String code;
-    
-    
-    
 
-    @JoinColumn(name="libelle")
+    /**
+     * *
+     * Code qui identifie le critère de notation
+     */
+    @Id
+    @JoinColumn(name = "code")
+    private String code;
+
+    /**
+     * *
+     * libelle ou nom du critere de notation
+     */
+    @JoinColumn(name = "libelle")
     private String libelle;
-   
+
+    /**
+     * *
+     * nombre d'etoile que la personne a donné au lieu pour ce critère *
+     *
+     */
     @Transient
     private Double nbEtoiles;
-     @Transient
-    private Integer nbPersonnes=0;
-    
 
+    /**
+     * *
+     * Nombre de personne qui a noté un lieu
+     */
+    @Transient
+    private Integer nbPersonnes = 0;
+
+    /**
+     * *
+     * m
+     *
+     * @param object
+     * @return boolean permettant de savoir si l instance de actuelle correspond
+     * à celle passée en paraùètre
+     *
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -48,13 +72,15 @@ public class CritereEntity implements Serializable {
             return false;
         }
         CritereEntity other = (CritereEntity) object;
-        if (( !this.code.equals(other.code))) {
+        if ((!this.code.equals(other.code))) {
             return false;
         }
         return true;
     }
+
     /**
-     * Retourne une chaine de caractère 
+     * Retourne une chaine de caractère
+     *
      * @return String
      */
     @Override

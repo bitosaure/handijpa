@@ -65,7 +65,7 @@ public class IndexControleur implements Serializable {
         }
 
         for (int i = 0; i < flag; i++) {
-            listeBd.get(i).setImage("http://localhost:55857/handijpa3/images/" + listeBd.get(i).getImage());
+            listeBd.get(i).setImage("../../images/" + listeBd.get(i).getImage());
             System.out.println(listeBd.get(i).getImage());
             maListe.add(listeBd.get(i));
         }

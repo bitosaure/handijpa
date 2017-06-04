@@ -7,7 +7,6 @@
 package fr.m1.miage.sorbonne.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,52 +21,128 @@ import javax.persistence.Table;
 @Entity
 @Table(name="PERSONNE")
 public class PersonneEntity implements Serializable {
-
+    /***
+     * SERial versions
+     */
     private static long serialVersionUID = 1L;
+    
+    /**
+     * * id de la personne
+     * clé primaire
+     * auto incrémente
+     * */
     @Id
     @JoinColumn(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    
+    /**
+     * Nom de la personne
+     */
     @JoinColumn(name="nom")
     private String nom;
+    /***
+     * prenom de la personne
+     */
     @JoinColumn(name="prenom")
     private String prenom;
+    
+    /***
+     * login de la personne
+     */
     @JoinColumn(name="login")
     private String login;
+    
+    /***
+     * mot de passe de la personne
+     */
     @JoinColumn(name="mdp")
     private String mdp;
+    
+    
+    /**
+     * email de la personne
+     */
     @JoinColumn(name="mail")
     private String mail;
+    
+    /***
+     * * code postal de la personne
+     * */
     @JoinColumn(name="codePostal")
     private Integer codePostal;
+    
+    /**
+     * numéro de rue de la personne
+     */
     @JoinColumn(name="numRue")
     private Integer numRue;
+    
+    /**
+     * rue de la personne
+     */
     @JoinColumn(name="rue")
     private String rue;
+    
+    /**
+     * ville de la personne
+     */
     @JoinColumn(name="ville")
     private String ville;
+    
+    /**
+     * telephone de la personne
+     */
     @JoinColumn(name="tel")
     private Integer tel;
+    /**
+     * pays auquel apparatient la personne
+     */
     @JoinColumn(name="pays")
     private String pays;
+    
+    /**
+     * TYPE DE LA PERSONNE
+     * par exemple, admin ou lambda
+    **/
     @JoinColumn(name="typePersonne")
     private String typePersonne;
 
+    
+    /**
+     * retourne l'id de la personne
+     * @return Long
+     */
     public Long getId() {
         return id;
     }
-
+    /**
+     * set l id de la personne
+     * @param id 
+     */
     public void setId(Long id) {
         this.id = id;
     }
-
+    /**
+     * hash code 
+     * @return int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
-
+    /**
+     * *
+     * m
+     *
+     * @param object
+     * @return boolean permettant de savoir si l instance de actuelle correspond
+     * à celle passée en paraùètre
+     *
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

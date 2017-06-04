@@ -6,14 +6,11 @@
 package fr.m1.miage.sorbonne.entity;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,28 +21,66 @@ import javax.persistence.Table;
 @Entity
 public class NoteUnLieuEntity implements Serializable {
 
+    
+    /***
+     * serial Version
+     */
     private static long serialVersionUID = 1L;
+
+    /**
+     * *
+     * id du lieu, clé primaire, auto incrément
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    /**
+     * *
+     * le nombre d'étoile que la personne a donné pour ce lieu
+     */
     @JoinColumn(name = "nombreEtoile")
     private Double nombreEtoile;
 
-
+    /**
+     * *
+     * personne ayant mis cette note
+     */
     @JoinColumn(name = "personne")
     private PersonneEntity personne;
 
+    /**
+     * *
+     * le critere de notation correspondant à la note
+     */
     @JoinColumn(name = "critere")
     private CritereEntity critere;
 
+    /**
+     * *
+     * retourne l'id : une valeur long
+     *
+     * @return long
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * *
+     * set the id avec la valeur passé en paramètre
+     *
+     * @param id de type long
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * *
+     * méthode hash code
+     *
+     * @return int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -53,6 +88,15 @@ public class NoteUnLieuEntity implements Serializable {
         return hash;
     }
 
+    /**
+     * *
+     * m
+     *
+     * @param object
+     * @return boolean permettant de savoir si l instance de actuelle correspond
+     * à celle passée en paraùètre
+     *
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -65,8 +109,10 @@ public class NoteUnLieuEntity implements Serializable {
         }
         return true;
     }
+
     /**
-     * Retourne une chaine de caractère 
+     * Retourne une chaine de caractère
+     *
      * @return String
      */
     @Override
@@ -101,8 +147,6 @@ public class NoteUnLieuEntity implements Serializable {
     public void setNombreEtoile(Double nombreEtoile) {
         this.nombreEtoile = nombreEtoile;
     }
-
-   
 
     /**
      * @return the personne

@@ -18,31 +18,62 @@ import javax.persistence.Table;
  * @author emiliepisu
  */
 @Entity
-@Table(name="SIGNALEMENT_COMMENTAIRE")
+@Table(name = "SIGNALEMENT_COMMENTAIRE")
 
 public class SignalementCommentaireEntity implements Serializable {
 
+    /**
+     * *
+     * SERIAL version
+     */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * *
+     * id du signalement clé primaire auto incrément
+     */
     @Id
-    @JoinColumn(name="id")
+    @JoinColumn(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @JoinColumn(name="createur")   
+
+    /**
+     * *
+     * personne qui a crée le signalement
+     *
+     */
+    @JoinColumn(name = "createur")
     private PersonneEntity createur;
-    
-    @JoinColumn(name="commentaireLieu")   
+
+    /**
+     * *
+     * commentaire qui a été signalé
+     */
+    @JoinColumn(name = "commentaireLieu")
     private CommentaireLieuEntity commentaireLieu;
-    
-      
+
+    /**
+     * retourne l id du signalement
+     *
+     * @return long
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * set the id
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * méthode hash code
+     *
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -50,6 +81,15 @@ public class SignalementCommentaireEntity implements Serializable {
         return hash;
     }
 
+    /**
+     * *
+     * m
+     *
+     * @param object
+     * @return boolean permettant de savoir si l instance de actuelle correspond
+     * à celle passée en paraùètre
+     *
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -62,8 +102,10 @@ public class SignalementCommentaireEntity implements Serializable {
         }
         return true;
     }
+
     /**
-     * Retourne une chaine de caractère 
+     * Retourne une chaine de caractère
+     *
      * @return String
      */
     @Override
@@ -99,6 +141,4 @@ public class SignalementCommentaireEntity implements Serializable {
         this.commentaireLieu = commentaireLieu;
     }
 
-    
-    
 }

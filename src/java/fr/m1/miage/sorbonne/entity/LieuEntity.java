@@ -6,20 +6,14 @@
 package fr.m1.miage.sorbonne.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -29,58 +23,122 @@ import javax.persistence.TemporalType;
 @Table(name = "LIEU")
 public class LieuEntity implements Serializable {
 
+    /***
+     * serial Version
+     */
     private static long serialVersionUID = 1L;
+    
+    /***
+     * id du lieu 
+     * clé primaire
+     * auto incrément
+     */
     @Id
     @JoinColumn(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    /***
+     * nom du lieu
+     */
     @JoinColumn(name = "nom")
     private String nom;
-
+    /***
+     * ** description du lieu
+     * */
     @JoinColumn(name = "description")
     private String description;
 
+    /***
+     * boolean permettant de savoir si le lieu a été validé ou non par l'administrateur
+     */
     @JoinColumn(name = "estValide", columnDefinition = "tinyint(1)")
     private boolean estValide;
+    
+    /***
+     * catégorie du lieu
+     */
     @JoinColumn(name = "categorie")
     private CategorieEntity categorie;
+    
+    /***
+     * personne ayant créé le lieu
+     */
     @JoinColumn(name = "createur")
     private PersonneEntity createur;
-    
+    /**
+     * code postal du lieu
+     */
     @JoinColumn(name = "codePostal")
     private Integer codePostal;
+    
+    /***
+     *  numéro de rue du lieu
+
+     */
     @JoinColumn(name = "numRue")
     private Integer numRue;
+    
+    /***
+     *  rue du lieu
+     */
     @JoinColumn(name = "rue")
     private String rue;
+    /***
+     * ville du lieu
+     */
     @JoinColumn(name = "ville")
     private String ville;
+    
+    /***
+     * telephone du lieu
+     */
     @JoinColumn(name = "tel")
     private Integer tel;
 
+    /***
+     * chemin pour trouver l'image du lieu
+     */
     @JoinColumn(name = "image")
     private String image;
 
+    /***
+     * pays du lieu
+     */
     @JoinColumn(name = "pays")
     private String pays;
-    
-    
-    @OneToMany
-     private List<NoteUnLieuEntity> notes ;
-    
-  
-    public String cheminImage(){
-        return "http://localhost:8080/handijpa/images/" + this.getImage();
-    }
 
+    /***
+     * Retourne les notes du lieu
+     */
+    @OneToMany
+    private List<NoteUnLieuEntity> notes;
+
+    
+    /***
+     * Retourne une chaine de caractère correspond au chemin de l'image
+     * @return 
+     */
+    public String cheminImage() {
+        return "../../images/" + this.getImage();
+    }
+    /***
+     * eztourne l'id du lieu
+     * @return Long
+     */
     public Long getId() {
         return id;
     }
-
+    /***
+     * set the id avec le paramètre en entrée
+     * @param id 
+     */
     public void setId(Long id) {
         this.id = id;
     }
-
+    /***
+     * Methode hashcode
+     * @return  int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -88,6 +146,15 @@ public class LieuEntity implements Serializable {
         return hash;
     }
 
+    /**
+     * *
+     * m
+     *
+     * @param object
+     * @return boolean permettant de savoir si l instance de actuelle correspond
+     * à celle passée en paraùètre
+     *
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -100,17 +167,25 @@ public class LieuEntity implements Serializable {
         }
         return true;
     }
+
     /**
-     * Retourne une chaine de caractère 
+     * Retourne une chaine de caractère
+     *
      * @return String
      */
     @Override
     public String toString() {
         return "fr.sorbonne.m1.entity.LieuEntity[ id=" + getId() + " ]";
     }
-    
+
+    /**
+     * *
+     * retourne une chaine de caractère correspond à l'adresse du lieu
+     *
+     * @return String
+     */
     public String adresse() {
-        return numRue + " " + rue + " "+ codePostal + " " + ville + " "+ pays;
+        return numRue + " " + rue + " " + codePostal + " " + ville + " " + pays;
     }
 
     /**
@@ -182,8 +257,6 @@ public class LieuEntity implements Serializable {
     public void setCategorie(CategorieEntity categorie) {
         this.categorie = categorie;
     }
-
-    
 
     /**
      * @return the codePostal
