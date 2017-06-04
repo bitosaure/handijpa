@@ -21,7 +21,9 @@
             /WEB-INF/gererCommentaire/faces-navigation.xml,
 
              /WEB-INF/parametrerNotation/faces-navigation.xml,
-                         /WEB-INF/signalementLieu/faces-navigation.xml
+                         /WEB-INF/signalementLieu/faces-navigation.xml,
+                                     /WEB-INF/index/faces-navigation.xml
+
 
 
 

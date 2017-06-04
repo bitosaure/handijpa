@@ -40,6 +40,15 @@ public class IndexControleur implements Serializable {
     public IndexControleur() {
         this.setLieuxIndex(lieuxIndex);
     }
+    
+    
+    /***
+     * Méthode appelée lorsque l'on souhaite aller sur la page d'acceuil
+     * @return  String permettant de savoir si la page a bien été initialisée
+     */
+    public String initialiserPage(){
+        return "SUCCESS";
+    }
 
     
     /***
