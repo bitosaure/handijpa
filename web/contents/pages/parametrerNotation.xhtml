@@ -41,7 +41,7 @@
                                 <h:inputText id="libelle" value="#{parametrerNotationControleur.critere.libelle}"  size="20" maxlength="20" />
                                 <h:message id="libelleMessage" for="libelle" errorClass="erreur" />
                                 <br />
-                                <h:commandButton value="Valider" action="#{parametrerNotationControleur.ajouter()}" styleClass="sansLabel" />
+                                <h:commandButton value="Valider" action="#{parametrerNotationControleur.ajouter()}" styleClass="btn btn-default" />
                             </div>
                         </div>
                     </div>
@@ -119,23 +119,23 @@
 
                 </div>
 
-                <script type="text/javascript">
-                    $(document)
-                            .ready(
-                                    function () {
+               <script type="text/javascript">
+                            $(document)
+                                    .ready(
+                                            function () {
 
-                                        $('.tableau')
-                                                .dataTable({
-                                                    "language": {
-                                                        "url": "French.json"
-                                                    }
-                                                }
+                                                $('.tableau')
+                                                        .dataTable({
+                                                            "language": {
+                                                                "url": "../../French.json"
+                                                            }
+                                                        }
 
 
 
-                                                )
-                                    });
-                </script>
+                                                        )
+                                            });
+                        </script>
 
 
             </h:form> 
