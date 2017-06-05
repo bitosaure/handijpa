@@ -5,10 +5,8 @@
  */
 package testControleur;
 
-import fr.m1.miage.sorbonne.controleur.ConsulterLieuxControleur;
-import fr.m1.miage.sorbonne.entity.CritereEntity;
-import java.util.ArrayList;
-import java.util.List;
+import fr.m1.miage.sorbonne.controleur.AjouterLieuControleur;
+import fr.m1.miage.sorbonne.controleur.AuthentificationControleur;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,20 +14,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
 import org.powermock.modules.junit4.PowerMockRunner;
+
 /**
  *
  * @author emiliepisu
  */
 
-public class ConsulterLieuxControleurTest {
+public class AuthentificationControleurTest {
     
-    
-   
-   
-    
-    public ConsulterLieuxControleurTest() {
+    public AuthentificationControleurTest() {
     }
     
     @BeforeClass
@@ -47,25 +41,12 @@ public class ConsulterLieuxControleurTest {
     @After
     public void tearDown() {
     }
-    
     @Test
-    public void noterSur5LesCritereTest(){
-       
-        List<CritereEntity>listC=new ArrayList<>();
-        CritereEntity cri = new CritereEntity();
-        cri.setNbEtoiles(15.0);
-        cri.setNbPersonnes(3);
-        
-        listC.add(cri);
-         ConsulterLieuxControleur consu=new ConsulterLieuxControleur(listC);
-         List<CritereEntity>listCresu= consu.noterSur5LesCritere();
-         listC.get(0).setNbEtoiles(5.0);
-         System.out.println("taille " + listC.size() +" taille "+listCresu.size());
-         assertEquals(listC.size(), listCresu.size());
-         
+    public void initialiserPageTest(){
+        AuthentificationControleur controleur = new AuthentificationControleur();
+        String resu=controleur.initialiserPage();
+        assertEquals(resu, "SUCCESS");
     }
-   
-
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //

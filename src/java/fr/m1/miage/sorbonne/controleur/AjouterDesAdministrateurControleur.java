@@ -21,28 +21,43 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @RequestScoped
-public class AjouterDesAdministrateurControleur implements Serializable{
-    
-    /***
+public class AjouterDesAdministrateurControleur implements Serializable {
+
+    /**
+     * *
      * Listes des personnes qui ne sont pas administrateurs
      */
     private List<PersonneEntity> listesPersonnes = new ArrayList<>();
-    
+
     /**
      * DAO permettant de gérer les données de la table Personne
      */
     private PersonneDAO persDao;
+
     /**
-     * Constructeur ne prenant aucun paramètre
-     * initaliser persDao
-     * appel de la dao pour pousser les personnes non administrateurs dans la liste persDao
+     * Constructeur ne prenant aucun paramètre initaliser persDao appel de la
+     * dao pour pousser les personnes non administrateurs dans la liste persDao
      */
-    public AjouterDesAdministrateurControleur(){
-        persDao=new PersonneDAO();
+    public AjouterDesAdministrateurControleur() {
+        persDao = new PersonneDAO();
         listesPersonnes = persDao.rechercherPersonnesNonAdmin();
     }
-    /***
-     * méthode appelée lorsque l'on souhaite consulter la page ajouterAdmin.xhtml
+
+    /**
+     * *
+     * constructeur prenant en paramètre une liste de personne
+     *
+     * @param listPers
+     */
+    public AjouterDesAdministrateurControleur(List<PersonneEntity> listPers) {
+        listesPersonnes = listPers;
+    }
+
+    /**
+     * *
+     * méthode appelée lorsque l'on souhaite consulter la page
+     * ajouterAdmin.xhtml
+     *
      * @return String
      */
     public String initialiserPage() {
@@ -54,22 +69,29 @@ public class AjouterDesAdministrateurControleur implements Serializable{
         return "SUCCESS";
 
     }
-    /***
-     * Méthode permettant de donner le statut admin à la personne passée en paramètre
+
+    /**
+     * *
+     * Méthode permettant de donner le statut admin à la personne passée en
+     * paramètre
+     *
      * @param pers de type PersonneEntity
      * @return String
      */
-    public String ajouterAdmin(PersonneEntity pers){
-        
+    public String ajouterAdmin(PersonneEntity pers) {
+
         pers.setTypePersonne("admin");
-        
-        persDao.update(pers);  
+
+        persDao.update(pers);
+        FacesMessage message = new FacesMessage("La personne est devenue un administrateur ");
+        FacesContext.getCurrentInstance().addMessage(null, message);
         return "SUCCESS";
-        
+
     }
 
     /**
      * retourne la liste des personnes administrateurs
+     *
      * @return the listesPersonnes de type List<PersonneEntity>
      */
     public List<PersonneEntity> getListesPersonnes() {
@@ -78,6 +100,7 @@ public class AjouterDesAdministrateurControleur implements Serializable{
 
     /**
      * set la liste des personnes administrateurs
+     *
      * @param listesPersonnes de type List<PersonneEntity>
      */
     public void setListesPersonnes(List<PersonneEntity> listesPersonnes) {

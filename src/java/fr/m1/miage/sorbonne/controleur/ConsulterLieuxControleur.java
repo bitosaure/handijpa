@@ -182,10 +182,11 @@ public class ConsulterLieuxControleur implements Serializable {
 
     }
 
-    
     /**
-     * Méthode permettant de récupérer l"id du lieu consulter  
-     * @return string correspond à l'id du lieu que l'utilisateur souhaite consulter
+     * Méthode permettant de récupérer l"id du lieu consulter
+     *
+     * @return string correspond à l'id du lieu que l'utilisateur souhaite
+     * consulter
      */
     public String recupId() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -200,8 +201,10 @@ public class ConsulterLieuxControleur implements Serializable {
         System.out.println(html.getValue().toString());
         return html.getValue().toString();
     }
+
     /**
-     * Méthode permettant de consulter le lieu que l'on souhaite 
+     * Méthode permettant de consulter le lieu que l'on souhaite
+     *
      * @param lieu de type LieuEntity, lieu que l'on souhaite consutler
      */
     public void setLieuDetail(LieuEntity lieu) {
@@ -214,8 +217,8 @@ public class ConsulterLieuxControleur implements Serializable {
         // html = (HtmlInputText) ui.findComponent("consulterLieux:secret");
     }
 
-    
-    /***
+    /**
+     * *
      * Methode permettant de signaler le lieu que l'utilisateur consulte
      */
     public void signalerLieu() {
@@ -227,9 +230,9 @@ public class ConsulterLieuxControleur implements Serializable {
         signalementLieu = new SignalementLieuEntity();
     }
 
-    
-    /***
-     * Methode permettant à l'utilisateur de noter le lieu 
+    /**
+     * *
+     * Methode permettant à l'utilisateur de noter le lieu
      */
     public void noterLieu() {
 
@@ -253,14 +256,24 @@ public class ConsulterLieuxControleur implements Serializable {
 
     }
 
-    /***
+    /**
+     * *
      * Methode permettant d'actualiser les notes du lieu
      */
     private void actualiserNote() {
         CritereDAO critereDao = new CritereDAO();
-        int j;
         setListCriterLieuDetailMoyenne(critereDao.findAll());
+        recupererLesNotes();
+
+        noterSur5LesCritere();
+
+    }
+
+    private void recupererLesNotes() {
+        int j;
+
         for (int i = 0; i < getListCriterLieuDetailMoyenne().size(); i++) {
+
             getListCriterLieuDetailMoyenne().get(i).setNbEtoiles(0.0);
             getListCriterLieuDetailMoyenne().get(i).setNbPersonnes(0);
         }
@@ -270,14 +283,10 @@ public class ConsulterLieuxControleur implements Serializable {
             getListCriterLieuDetailMoyenne().get(j).setNbEtoiles(getListCriterLieuDetailMoyenne().get(j).getNbEtoiles() + note.getNombreEtoile());
             getListCriterLieuDetailMoyenne().get(j).setNbPersonnes(getListCriterLieuDetailMoyenne().get(j).getNbPersonnes() + 1);
         }
-
-        noterSur5LesCritere();
-
     }
-    
-    
+
     /**
-     * 
+     *
      * méthode permettant de mettre les notes sur 5
      */
     public List<CritereEntity> noterSur5LesCritere() {
@@ -295,6 +304,7 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * retourne le commentaire que l'utilisateur a créé
+     *
      * @return the commentaire de type CommentaireLieuEntity
      */
     public CommentaireLieuEntity getCommentaire() {
@@ -303,6 +313,7 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * set the commentaire de type CommentaireLieuEntity
+     *
      * @param commentaire the commentaire to set
      */
     public void setCommentaire(CommentaireLieuEntity commentaire) {
@@ -311,6 +322,7 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * retourne la liste des commentaires du lieu
+     *
      * @return the listCommentaires de type List<CommentaireLieuEntity>
      */
     public List<CommentaireLieuEntity> getListCommentaires() {
@@ -319,6 +331,7 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * set the liste des commentaires
+     *
      * @param listCommentaires the listCommentaires to set
      */
     public void setListCommentaires(List<CommentaireLieuEntity> listCommentaires) {
@@ -327,6 +340,7 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * retourne la liste des différents critères de note
+     *
      * @return the listCritere
      */
     public List<CritereEntity> getListCritere() {
@@ -335,6 +349,7 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * set listCritere
+     *
      * @param listCritere the listCritere to set
      */
     public void setListCritere(List<CritereEntity> listCritere) {
@@ -343,6 +358,7 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * retourne la liste des notes du lieu
+     *
      * @return the listCriterLieuDetailMoyenne
      */
     public List<CritereEntity> getListCriterLieuDetailMoyenne() {
@@ -351,6 +367,7 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * modifie la liste des critères du lieu
+     *
      * @param listCriterLieuDetailMoyenne the listCriterLieuDetailMoyenne to set
      */
     public void setListCriterLieuDetailMoyenne(List<CritereEntity> listCriterLieuDetailMoyenne) {
@@ -363,13 +380,16 @@ public class ConsulterLieuxControleur implements Serializable {
 
     /**
      * set la liste des lieux
-     * @param lieux 
+     *
+     * @param lieux
      */
     public void setLieux(List<LieuEntity> lieux) {
         this.lieux = lieux;
     }
+
     /**
      * retoutne le lieu consulté
+     *
      * @return LieuEntity
      */
     public LieuEntity getLieuDetail() {

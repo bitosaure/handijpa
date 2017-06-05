@@ -41,8 +41,8 @@ public class GererCommentaireControleur implements Serializable {
      * @return String permettant de savoir si les données ont bien été intitialisées
      */
     public String initialiserPage() {
-        signalementDao= new SignalementCommentaireDAO();
-        listCommentaireSiganles= signalementDao.findAll();
+        setSignalementDao(new SignalementCommentaireDAO());
+        listCommentaireSiganles= getSignalementDao().findAll();
          if (listCommentaireSiganles.size()==0){
                 FacesMessage message = new FacesMessage("Aucun commentaire n'a été signalé");
                   FacesContext.getCurrentInstance().addMessage(null, message);
@@ -56,10 +56,10 @@ public class GererCommentaireControleur implements Serializable {
      * @return String permettant de savoir si le commentaire a bien été supprimé
      */
      public String supprimerCommentaire(SignalementCommentaireEntity sign) {
-         SignalementCommentaireDAO signalementCommeDAO = new SignalementCommentaireDAO();
+          setSignalementDao(new SignalementCommentaireDAO());
          
          CommentaireLieuEntity comm=sign.getCommentaireLieu();
-         signalementCommeDAO.delete(sign);
+         getSignalementDao().delete(sign);
          CommentaireLieuDAO commDAO = new CommentaireLieuDAO();
          commDAO.delete(comm);
         listCommentaireSiganles.remove(sign);
@@ -75,8 +75,8 @@ public class GererCommentaireControleur implements Serializable {
       * @return 
       */
      public String validerCommentaire(SignalementCommentaireEntity sign) {
-         SignalementCommentaireDAO signalementCommeDAO = new SignalementCommentaireDAO();
-         signalementCommeDAO.delete(sign);
+          setSignalementDao(new SignalementCommentaireDAO());
+         getSignalementDao().delete(sign);
          listCommentaireSiganles.remove(sign);
          
         
@@ -97,5 +97,19 @@ public class GererCommentaireControleur implements Serializable {
      */
     public void setListCommentaireSiganles(List<SignalementCommentaireEntity> listCommentaireSiganles) {
         this.listCommentaireSiganles = listCommentaireSiganles;
+    }
+
+    /**
+     * @return the signalementDao
+     */
+    public SignalementCommentaireDAO getSignalementDao() {
+        return signalementDao;
+    }
+
+    /**
+     * @param signalementDao the signalementDao to set
+     */
+    public void setSignalementDao(SignalementCommentaireDAO signalementDao) {
+        this.signalementDao = signalementDao;
     }
 }
