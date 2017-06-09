@@ -19,76 +19,108 @@
             <h:messages class="form-title" globalOnly="true" infoClass="info" />
 
             <h:form id="validerLieu" rendered="#{validerLieuControleur.listEntity.size()!=0}">
-                
-                            <h4 class="form-title">
 
-                                <h:outputText
-                                    value="Valider les lieux ajoutés" />
+                <h4 class="form-title">
 
-                            </h4>
-                       
-                        <div class="panel-body">
-                            <table>
+                    <h:outputText
+                        value="Valider les lieux ajoutés" />
 
-                                <ui:repeat var="l" value="#{validerLieuControleur.listEntity}" >
+                </h4>
+
+                <div class="panel-body">
+                    <table>
+
+                        <ui:repeat var="l" value="#{validerLieuControleur.listEntity}" >
 
 
-                                    <div class="container-fluid">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h4 class="form-title"> Nom du lieu: 
-                                                    <h:outputText 
-                                                        value="#{l.nom}" />
+                            <div class="container-fluid">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="form-title"> Nom du lieu: 
+                                            <h:outputText 
+                                                value="#{l.nom}" />
+                                        </h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-horizontal">
+                                            <div class="col-md-6">
+                                                <h4>
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+                                                            <div class="col-md-2">
+                                                                <h:outputLabel value="description: "> </h:outputLabel>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h:outputLabel value="#{l.description}"> </h:outputLabel>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+                                                            <div class="col-md-2">
+
+                                                                <h:outputLabel value="adresse: "> </h:outputLabel>
+                                                            </div>
+                                                            <div class="col-md-4">
+
+                                                                <h:outputLabel value="#{l.adresse()}"> </h:outputLabel>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+                                                            <div class="col-md-2">
+
+                                                                <h:outputLabel value="catégorie: "> </h:outputLabel>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+
+                                                                <h:outputLabel value="#{l.categorie.libelle}"> </h:outputLabel>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+                                                            <div class="col-md-2">
+
+                                                                <h:outputLabel value="créateur: "> </h:outputLabel>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+
+
+                                                                <h:outputLabel value="#{l.createur.login}"> </h:outputLabel>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </h4>
                                             </div>
-                                            <div class="panel-body">
-                                                <div class="form-horizontal">
-                                                    <div class="col-md-6">
-                                                        <h:outputLabel value="description: "> </h:outputLabel>
+                                            <h:panelGroup id="detail" rendered="#{l.cheminImage() !='../../images/null'}">
 
-                                                        <h:outputLabel value="#{l.description}"> </h:outputLabel>
+                                                <div class="col-md-6">
 
-
-                                                        <br />
-
-                                                        <h:outputLabel value="adresse: "> </h:outputLabel>
-
-                                                        <h:outputLabel value="#{l.adresse()}"> </h:outputLabel>
-
-                                                        <br />
-
-                                                        <h:outputLabel value="catégorie: "> </h:outputLabel>
-
-                                                        <h:outputLabel value="#{l.categorie.libelle}"> </h:outputLabel>
-                                                        <br />
-                                                        <h:outputLabel value="créateur: "> </h:outputLabel>
-
-
-                                                        <h:outputLabel value="#{l.createur.login}"> </h:outputLabel>
-
-                                                        <br />
-                                                    </div>
-                                                    <div class="col-md-6">
-
-                                                        <img src="#{l.cheminImage()}" class="img-circle" width="100%" height="100%"/>
-                                                    </div>
-                                                    <br />
-                                                    <h:commandButton value="Valider" action="#{validerLieuControleur.valider(l)}" styleClass="btn btn-default" />
-
-                                                    <h:commandButton value="Supprimer" action="#{validerLieuControleur.supprimer(l)}" styleClass="btn btn-default" />
-                                                    <br />
+                                                    <img src="#{l.cheminImage()}" class="img-circle" width="100%" height="100%"/>
                                                 </div>
+                                            </h:panelGroup>
+                                            <br />
+                                            <h:commandButton value="Valider" action="#{validerLieuControleur.valider(l)}" styleClass="btn btn-default"  style="color: black;" />
 
-                                            </div>
-
+                                            <h:commandButton value="Supprimer" action="#{validerLieuControleur.supprimer(l)}" style="color: black;" styleClass="btn btn-default" />
+                                            <br />
                                         </div>
 
                                     </div>
 
-                                </ui:repeat>
+                                </div>
 
-                            </table>
-                        
+                            </div>
+
+                        </ui:repeat>
+
+                    </table>
+
                 </div>
             </h:form>
             <br />

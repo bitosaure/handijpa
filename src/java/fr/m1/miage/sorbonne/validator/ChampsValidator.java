@@ -1,4 +1,4 @@
-package fr.ca.sa.aims.web.validators;
+package fr.m1.miage.sorbonne.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +23,7 @@ public class ChampsValidator implements Validator {
 	/**
 	 * Méthode testant le contenu du champs grâce à une regexp
 	 * 
+         * 
 	 */
 	@Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)

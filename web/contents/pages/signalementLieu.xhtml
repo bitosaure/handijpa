@@ -10,7 +10,7 @@
     <ui:composition template="/././templateHandi.xhtml">
         <ui:define name="body">
 
-            <h:messages globalOnly="true" infoClass="info" />
+            <h:messages globalOnly="true" infoClass="info" style ="color:blue;margin:8px;"/>
 
             <h:form id="gererSignalementLieu" rendered="#{signalementLieuControleur.listSignalementLieu.size()!=0}">
 
@@ -66,7 +66,21 @@
 
 
                             </h:column>
+<h:column id="colVal">
+                                <f:facet name="header">
+                                    <h:outputText styleClass="outputText" value="ignorer le signalement"
+                                                  id="valComm">
 
+                                    </h:outputText>
+                                </f:facet>
+
+
+
+                                <h:commandLink styleClass="commandLink" immediate="true"
+                                               action="#{signalementLieuControleur.validerLieu(var)}" >
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </h:commandLink>
+                            </h:column>
 
 
 
@@ -87,6 +101,9 @@
                                 </h:commandLink>
                             </h:column>
 
+                            
+                            
+                            
                         </h:dataTable>
 
                         <script type="text/javascript">

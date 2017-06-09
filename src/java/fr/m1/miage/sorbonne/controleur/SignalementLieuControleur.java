@@ -18,8 +18,10 @@ import fr.m1.miage.sorbonne.entity.SignalementLieuEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -60,6 +62,10 @@ public class SignalementLieuControleur implements Serializable {
         lieuDao = new LieuDAO();
         setSignalementLieuDao(new SignalementLieuDAO());
         setListSignalementLieu(getSignalementLieuDao().findAll());
+        if (listSignalementLieu.size() == 0) {
+            FacesMessage message = new FacesMessage("Il n'y a pas de signalement de lieu ");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
         return "SUCCESS";
 
     }
@@ -115,7 +121,31 @@ public class SignalementLieuControleur implements Serializable {
         listSignalementLieu = getSignalementLieuDao().findAll();
         lieuDao = new LieuDAO();
         lieuDao.delete(lieu);
-
+       
+        if (listSignalementLieu.size() == 0) {
+            FacesMessage message = new FacesMessage("Le lieu a bien été supprimé. Il n'y a pas de signalement de lieu ");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        else{
+            FacesMessage message = new FacesMessage("Le lieu a bien été supprimé");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    /***
+     * Methode permettant d'ignorer un signalement
+     * @param sign 
+     */
+    public void validerLieu(SignalementLieuEntity sign){
+        signalementLieuDao = new SignalementLieuDAO();
+        signalementLieuDao.delete(sign);
+        listSignalementLieu.remove(sign);
+        if (listSignalementLieu.size() == 0) {
+            FacesMessage message = new FacesMessage("Le signalement de lieu a été supprimé. Il n'y a pas de signalement de lieu ");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+         FacesMessage message = new FacesMessage("Le signalement de lieu a été supprimé ");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        
     }
 
     /**

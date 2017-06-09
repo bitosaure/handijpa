@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
     <h:head>
         <meta charset="utf-8" />
-        <title>Parametrer notation</title>
+        <title>Parametrer Catégorie</title>
 
 
     </h:head>
@@ -22,7 +22,7 @@
                         <div class="panel-heading">
                             <h4 class="form-title">
                                 <h:outputText
-                                    value="Ajouter un critère de notation" />
+                                    value="Ajouter une catégorie" />
                             </h4>
                         </div>
 
@@ -32,30 +32,30 @@
 
 
                                 <h:outputLabel for="code">Code</h:outputLabel>
-                                <h:inputText id="code" class="form-control"  value="#{parametrerNotationControleur.critere.code}" size="20" maxlength="60" />
+                                <h:inputText id="code" class="form-control"  value="#{parametrerCategorieControleur.categorie.code}" size="20" maxlength="60" />
                                 <h:message id="codeMessage" for="code" errorClass="erreur" />
 
                                 <br />
 
                                 <h:outputLabel for="libelle">libelle</h:outputLabel>
-                                <h:inputText id="libelle" value="#{parametrerNotationControleur.critere.libelle}"  size="20" maxlength="20" />
+                                <h:inputText id="libelle" value="#{parametrerCategorieControleur.categorie.libelle}"  size="20" maxlength="20" />
                                 <h:message id="libelleMessage" for="libelle" errorClass="erreur" />
                                 <br />
-                                <h:commandButton style="color: black;" value="Valider" action="#{parametrerNotationControleur.ajouter()}" styleClass="btn btn-default" />
+                                <h:commandButton style="color: black;" value="Valider" action="#{parametrerCategorieControleur.ajouter()}" styleClass="btn btn-default" />
                             </div>
                         </div>
                     </div>
                 </div>
             </h:form>
 
-            <h:messages globalOnly="true" infoClass="info" />
-            <h:form rendered="#{parametrerNotationControleur.listCriteres.size()!=0}">
+            <h:messages globalOnly="true" infoClass="info" style ="color:blue;margin:8px;"/>
+            <h:form rendered="#{parametrerCategorieControleur.listCategories.size()!=0}">
                 <div class="container-fluid">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="form-title">
                                 <h:outputText
-                                    value="Lister les notations" />
+                                    value="Lister les catégories" />
                             </h4>
                         </div>
 
@@ -65,7 +65,7 @@
 
                                 
                                 <h:dataTable id="tableau" var="var"  class="display"
-                                             value="#{parametrerNotationControleur.listCriteres}"
+                                             value="#{parametrerCategorieControleur.listCategories}"
                                              styleClass="tableau table table-responsive table-striped table-bordered table-hover">
 
                                     <h:column id="colCode">
@@ -92,21 +92,6 @@
 
                                     </h:column>
 
-                                    <h:column id="suppression">
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="outputText" value="supprimer critère"
-                                                          id="supp">
-
-                                            </h:outputText>
-                                        </f:facet>
-
-
-
-                                        <h:commandLink styleClass="commandLink"  immediate="true"
-                                                       action="#{parametrerNotationControleur.supprimer(var)}">
-                            <span class="glyphicon glyphicon-remove"></span>
-                                        </h:commandLink>
-                                    </h:column>
 
                                 </h:dataTable>
 

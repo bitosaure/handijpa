@@ -83,7 +83,6 @@ public class CategorieDAO implements DAO<CategorieEntity> {
      */
     public CategorieEntity findById(String id) {
 
-        System.out.println("lib" + em.find(CategorieEntity.class, id).getLibelle());
         return em.find(CategorieEntity.class, id);
     }
 }

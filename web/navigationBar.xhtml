@@ -66,6 +66,15 @@
                                     <li id="divGestionDesSignaleLieu"><h:commandLink id="parametreSignaLieu"
                                                                                      action="#{signalementLieuControleur.initialiserPage()}"
                                                                                      value="Gerer les lieux signalés " rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                               
+                                 <li id="divGestionDesCategories"><h:commandLink id="parametreCategorie"
+                                                                                     action="#{parametrerCategorieControleur.initialiserPage()}"
+                                                                                     value="Gerer les catégories " rendered="#{authentificationControleur.personne.typePersonne=='admin'}" /></li>
+                               
+                                
+                                
+                                
+                                
                                 </ul>
                                                             </h:panelGroup></span></li>
                            

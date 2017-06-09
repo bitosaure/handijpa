@@ -133,9 +133,7 @@ public class AjouterLieuControleur implements Serializable {
                 Logger.getLogger(AjouterLieuControleur.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else {
-            lieu.setImage("Pas d'image pour ce lieu !");
-        }
+        } 
         lieuDao.create(lieu);
         return "SUCCESS";
 

@@ -79,6 +79,10 @@ public class GererCommentaireControleur implements Serializable {
          getSignalementDao().delete(sign);
          listCommentaireSiganles.remove(sign);
          
+        if (listCommentaireSiganles.size() == 0) {
+            FacesMessage message = new FacesMessage("Il n'y a plus de commentaires à gérer");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
         
         return "SUCCESS";
     }

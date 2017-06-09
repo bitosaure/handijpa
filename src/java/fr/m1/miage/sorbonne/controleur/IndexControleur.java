@@ -62,7 +62,7 @@ public class IndexControleur implements Serializable {
     private List<LieuEntity> recupererLieux() {
         lieux = new LieuDAO();
         List<LieuEntity> maListe = new ArrayList<>();
-        List<LieuEntity> listeBd = lieux.findAll();
+        List<LieuEntity> listeBd = lieux.findAvecImage();
         int flag = 5;
         if (listeBd.size() < flag) {
             flag = listeBd.size();

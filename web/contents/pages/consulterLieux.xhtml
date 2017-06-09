@@ -69,7 +69,7 @@
                                                 </h:panelGroup>
                                                 <h:panelGroup id="noteNonCi" rendered="#{com.nbPersonnes==0}">
                                                     <h:outputLabel  value="Aucune personne n'a donnée de note pour ce critère"/>
-                                                    
+
 
                                                 </h:panelGroup>
                                             </div>
@@ -82,7 +82,7 @@
                                     <div class="col-md-6">
                                         <img src="#{consulterLieuxControleur.lieuDetail.cheminImage()}" alt="#{consulterLieuxControleur.lieuDetail.nom}" class="img-circle" width="100%" height="100%"/>
                                         <div class="row">
-                                            
+
 
                                             <div class="col-xs-3">
                                                 <h:panelGroup id="ajouterComm" rendered="#{authentificationControleur.personne.typePersonne!=null}">
@@ -298,14 +298,22 @@
                             </div>
                             <div class="modal-body">
                                 <ui:repeat var="com" value="#{consulterLieuxControleur.listCommentaires}">
-                                    <h:panelGrid columns="2">
-                                        <h:outputLabel>#{com.titre}      <strong>Auteur : </strong>#{com.personne.login} 
+                                    <div class="panel-body">
+                                        <div class="form-horizontal">
+                                            <div class="col-md-8">
+                                                <h:outputLabel>#{com.titre}      <strong>Auteur : </strong>#{com.personne.login} 
 
 
-                                        </h:outputLabel>
+                                                </h:outputLabel>
+                                            </div>
+                                            <div class="col-md-2">
 
-                                        <h:commandLink  value="Signaler"  action="#{consulterLieuxControleur.signalerCommentaire(com)}"/>
-                                    </h:panelGrid>
+                                                <h:commandLink  value="Signaler"  action="#{consulterLieuxControleur.signalerCommentaire(com)}"/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                     <h:outputText id="com" class="form-control"  value="#{com.commentaire}"/>
                                 </ui:repeat>
 
@@ -399,7 +407,7 @@
 
 
                                 </div>
-                           
+
 
 
                             </div>
