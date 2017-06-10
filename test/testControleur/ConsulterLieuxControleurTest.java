@@ -16,8 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
-import org.powermock.modules.junit4.PowerMockRunner;
 /**
  *
  * @author emiliepisu

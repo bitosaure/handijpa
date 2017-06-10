@@ -30,7 +30,7 @@
                             <h:messages globalOnly="true" infoClass="info" />
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
 
 
                                         <h:outputLabel for="description">Description </h:outputLabel>
@@ -59,26 +59,31 @@
 
 
                                         <br />
-                                        <h:outputLabel >Liste des moyennes</h:outputLabel>
-                                        <ui:repeat var="com" value="#{consulterLieuxControleur.listCriterLieuDetailMoyenne}">
-                                            <div class="row">
-                                                <h:outputText value="#{com.libelle}"/>: 
-                                            <!--<h:outputText value="#{com.nbEtoiles}"/>-->
-                                                <h:panelGroup id="noteCi" rendered="#{com.nbPersonnes!=0}">
-                                                    <h:outputLabel  value="#{com.nbEtoiles}"/>/5
-                                                </h:panelGroup>
-                                                <h:panelGroup id="noteNonCi" rendered="#{com.nbPersonnes==0}">
-                                                    <h:outputLabel  value="Aucune personne n'a donnée de note pour ce critère"/>
 
-
-                                                </h:panelGroup>
-                                            </div>
-                                        </ui:repeat>
 
 
 
 
                                     </div>
+                                    <div class="col-md-2">
+                                        <h:panelGroup id="affMO" rendered="#{consulterLieuxControleur.lieuDetail.moyenneDuLieu != 0.0}">
+
+                                            <h4 class="form-title" style="color:#539898">
+
+                                                <h:outputText 
+                                                    value="#{consulterLieuxControleur.lieuDetail.moyenneDuLieu}" />/5
+
+                                            </h4>
+                                        </h:panelGroup>
+                                        <h:panelGroup id="affiNoMoy" rendered="#{consulterLieuxControleur.lieuDetail.moyenneDuLieu == 0.0}">
+                                       Soyez le prrmier à noter ce lieu
+                                        </h:panelGroup>
+
+                                         <div class="col-xs-3">
+                                                <a href="#" onclick="$('#myModal5').modal()" alt="Voir les moyennes" title="Voir les moyennes"><span class="glyphicon glyphicon-list-alt"></span></a>
+                                            </div>
+                                    </div>
+
                                     <div class="col-md-6">
                                         <img src="#{consulterLieuxControleur.lieuDetail.cheminImage()}" alt="#{consulterLieuxControleur.lieuDetail.nom}" class="img-circle" width="100%" height="100%"/>
                                         <div class="row">
@@ -421,6 +426,41 @@
                 </h:form>
             </div><!-- /.modal -->
 
+               <div id="myModal5" class="modal fade" tabindex="-1" role="dialog">
+                <h:form id="modalAffichNoteLieu">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                           
+                            <div class="modal-body">
+
+
+                                <h:outputLabel class="h4" >Liste des moyennes</h:outputLabel>
+                                        <ui:repeat var="com" value="#{consulterLieuxControleur.listCriterLieuDetailMoyenne}">
+                                            <div class="row">
+                                                <h:outputText value="#{com.libelle}"/>: 
+                                            <!--<h:outputText value="#{com.nbEtoiles}"/>-->
+                                                <h:panelGroup id="noteCi" rendered="#{com.nbPersonnes!=0}">
+                                                    <h:outputLabel  value="#{com.nbEtoiles}"/>/5
+                                                </h:panelGroup>
+                                                <h:panelGroup id="noteNonCi" rendered="#{com.nbPersonnes==0}">
+                                                    <h:outputLabel  value="Aucune personne n'a donnée de note pour ce critère"/>
+
+
+                                                </h:panelGroup>
+                                            </div>
+                                        </ui:repeat>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </h:form>
+            </div><!-- /.modal -->
         </ui:define>
     </ui:composition>
 </html>

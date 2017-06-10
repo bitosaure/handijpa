@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -23,44 +24,51 @@ import javax.persistence.Table;
 @Table(name = "LIEU")
 public class LieuEntity implements Serializable {
 
-    /***
+    /**
+     * *
      * serial Version
      */
     private static long serialVersionUID = 1L;
-    
-    /***
-     * id du lieu 
-     * clé primaire
-     * auto incrément
+
+    /**
+     * *
+     * id du lieu clé primaire auto incrément
      */
     @Id
     @JoinColumn(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    /***
+    /**
+     * *
      * nom du lieu
      */
     @JoinColumn(name = "nom")
     private String nom;
-    /***
+    /**
+     * *
      * ** description du lieu
-     * */
+     *
+     */
     @JoinColumn(name = "description")
     private String description;
 
-    /***
-     * boolean permettant de savoir si le lieu a été validé ou non par l'administrateur
+    /**
+     * *
+     * boolean permettant de savoir si le lieu a été validé ou non par
+     * l'administrateur
      */
     @JoinColumn(name = "estValide", columnDefinition = "tinyint(1)")
     private boolean estValide;
-    
-    /***
+
+    /**
+     * *
      * catégorie du lieu
      */
     @JoinColumn(name = "categorie")
     private CategorieEntity categorie;
-    
-    /***
+
+    /**
+     * *
      * personne ayant créé le lieu
      */
     @JoinColumn(name = "createur")
@@ -70,74 +78,97 @@ public class LieuEntity implements Serializable {
      */
     @JoinColumn(name = "codePostal")
     private Integer codePostal;
-    
-    /***
-     *  numéro de rue du lieu
 
+    /**
+     * *
+     * numéro de rue du lieu
+     *
      */
     @JoinColumn(name = "numRue")
     private Integer numRue;
-    
-    /***
-     *  rue du lieu
+
+    /**
+     * *
+     * rue du lieu
      */
     @JoinColumn(name = "rue")
     private String rue;
-    /***
+    /**
+     * *
      * ville du lieu
      */
     @JoinColumn(name = "ville")
     private String ville;
-    
-    /***
+
+    /**
+     * *
      * telephone du lieu
      */
     @JoinColumn(name = "tel")
     private Integer tel;
 
-    /***
+    /**
+     * *
      * chemin pour trouver l'image du lieu
      */
     @JoinColumn(name = "image")
     private String image;
 
-    /***
+    /**
+     * *
      * pays du lieu
      */
     @JoinColumn(name = "pays")
     private String pays;
 
+    
     /***
+     * Moyenne du lieu
+     */
+    @Transient
+    private Double moyenneDuLieu;
+    /**
+     * *
      * Retourne les notes du lieu
      */
     @OneToMany
     private List<NoteUnLieuEntity> notes;
 
-    
-    /***
+    /**
+     * *
      * Retourne une chaine de caractère correspond au chemin de l'image
-     * @return 
+     *
+     * @return
      */
     public String cheminImage() {
         return "../../images/" + this.getImage();
     }
-    /***
+
+    /**
+     * *
      * eztourne l'id du lieu
+     *
      * @return Long
      */
     public Long getId() {
         return id;
     }
-    /***
+
+    /**
+     * *
      * set the id avec le paramètre en entrée
-     * @param id 
+     *
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
     }
-    /***
+
+    /**
+     * *
      * Methode hashcode
-     * @return  int
+     *
+     * @return int
      */
     @Override
     public int hashCode() {
@@ -376,6 +407,20 @@ public class LieuEntity implements Serializable {
      */
     public void setNotes(List<NoteUnLieuEntity> notes) {
         this.notes = notes;
+    }
+
+    /**
+     * @return the moyenneDuLieu
+     */
+    public Double getMoyenneDuLieu() {
+        return moyenneDuLieu;
+    }
+
+    /**
+     * @param moyenneDuLieu the moyenneDuLieu to set
+     */
+    public void setMoyenneDuLieu(Double moyenneDuLieu) {
+        this.moyenneDuLieu = moyenneDuLieu;
     }
 
 }

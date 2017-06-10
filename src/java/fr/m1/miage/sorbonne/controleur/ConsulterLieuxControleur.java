@@ -29,6 +29,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
+import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQLTypes.Int;
 
 /**
  *
@@ -290,15 +291,19 @@ public class ConsulterLieuxControleur implements Serializable {
      * méthode permettant de mettre les notes sur 5
      */
     public List<CritereEntity> noterSur5LesCritere() {
+        Double moy=0.0;
+        int nb=0;
         for (CritereEntity obj : getListCriterLieuDetailMoyenne()) {
             if (obj.getNbPersonnes() != 0) {
 
                 obj.setNbEtoiles((double) Math.round(obj.getNbEtoiles() / obj.getNbPersonnes() * 100) / 100);
-
+                moy=moy+obj.getNbEtoiles();
+                nb=nb+1;
             } else {
                 obj.setNbEtoiles(null);
             }
         }
+        lieuDetail.setMoyenneDuLieu(moy/nb);
         return getListCriterLieuDetailMoyenne();
     }
 
