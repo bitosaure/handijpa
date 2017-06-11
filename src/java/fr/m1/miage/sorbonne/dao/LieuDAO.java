@@ -134,7 +134,6 @@ public class LieuDAO implements DAO<LieuEntity> {
     public void create(LieuEntity obj) {
         em.getTransaction().begin();
         em.persist(obj);
-        em.flush();
         em.getTransaction().commit();
         em.close();
     }

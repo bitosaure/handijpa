@@ -307,7 +307,7 @@ public class ConsulterLieuxControleur implements Serializable {
             lieuDetail.setMoyenneDuLieu(-1.0);
 
         } else {
-            lieuDetail.setMoyenneDuLieu(moy / nb);
+            lieuDetail.setMoyenneDuLieu((double) Math.round(moy / nb * 100) / 100);
         }
         return getListCriterLieuDetailMoyenne();
     }

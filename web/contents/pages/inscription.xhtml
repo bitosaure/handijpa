@@ -42,6 +42,8 @@
                         <br />
                         <h:outputLabel for="email">Adresse email </h:outputLabel>
                         <h:inputText id="email" value="#{inscriptionControleur.personne.mail}" required="true" requiredMessage="Champs requis" size="20" maxlength="60" >
+                            <f:validator validatorId="emailValidator"/>
+
                         </h:inputText>
                         <h:message id="emailMessage" for="email" errorClass="erreur" errorStyle="color : red"/>
 

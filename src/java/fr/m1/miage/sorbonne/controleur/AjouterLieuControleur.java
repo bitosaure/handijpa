@@ -120,7 +120,7 @@ public class AjouterLieuControleur implements Serializable {
             Path file = null;
             try {
 
-                file = Files.createTempFile(Paths.get("/Users/thibault/handijpa3/web/images"), str, ".jpg");
+                file = Files.createTempFile(Paths.get("/Users/emiliepisu/handijpa/web/images"), str, ".jpg");
                 //InputStream in = fichier.getInputStream();
                 System.out.println(file.getFileName());
                 try (InputStream input = fichier.getInputStream()) {
@@ -134,6 +134,7 @@ public class AjouterLieuControleur implements Serializable {
             }
 
         } 
+        System.out.println(lieu.getCategorie());
         lieuDao.create(lieu);
         return "SUCCESS";
 
