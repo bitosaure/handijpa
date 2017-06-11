@@ -66,7 +66,7 @@
 
                                     </div>
                                     <div class="col-md-2">
-                                        <h:panelGroup id="affMO" rendered="#{consulterLieuxControleur.lieuDetail.moyenneDuLieu != 0.0}">
+                                        <h:panelGroup id="affMO" rendered="#{consulterLieuxControleur.lieuDetail.moyenneDuLieu != -1.0}">
 
                                             <h4 class="form-title" style="color:#539898">
 
@@ -75,8 +75,8 @@
 
                                             </h4>
                                         </h:panelGroup>
-                                        <h:panelGroup id="affiNoMoy" rendered="#{consulterLieuxControleur.lieuDetail.moyenneDuLieu == 0.0}">
-                                       Soyez le prrmier à noter ce lieu
+                                        <h:panelGroup id="affiNoMoy" rendered="#{consulterLieuxControleur.lieuDetail.moyenneDuLieu == -1.0}">
+                                       Soyez le premier à noter ce lieu
                                         </h:panelGroup>
 
                                          <div class="col-xs-3">

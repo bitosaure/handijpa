@@ -12,26 +12,25 @@
     <h:body>
         <ui:composition template="/././templateHandi.xhtml">
             <ui:define name="body">
+                <h:messages globalOnly="true" infoClass="info" style ="color:blue;margin:8px;"/>
+
                 <h:form>
                     <fieldset>
                         <legend>Inscription</legend>
                         <h:outputLabel for="nom">Nom  </h:outputLabel>
                         <h:inputText id="nom" value="#{inscriptionControleur.personne.nom}" required="true" requiredMessage="Champs requis" size="20" maxlength="20">
-                            <f:validator validatorId="champsValidator"/>
                         </h:inputText>
                         <h:message id="nomMessage" for="nom" errorClass="erreur" errorStyle="color : red"/>
                         <br />
 
                         <h:outputLabel for="prenom">Prénom</h:outputLabel>
                         <h:inputText id="prenom" value="#{inscriptionControleur.personne.prenom}" required="true" requiredMessage="Champs requis" size="20" maxlength="20">
-                            <f:validator validatorId="champsValidator"/>
                         </h:inputText>
                         <h:message id="prenomMessage" for="prenom" errorClass="erreur" errorStyle="color : red"/>
                         <br />
 
                         <h:outputLabel for="login">Login </h:outputLabel>
                         <h:inputText id="login" class="form-control"  value="#{inscriptionControleur.personne.login}" required="true" requiredMessage="Champs requis" size="20" maxlength="60">
-                            <f:validator validatorId="champsValidator"/>
                         </h:inputText>
                         <h:message id="loginMessage" for="login" errorClass="erreur" errorStyle="color : red"/>
 
@@ -43,7 +42,6 @@
                         <br />
                         <h:outputLabel for="email">Adresse email </h:outputLabel>
                         <h:inputText id="email" value="#{inscriptionControleur.personne.mail}" required="true" requiredMessage="Champs requis" size="20" maxlength="60" >
-                            <f:validator validatorId="emailValidator"/>
                         </h:inputText>
                         <h:message id="emailMessage" for="email" errorClass="erreur" errorStyle="color : red"/>
 
@@ -51,21 +49,20 @@
 
 
                         <h:outputLabel for="numRue">Numéro de rue </h:outputLabel>
-                        <h:inputText id="numRue" value="#{inscriptionControleur.personne.numRue}"  size="20" maxlength="60">
-                            <f:validator validatorId="numberValidator"/>
+                        <h:inputText id="numRue" value="#{inscriptionControleur.personne.numRue}"  validatorMessage="vous devez entrer un entier"
+                                     size="20" maxlength="60">
                         </h:inputText>
+
                         <h:message id="numRueMessage" for="numRue" errorClass="erreur" errorStyle="color : red"/>
                         <br />
 
                         <h:outputLabel for="rue">rue </h:outputLabel>
-                        <h:inputText id="rue" value="#{inscriptionControleur.personne.rue}"  size="20" maxlength="60">
-                            <f:validator validatorId="champsValidator"/>
+                        <h:inputText id="rue"  value="#{inscriptionControleur.personne.rue}"  size="20" maxlength="60">
                         </h:inputText>
                         <h:message id="rueMessage" for="rue" errorClass="erreur" errorStyle="color : red"/>
                         <br />
                         <h:outputLabel for="ville">ville </h:outputLabel>
                         <h:inputText id="ville" value="#{inscriptionControleur.personne.ville}"  size="20" maxlength="60">
-                            <f:validator validatorId="champsValidator"/>
                         </h:inputText>
                         <h:message id="villeMessage" for="ville" errorClass="erreur" errorStyle="color : red"/>
                         <br />
@@ -75,7 +72,6 @@
                         <br />
                         <h:outputLabel for="pays">pays</h:outputLabel>
                         <h:inputText id="pays" value="#{inscriptionControleur.personne.pays}" size="20" maxlength="60">
-                            <f:validator validatorId="champsValidator"/>
                         </h:inputText>
                         <h:message id="paysMessage" for="pays" errorClass="erreur" errorStyle="color : red"/>
                         <br />
